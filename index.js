@@ -45,8 +45,8 @@ var WpdtrtPluginBump = function(opts) {
 	function version_child_extend(root_pkg, root_path, wpdtrt_plugin_pkg_version_namespaced) {
 		// extends DoTheRightThing\WPPlugin\r_1_2_3
 		var files = [
-				root_path + 'src/class-' + root_pkg.name + '-plugin.php',
-				root_path + 'src/class-' + root_pkg.name + '-widgets.php'
+			root_path + 'src/class-' + root_pkg.name + '-plugin.php',
+			root_path + 'src/class-' + root_pkg.name + '-widgets.php'
 		];
 
 		return gulp.src(files)
@@ -276,9 +276,24 @@ var WpdtrtPluginBump = function(opts) {
 		// ./package.json will always be wpdtrt-plugin/package.json
 		// therefore we differentiate between root_pkg & wpdtrt_plugin_pkg
 
-		// parent installed as a dependency of child
-		if ( opts.root_path !== opts.wpdtrt_plugin_path ) {
+		// orphan parent
+		if ( opts.root_path === opts.wpdtrt_plugin_path ) {
 
+			// get the latest release number
+			console.log('Bump ' + wpdtrt_plugin_pkg.name + ' to ' + wpdtrt_plugin_pkg.version + ' using package.json' );
+
+			version_parent_src( opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg_version_namespaced );
+
+			version_parent_src_plugin( opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg, wpdtrt_plugin_pkg_version_namespaced );
+
+			version_parent_composer( opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg_version_namespaced );
+
+			version_parent_autoloader( opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg );
+
+			version_parent_root( opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg );
+		}
+		// parent installed as a dependency of child
+		else {
 			// after getting the latest version via bump_update
 			// get the latest release number
 			root_pkg = require(opts.root_path + 'package.json');
@@ -293,22 +308,6 @@ var WpdtrtPluginBump = function(opts) {
 			version_child_readme( root_pkg, opts.root_path );
 
 			version_child_root( root_pkg, opts.root_path, wpdtrt_plugin_pkg_version_namespaced );
-		}
-		// orphan parent
-		else {
-
-			// get the latest release number
-			console.log('Bump ' + wpdtrt_plugin_pkg.name + ' to ' + wpdtrt_plugin_pkg.version + ' using package.json' );
-
-			version_parent_src( opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg_version_namespaced );
-
-			version_parent_src_plugin( opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg, wpdtrt_plugin_pkg_version_namespaced );
-
-			version_parent_composer( opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg_version_namespaced );
-
-			version_parent_autoloader( opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg );
-
-			version_parent_root( opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg );
 		}
 	};
 };
