@@ -1,7 +1,18 @@
 /*jslint white:true, regexp: true, node:true */
 
 // https://github.com/stevelacy/gulp-bump/blob/master/test/index.js
-'use_strict';
+
+'use strict';
+
+// Mocha tips:
+// https://samwize.com/2014/02/08/a-guide-to-mochas-describe-it-and-setup-hooks/
+//
+// 1. `describe()` is merely for grouping, which you can nest as deep
+// 2. `it()` is a test case
+// 3. `before()`, `beforeEach()`, `after()`, `afterEach()` are hooks to run
+// before/after first/each it() or describe().
+//
+// Which means, `before()` is run before first it()/describe()
 
 /**
  * Path from node_modules to gulpfile.js
@@ -10,8 +21,13 @@
  */ 
 //const gulpfile = require('../gulpfile.js');
 var gulp = require('gulp');
-var path = require('path');
 var assert = require('assert');
+var mocha = require('mocha');
+var path = require('path');
+
+// jslint..
+var describe = mocha.describe;
+var it = mocha.it;
 
 // our plugin
 var wpdtrtPluginBump = require('../index.js');
@@ -34,7 +50,7 @@ describe('Test gulp tasks', function() {
           gulp.task('test', ['wpdtrtPluginBump'], function() {
     		    assert.equal(1, true);
 
-            
+
 
             done();
           });

@@ -26,16 +26,12 @@
   },
   "devDependencies": {
     "assert": "^1.4.1",
-    "fs": "^0.0.1-security",
     "jslint": "^0.12.0",
     "mocha": "^5.1.1",
-    "path": "^0.12.7",
-    "should": "^13.2.1",
-    "vinyl": "^2.1.0",
-    "wpdtrt-plugin": "https://github.com/dotherightthing/wpdtrt-plugin/"
+    "path": "^0.12.7"
   },
   "scripts": {
-    "test": "jslint ./index.js & mocha"
+    "test": "jslint ./**/*.js & mocha"
   },
   "engines": {
     "node": ">=8.11.1"
