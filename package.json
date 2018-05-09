@@ -31,7 +31,8 @@
     "mocha": "^5.1.1",
     "path": "^0.12.7",
     "should": "^13.2.1",
-    "vinyl": "^2.1.0"
+    "vinyl": "^2.1.0",
+    "wpdtrt-plugin": "https://github.com/dotherightthing/wpdtrt-plugin/"
   },
   "scripts": {
     "test": "jslint ./index.js & mocha"

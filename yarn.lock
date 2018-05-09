@@ -1628,6 +1628,10 @@ which@^1.2.14:
   dependencies:
     isexe "^2.0.0"
 
+"wpdtrt-plugin@https://github.com/dotherightthing/wpdtrt-plugin/":
+  version "1.4.11"
+  resolved "https://github.com/dotherightthing/wpdtrt-plugin/#613d72ba20e341770504cfe0e7e1861c203bfb46"
+
 wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"

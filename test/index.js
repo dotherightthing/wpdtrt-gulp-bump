@@ -31,7 +31,8 @@ describe('Test gulp tasks', function() {
     describe('Replace version number strings', function() {
 
     	gulp.task('wpdtrtPluginBump', wpdtrtPluginBump({
-            wpdtrt_plugin_is_dependency: false
+            root_path: false,
+            wpdtrt_plugin_path: './fixtures/wpdtrt-plugin/'
         }));
 
     	it('should pass simple test', function(done) {

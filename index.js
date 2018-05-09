@@ -14,25 +14,17 @@ var PLUGIN_NAME = 'gulp-wpdtrt-plugin-bump';
  * Plugin
  * @param files array Gulp files glob
  * @param opts array optional Options
- * @example
- * 	gulp.task('wpdtrtPluginBump', wpdtrtPluginBump({
- * 		wpdtrt_plugin_is_dependency: false
- * 	}));
  */
 var wpdtrtPluginBump = function(opts) {
 
 	opts = opts || {};
 
-	if ( !opts.wpdtrt_plugin_is_dependency ) {
-		opts.wpdtrt_plugin_is_dependency = false;
+	if ( !opts.root_path ) {
+		opts.root_path = false; // '../../../package.json'
 	}
 
-	if ( !opts.basePath ) {
-		opts.basePath = './';
-	}
-
-	if ( !opts.destinationPath ) {
-		opts.destinationPath = './';
+	if ( !opts.wpdtrt_plugin_path ) {
+		opts.wpdtrt_plugin_path = './';
 	}
 
 	return function() {
@@ -48,12 +40,12 @@ var wpdtrtPluginBump = function(opts) {
 			wpdtrt_plugin_pkg_version_namespaced;
 
 		// wpdtrt-foo
-		if ( opts.wpdtrt_plugin_is_dependency ) {
+		if ( opts.root_path ) {
 
 			// after getting the latest version via bump_update
 			// get the latest release number
-			root_pkg = require('../../../package.json');
-			wpdtrt_plugin_pkg = require('./package.json');
+			root_pkg = require(opts.root_path + 'package.json');
+			wpdtrt_plugin_pkg = require(opts.wpdtrt_plugin_path + 'package.json');
 			wpdtrt_plugin_pkg_version_escaped = wpdtrt_plugin_pkg.version.split('.').join('\\.');
 			wpdtrt_plugin_pkg_version_namespaced = wpdtrt_plugin_pkg.version.split('.').join('_');
 
@@ -62,24 +54,24 @@ var wpdtrtPluginBump = function(opts) {
 
 			// extends DoTheRightThing\WPPlugin\r_1_2_3
 			gulp.src([
-					'./src/class-' + root_pkg.name + '-plugin.php',
-					'./src/class-' + root_pkg.name + '-widgets.php'
+					opts.wpdtrt_plugin_path + 'src/class-' + root_pkg.name + '-plugin.php',
+					opts.wpdtrt_plugin_path + 'src/class-' + root_pkg.name + '-widgets.php'
 				])
 				.pipe(replace(
 					/(extends DoTheRightThing\\WPPlugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/,
 					'$1' + wpdtrt_plugin_pkg_version_namespaced
 				))
-				.pipe(gulp.dest('./src/'));
+				.pipe(gulp.dest(opts.wpdtrt_plugin_path + 'src/'));
 
 			// * @version 1.2.3
-			gulp.src('./gulpfile.js')
+			gulp.src(opts.wpdtrt_plugin_path + 'gulpfile.js')
 				.pipe(replace(
 					/(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
 					'$1' + root_pkg.version
 				))
-				.pipe(gulp.dest('./'));
+				.pipe(gulp.dest(opts.wpdtrt_plugin_path));
 
-			gulp.src('./readme.txt')
+			gulp.src(opts.wpdtrt_plugin_path + 'readme.txt')
 				.pipe(replace(
 					// Stable tag: 1.2.3
 					/(Stable tag:.)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
@@ -94,10 +86,10 @@ var wpdtrtPluginBump = function(opts) {
 					/(== Changelog ==\n\n= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\n)/,
 					"$1" + root_pkg.version + " =\r\r= $2$3"
 				))
-				.pipe(gulp.dest('./'));
+				.pipe(gulp.dest(opts.wpdtrt_plugin_path));
 
 			gulp.src([
-					'./' + root_pkg.name + '.php'
+					opts.wpdtrt_plugin_path + root_pkg.name + '.php'
 				])
 				// DoTheRightThing\WPPlugin\r_1_2_3
 				.pipe(replace(
@@ -114,13 +106,13 @@ var wpdtrtPluginBump = function(opts) {
 					/(define\( '[A-Z_]+_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(.+;)/,
 					'$1' + root_pkg.version + '$3'
 				))
-				.pipe(gulp.dest('./'));
+				.pipe(gulp.dest(opts.wpdtrt_plugin_path));
 		}
 		// wpdtrt-plugin
 		else {
 
 			// get the latest release number
-			wpdtrt_plugin_pkg = require('./package.json');
+			wpdtrt_plugin_pkg = require(opts.wpdtrt_plugin_path + 'package.json');
 			wpdtrt_plugin_pkg_version_escaped = wpdtrt_plugin_pkg.version.split('.').join('\\.');
 			wpdtrt_plugin_pkg_version_namespaced = wpdtrt_plugin_pkg.version.split('.').join('_');
 
@@ -128,20 +120,20 @@ var wpdtrtPluginBump = function(opts) {
 
 			// DoTheRightThing\WPPlugin\r_1_2_3
 			gulp.src([
-					'./src/class-wpdtrt-test-plugin.php',
-					'./src/class-wpdtrt-test-widgets.php',
-					'./src/Shortcode.php',
-					'./src/Taxonomy.php',
-					'./src/TemplateLoader.php',
-					'./src/Widget.php'
+					opts.wpdtrt_plugin_path + 'src/class-wpdtrt-test-plugin.php',
+					opts.wpdtrt_plugin_path + 'src/class-wpdtrt-test-widgets.php',
+					opts.wpdtrt_plugin_path + 'src/Shortcode.php',
+					opts.wpdtrt_plugin_path + 'src/Taxonomy.php',
+					opts.wpdtrt_plugin_path + 'src/TemplateLoader.php',
+					opts.wpdtrt_plugin_path + 'src/Widget.php'
 				])
 				.pipe(replace(
 					/(DoTheRightThing\\WPPlugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/g,
 					'$1' + wpdtrt_plugin_pkg_version_namespaced
 				))
-				.pipe(gulp.dest('./src/'));
+				.pipe(gulp.dest(opts.wpdtrt_plugin_path + 'src/'));
 
-			gulp.src('./src/Plugin.php')
+			gulp.src(opts.wpdtrt_plugin_path + 'src/Plugin.php')
 				// DoTheRightThing\WPPlugin\r_1_2_3
 				.pipe(replace(
 					/(DoTheRightThing\\WPPlugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/g,
@@ -152,25 +144,25 @@ var wpdtrtPluginBump = function(opts) {
 					/(const WPPLUGIN_VERSION = ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(';)/,
 					'$1' + wpdtrt_plugin_pkg.version + '$3'
 				))
-				.pipe(gulp.dest('./src/'));
+				.pipe(gulp.dest(opts.wpdtrt_plugin_path + 'src/'));
 
 			// "DoTheRightThing\\WPPlugin\\r_1_2_3\\": "src"
-			gulp.src('./composer.json')
+			gulp.src(opts.wpdtrt_plugin_path + 'composer.json')
 				.pipe(replace(
 					/("DoTheRightThing\\\\WPPlugin\\\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})(\\\\")/,
 					'$1' + wpdtrt_plugin_pkg_version_namespaced + '$3'
 				))
-				.pipe(gulp.dest('./'));
+				.pipe(gulp.dest(opts.wpdtrt_plugin_path));
 
 			// * @version 1.2.3
-			gulp.src('./index.php')
+			gulp.src(opts.wpdtrt_plugin_path + 'index.php')
 				.pipe(replace(
 					/(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
 					'$1' + wpdtrt_plugin_pkg.version
 				))
-				.pipe(gulp.dest('./'));
+				.pipe(gulp.dest(opts.wpdtrt_plugin_path));
 
-				gulp.src('./readme.txt')
+				gulp.src(opts.wpdtrt_plugin_path + 'readme.txt')
 				.pipe(replace(
 					// Stable tag: 1.2.3
 					/(Stable tag:.)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
@@ -185,9 +177,9 @@ var wpdtrtPluginBump = function(opts) {
 					/(== Changelog ==\n\n= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\n)/,
 					"$1" + wpdtrt_plugin_pkg.version + " =\r\r= $2$3"
 				))
-				.pipe(gulp.dest('./'));
+				.pipe(gulp.dest(opts.wpdtrt_plugin_path));
 
-			gulp.src('./wpdtrt-plugin.php')
+			gulp.src(opts.wpdtrt_plugin_path + 'wpdtrt-plugin.php')
 				// * Version: 1.2.3
 				.pipe(replace(
 					/(\* Version:\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
@@ -198,7 +190,7 @@ var wpdtrtPluginBump = function(opts) {
 					/(define\( '[A-Z_]+_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(.+;)/,
 					'$1' + wpdtrt_plugin_pkg.version + '$3'
 				))
-				.pipe(gulp.dest('./'));
+				.pipe(gulp.dest(opts.wpdtrt_plugin_path));
 		}
 	};
 };
