@@ -16,12 +16,6 @@ var assert = require('assert');
 // our plugin
 var wpdtrtPluginBump = require('../index.js');
 
-// test/input
-var inputDir = path.join(__dirname, '/input/');
-
-// test/output
-var outputDir = path.join(__dirname, '/output/');
-
 // https://duske.me/simple-functional-tests-for-gulp-tasks/
 describe('Test gulp tasks', function() {
 	// increase default timeout in case assert operations take too long (i/o usage)
@@ -31,8 +25,8 @@ describe('Test gulp tasks', function() {
     describe('Replace version number strings', function() {
 
     	gulp.task('wpdtrtPluginBump', wpdtrtPluginBump({
-            root_path: false,
-            wpdtrt_plugin_path: './fixtures/wpdtrt-plugin/'
+          root_path: false,
+          wpdtrt_plugin_path: './fixtures/wpdtrt-plugin/'
         }));
 
     	it('should pass simple test', function(done) {
