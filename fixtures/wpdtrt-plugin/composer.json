@@ -1,0 +1,8 @@
+{
+    "name": "dotherightthing/wpdtrt-plugin",
+    "autoload": {
+        "psr-4": {
+            "DoTheRightThing\\WPPlugin\\r_1_4_11\\": "src"
+        }
+    }
+}
