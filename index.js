@@ -1,9 +1,5 @@
 /*jslint white:true, regexp: true, node:true */
 
-// https://duske.me/simple-functional-tests-for-gulp-tasks/
-// https://github.com/lazd/gulp-replace/blob/master/test/main.js
-// https://artandlogic.com/2014/05/a-simple-gulp-plugin/
-
 'use strict';
 
 var gulp = require('gulp');
