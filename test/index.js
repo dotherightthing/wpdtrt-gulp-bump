@@ -1,0 +1,47 @@
+/*jslint white:true, regexp: true, node:true */
+
+// https://github.com/stevelacy/gulp-bump/blob/master/test/index.js
+'use_strict';
+
+/**
+ * Path from node_modules to gulpfile.js
+ * 	This exposes the function as gulpfile.wpdtrtPluginBump()
+ * @see https://duske.me/simple-functional-tests-for-gulp-tasks/
+ */ 
+//const gulpfile = require('../gulpfile.js');
+var gulp = require('gulp');
+var path = require('path');
+var assert = require('assert');
+
+// our plugin
+var wpdtrtPluginBump = require('../index.js');
+
+// test/input
+var inputDir = path.join(__dirname, '/input/');
+
+// test/output
+var outputDir = path.join(__dirname, '/output/');
+
+// https://duske.me/simple-functional-tests-for-gulp-tasks/
+describe('Test gulp tasks', function() {
+	// increase default timeout in case assert operations take too long (i/o usage)
+	// https://duske.me/simple-functional-tests-for-gulp-tasks/
+	this.timeout(4000);
+
+    describe('Replace version number strings', function() {
+
+    	gulp.task('wpdtrtPluginBump', wpdtrtPluginBump({
+            wpdtrt_plugin_is_dependency: false
+        }));
+
+    	it('should pass simple test', function(done) {
+          // pseudo-task
+          gulp.task('test', ['wpdtrtPluginBump'], function() {
+    		assert.equal(1, true);
+
+            done();
+          });
+          gulp.start('test');
+    	});
+    });
+});
