@@ -44,11 +44,11 @@ var WpdtrtPluginBump = function(opts) {
 
 	/**
 	 * Get the version value from wpdtrt-plugin/package.json, in namespace format
-	 * @param {object} wpdtrt_plugin_package - A reference to the package.json file
+	 * @param {string} wpdtrt_plugin_package_version
 	 * @return {string} The version in namespace format
 	 */
-	function namespace_wpdtrt_plugin_package_version( wpdtrt_plugin_package ) {
-		return wpdtrt_plugin_package.version.split('.').join('_');
+	function namespace_wpdtrt_plugin_package_version( wpdtrt_plugin_package_version ) {
+		return wpdtrt_plugin_package_version.split('.').join('_');
 	}
 
 	/**
@@ -285,7 +285,7 @@ var WpdtrtPluginBump = function(opts) {
 
 		var root_package = require(opts.root_package),
 			wpdtrt_plugin_package = require(opts.wpdtrt_plugin_package),
-			wpdtrt_plugin_package_version_namespaced = namespace_wpdtrt_plugin_package_version( wpdtrt_plugin_package );
+			wpdtrt_plugin_package_version_namespaced = namespace_wpdtrt_plugin_package_version( wpdtrt_plugin_package.version );
 
 
 		// orphan parent
