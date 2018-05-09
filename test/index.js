@@ -34,8 +34,10 @@ describe('Test plugin', function() {
   describe('Test orphan parent', function() {
 
     gulp.task('wpdtrtPluginBumpParent', wpdtrtPluginBump({
+      wpdtrt_plugin_path: 'fixtures/wpdtrt-plugin/',
+      wpdtrt_plugin_package: process.cwd() + '/fixtures/wpdtrt-plugin/package.json', // process.cwd() + '/package.json'
       root_path: 'fixtures/wpdtrt-plugin/',
-      wpdtrt_plugin_path: 'fixtures/wpdtrt-plugin/'
+      root_package: process.cwd() + '/fixtures/wpdtrt-plugin/package.json' // process.cwd() + '/package.json'
     }));
 
     it('Plugin runs without error', function(done) {
@@ -52,8 +54,10 @@ describe('Test plugin', function() {
   describe('Test parent installed as a dependency of child', function() {
 
     gulp.task('wpdtrtPluginBumpChild', wpdtrtPluginBump({
+      wpdtrt_plugin_path: 'fixtures/wpdtrt-plugin/',
+      wpdtrt_plugin_package: process.cwd() + '/fixtures/wpdtrt-plugin/package.json', // process.cwd() + '/package.json'
       root_path: 'fixtures/wpdtrt-plugin-child/',
-      wpdtrt_plugin_path: 'fixtures/wpdtrt-plugin/'
+      root_package: process.cwd() + '/fixtures/wpdtrt-plugin-child/package.json' // '../../../package.json'
     }));
 
     it('Plugin runs without error', function(done) {
