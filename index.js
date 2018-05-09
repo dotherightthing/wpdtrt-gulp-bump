@@ -207,7 +207,7 @@ var WpdtrtPluginBump = function(opts) {
 			root_pkg = require(opts.root_path + 'package.json');
 
 			// bump wpdtrt-foo to 0.1.2 and wpdtrt-plugin 1.2.3 using package.json
-			////taskheader(this, '| bump ' + root_pkg.name + ' to ' + root_pkg.version + ' and ' + wpdtrt_plugin_pkg.name + ' ' + wpdtrt_plugin_pkg.version + ' using package.json' );
+			console.log('Bump ' + root_pkg.name + ' to ' + root_pkg.version + ' and ' + wpdtrt_plugin_pkg.name + ' ' + wpdtrt_plugin_pkg.version + ' using package.json' );
 
 			version_child_extend( root_pkg, opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg_version_namespaced );
 
@@ -221,7 +221,7 @@ var WpdtrtPluginBump = function(opts) {
 		else {
 
 			// get the latest release number
-			////taskheader(this, '| bump ' + wpdtrt_plugin_pkg.name + ' to ' + wpdtrt_plugin_pkg.version + ' using package.json' );
+			console.log('Bump ' + wpdtrt_plugin_pkg.name + ' to ' + wpdtrt_plugin_pkg.version + ' using package.json' );
 
 			version_parent_src( opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg_version_namespaced );
 
