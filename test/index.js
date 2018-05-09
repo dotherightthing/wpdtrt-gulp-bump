@@ -31,17 +31,39 @@ describe('Test plugin', function() {
 	// https://duske.me/simple-functional-tests-for-gulp-tasks/
 	this.timeout(4000);
 
-	gulp.task('wpdtrtPluginBump', wpdtrtPluginBump({
-    root_path: false,
-    wpdtrt_plugin_path: './fixtures/wpdtrt-plugin/'
-  }));
+  describe('Test orphan parent', function() {
 
-	it('Plugin runs in task without error', function(done) {
-    // pseudo-task
-    gulp.task('test', ['wpdtrtPluginBump'], function() {
-	    //assert.equal(1, true);
-      done();
+    gulp.task('wpdtrtPluginBumpParent', wpdtrtPluginBump({
+      root_path: false,
+      wpdtrt_plugin_path: './fixtures/wpdtrt-plugin/'
+    }));
+
+    it('Files versioned without error', function(done) {
+      // pseudo-task
+      gulp.task('test', ['wpdtrtPluginBumpParent'], function() {
+        //assert.equal(1, true);
+        done();
+      });
+      gulp.start('test');
     });
-    gulp.start('test');
-	});
+
+  });
+
+  describe('Test parent installed as a dependency of child', function() {
+
+    gulp.task('wpdtrtPluginBumpChild', wpdtrtPluginBump({
+      root_path: './fixtures/wpdtrt-plugin-child/',
+      wpdtrt_plugin_path: './fixtures/wpdtrt-plugin/'
+    }));
+
+    it('Files versioned without error', function(done) {
+      // pseudo-task
+      gulp.task('test', ['wpdtrtPluginBumpChild'], function() {
+        //assert.equal(1, true);
+        done();
+      });
+      gulp.start('test');
+    });
+
+  });
 });

@@ -255,7 +255,7 @@ var WpdtrtPluginBump = function(opts) {
 		// ./package.json will always be wpdtrt-plugin/package.json
 		// therefore we differentiate between root_pkg & wpdtrt_plugin_pkg
 
-		// wpdtrt-foo
+		// parent installed as a dependency of child
 		if ( opts.root_path ) {
 
 			// after getting the latest version via bump_update
@@ -273,7 +273,7 @@ var WpdtrtPluginBump = function(opts) {
 
 			version_child_root( root_pkg, opts.wpdtrt_plugin_path, wpdtrt_plugin_pkg_version_namespaced );
 		}
-		// wpdtrt-plugin
+		// orphan parent
 		else {
 
 			// get the latest release number
