@@ -268,16 +268,24 @@ var WpdtrtPluginBump = function(opts) {
 			.pipe(gulp.dest(wpdtrt_plugin_path));
 	}
 
+	/**
+	 * Get require() path
+	 *
+	 * require() is relative to the active gulpfile not to the CWD
+	 * as it is wpdtrt-plugin/gulpfile.js which is always run
+	 * ./package.json will always be wpdtrt-plugin/package.json
+	 * therefore we differentiate between root_pkg & wpdtrt_plugin_pkg
+	 *
+	 * @param {string} path
+	 * @return {string} require path
+	 */
+	function get_require_path( path ) {}
+
 	return function() {
 
 		var root_pkg = '',
 			wpdtrt_plugin_pkg = require('./' + opts.wpdtrt_plugin_path + 'package.json'),
 			wpdtrt_plugin_pkg_version_namespaced = namespace_wpdtrt_plugin_pkg_version( wpdtrt_plugin_pkg );
-
-		// require() is relative to the active gulpfile not to the CWD
-		// as it is wpdtrt-plugin/gulpfile.js which is always run
-		// ./package.json will always be wpdtrt-plugin/package.json
-		// therefore we differentiate between root_pkg & wpdtrt_plugin_pkg
 
 		// orphan parent
 		if ( opts.root_path === opts.wpdtrt_plugin_path ) {
