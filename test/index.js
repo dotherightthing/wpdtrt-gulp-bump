@@ -32,7 +32,9 @@ describe('Test gulp tasks', function() {
     	it('should pass simple test', function(done) {
           // pseudo-task
           gulp.task('test', ['wpdtrtPluginBump'], function() {
-    		assert.equal(1, true);
+    		    assert.equal(1, true);
+
+            
 
             done();
           });
