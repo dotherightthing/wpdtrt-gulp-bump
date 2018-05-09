@@ -34,11 +34,11 @@ describe('Test plugin', function() {
   describe('Test orphan parent', function() {
 
     gulp.task('wpdtrtPluginBumpParent', wpdtrtPluginBump({
-      root_path: false,
+      root_path: './fixtures/wpdtrt-plugin/',
       wpdtrt_plugin_path: './fixtures/wpdtrt-plugin/'
     }));
 
-    it('Files versioned without error', function(done) {
+    it('Plugin runs without error', function(done) {
       // pseudo-task
       gulp.task('test', ['wpdtrtPluginBumpParent'], function() {
         //assert.equal(1, true);
@@ -56,7 +56,7 @@ describe('Test plugin', function() {
       wpdtrt_plugin_path: './fixtures/wpdtrt-plugin/'
     }));
 
-    it('Files versioned without error', function(done) {
+    it('Plugin runs without error', function(done) {
       // pseudo-task
       gulp.task('test', ['wpdtrtPluginBumpChild'], function() {
         //assert.equal(1, true);
