@@ -271,7 +271,7 @@ var WpdtrtPluginBump = function(opts) {
 	return function() {
 
 		var root_pkg = '',
-			wpdtrt_plugin_pkg = require(opts.wpdtrt_plugin_path + 'package.json'),
+			wpdtrt_plugin_pkg = require('./' + opts.wpdtrt_plugin_path + 'package.json'),
 			wpdtrt_plugin_pkg_version_namespaced = namespace_wpdtrt_plugin_pkg_version( wpdtrt_plugin_pkg );
 
 		// require() is relative to the active gulpfile not to the CWD
@@ -299,7 +299,7 @@ var WpdtrtPluginBump = function(opts) {
 		else {
 			// after getting the latest version via bump_update
 			// get the latest release number
-			root_pkg = require(opts.root_path + 'package.json');
+			root_pkg = require('./' + opts.root_path + 'package.json');
 
 			// bump wpdtrt-foo to 0.1.2 and wpdtrt-plugin 1.2.3 using package.json
 			console.log('Bump ' + root_pkg.name + ' to ' + root_pkg.version + ' and ' + wpdtrt_plugin_pkg.name + ' ' + wpdtrt_plugin_pkg.version + ' using package.json' );
