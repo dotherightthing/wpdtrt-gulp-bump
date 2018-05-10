@@ -283,52 +283,48 @@ var wpdtrtPluginBump = function(opts) {
 			.pipe(gulp.dest(output_path));
 	}
 
-	return function() {
+	var root_package = require(opts.root_package),
+		wpdtrt_plugin_package = require(opts.wpdtrt_plugin_package),
+		wpdtrt_plugin_package_version_namespaced = namespace_wpdtrt_plugin_package_version( wpdtrt_plugin_package.version ),
+		input = '',
+		output = '';
 
-		var root_package = require(opts.root_package),
-			wpdtrt_plugin_package = require(opts.wpdtrt_plugin_package),
-			wpdtrt_plugin_package_version_namespaced = namespace_wpdtrt_plugin_package_version( wpdtrt_plugin_package.version ),
-			input = '',
-			output = '';
+	// orphan parent
+	if ( opts.root_input_path === opts.wpdtrt_plugin_input_path ) {
 
+		input = opts.wpdtrt_plugin_input_path;
+		output = opts.wpdtrt_plugin_output_path;
 
-		// orphan parent
-		if ( opts.root_input_path === opts.wpdtrt_plugin_input_path ) {
+		// get the latest release number
+		console.log('Bump ' + wpdtrt_plugin_package.name + ' to ' + wpdtrt_plugin_package.version + ' using package.json' );
 
-			input = opts.wpdtrt_plugin_input_path;
-			output = opts.wpdtrt_plugin_output_path;
+		version_parent_src( input, output, wpdtrt_plugin_package_version_namespaced );
 
-			// get the latest release number
-			console.log('Bump ' + wpdtrt_plugin_package.name + ' to ' + wpdtrt_plugin_package.version + ' using package.json' );
+		version_parent_src_plugin( input, output, wpdtrt_plugin_package, wpdtrt_plugin_package_version_namespaced );
 
-			version_parent_src( input, output, wpdtrt_plugin_package_version_namespaced );
+		version_parent_composer( input, output, wpdtrt_plugin_package_version_namespaced );
 
-			version_parent_src_plugin( input, output, wpdtrt_plugin_package, wpdtrt_plugin_package_version_namespaced );
+		version_parent_autoloader( input, output, wpdtrt_plugin_package );
 
-			version_parent_composer( input, output, wpdtrt_plugin_package_version_namespaced );
+		version_parent_root( input, output, wpdtrt_plugin_package );
+	}
+	// parent installed as a dependency of child
+	else {
 
-			version_parent_autoloader( input, output, wpdtrt_plugin_package );
+		input = opts.root_input_path;
+		output = opts.root_output_path;
 
-			version_parent_root( input, output, wpdtrt_plugin_package );
-		}
-		// parent installed as a dependency of child
-		else {
+		// bump wpdtrt-foo to 0.1.2 and wpdtrt-plugin 1.2.3 using package.json
+		console.log('Bump ' + root_package.name + ' to ' + root_package.version + ' and ' + wpdtrt_plugin_package.name + ' ' + wpdtrt_plugin_package.version + ' using package.json' );
 
-			input = opts.root_input_path;
-			output = opts.root_output_path;
+		version_child_extend( input, output, root_package, wpdtrt_plugin_package_version_namespaced );
 
-			// bump wpdtrt-foo to 0.1.2 and wpdtrt-plugin 1.2.3 using package.json
-			console.log('Bump ' + root_package.name + ' to ' + root_package.version + ' and ' + wpdtrt_plugin_package.name + ' ' + wpdtrt_plugin_package.version + ' using package.json' );
+		version_child_gulpfile( input, output, root_package );
 
-			version_child_extend( input, output, root_package, wpdtrt_plugin_package_version_namespaced );
+		version_child_readme( input, output, root_package );
 
-			version_child_gulpfile( input, output, root_package );
-
-			version_child_readme( input, output, root_package );
-
-			version_child_root( input, output, root_package, wpdtrt_plugin_package_version_namespaced );
-		}
-	};
+		version_child_root( input, output, root_package, wpdtrt_plugin_package_version_namespaced );
+	}
 };
 
 // Export the plugin main function
