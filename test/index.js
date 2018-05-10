@@ -60,16 +60,14 @@ describe('Test plugin', function() {
         'src/Widget.php',
         'composer.json',
         'index.php',
-        //'package.json',
-        ////'readme.txt',
+        'readme.txt',
         'wpdtrt-plugin.php'
       ],
       plugin_child_files = [
         'src/class-wpdtrt-plugin-child-plugin.php',
         'src/class-wpdtrt-plugin-child-widgets.php',
         'gulpfile.js',
-        //'package.json',
-        ////'readme.txt',
+        'readme.txt',
         'wpdtrt-plugin-child.php'
       ];
 
@@ -108,7 +106,6 @@ describe('Test plugin', function() {
             outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + plugin_parent_files[i]);
             expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + plugin_parent_files[i]);
 
-            // readme.txt fails - are programmed line breaks different from user authored ones?
             expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
           }
 
@@ -153,7 +150,6 @@ describe('Test plugin', function() {
             outputBuffer = fs.readFileSync(root_output_path + plugin_child_files[i]);
             expectedBuffer = fs.readFileSync(root_expected_path + plugin_child_files[i]);
 
-            // readme.txt fails - are programmed line breaks different from user authored ones?
             expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
           }
 
