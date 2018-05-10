@@ -23,6 +23,8 @@ var mocha = require('mocha');
 var path = require('path');
 //var rimraf = require('rimraf'); // didn't work, possibly due to async flow
 
+chai.use(require('chai-diff'));
+
 // jslint..
 var after = mocha.after;
 var before = mocha.before;
@@ -89,7 +91,7 @@ describe('Test plugin', function() {
           outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + 'readme.txt');
           expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + 'readme.txt');
 
-          expect( outputBuffer.toString() ).to.equal( expectedBuffer.toString() );
+          expect( outputBuffer.toString() ).not.differentFrom( expectedBuffer.toString() )
 
           done();
         }, 1000);
@@ -136,7 +138,7 @@ describe('Test plugin', function() {
           outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + 'readme.txt');
           expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + 'readme.txt');
 
-          expect( outputBuffer.toString() ).to.equal( expectedBuffer.toString() );
+          expect( outputBuffer.toString() ).not.differentFrom( expectedBuffer.toString() )
 
           done();
         }, 1000);
