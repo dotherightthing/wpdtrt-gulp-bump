@@ -1,14 +1,14 @@
 <?php
 /**
  * Plugin Name:  DTRT Plugin Child
- * Plugin URI:   https://github.com/dotherightthing/wpdtrt-blocks
+ * Plugin URI:   https://github.com/dotherightthing/wpdtrt-plugin-child
  * Description:  Demo plugin which uses wpdtrt-plugin.
  * Version:      0.12.345
  * Author:       Dan Smith
  * Author URI:   https://profiles.wordpress.org/dotherightthingnz
  * License:      GPLv2 or later
  * License URI:  http://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:  wpdtrt-blocks
+ * Text Domain:  wpdtrt-plugin-child
  * Domain Path:  /languages
  */
 
