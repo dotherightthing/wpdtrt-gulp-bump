@@ -126,7 +126,7 @@ var WpdtrtPluginBump = function(opts) {
 				// = 1.2.3 =
 				//
 				// @see https://github.com/dotherightthing/wpdtrt-plugin/issues/101
-				/(== Changelog ==\n\n= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\n)/,
+				/(== Changelog ==\s\s= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\s)/,
 				"$1" + root_package.version + " =\n\n= $2$3"
 			))
 			.pipe(gulp.dest(output_path));
@@ -267,8 +267,8 @@ var WpdtrtPluginBump = function(opts) {
 				// = 1.2.3 =
 				//
 				// @see https://github.com/dotherightthing/wpdtrt-plugin/issues/101
-				/(== Changelog ==\n\n= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\n)/,
-				"$1" + wpdtrt_plugin_package.version + " =\r\r= $2$3"
+				/(== Changelog ==\s\s= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\s)/,
+				"$1" + wpdtrt_plugin_package.version + " =\n\n= $2$3"
 			))
 			.pipe(gulp.dest(output_path));
 	}
