@@ -80,7 +80,7 @@ var WpdtrtPluginBump = function(opts) {
 				/(extends DoTheRightThing\\WPPlugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/,
 				'$1' + wpdtrt_plugin_package_version_namespaced
 			))
-			.pipe(gulp.dest(input_path + 'src/'));
+			.pipe(gulp.dest(output_path + 'src/'));
 	}
 
 	/**
@@ -100,7 +100,7 @@ var WpdtrtPluginBump = function(opts) {
 				/(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
 				'$1' + root_package.version
 			))
-			.pipe(gulp.dest(input_path));
+			.pipe(gulp.dest(output_path));
 	}
 
 	/**
@@ -129,7 +129,7 @@ var WpdtrtPluginBump = function(opts) {
 				/(== Changelog ==\n\n= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\n)/,
 				"$1" + root_package.version + " =\r\r= $2$3"
 			))
-			.pipe(gulp.dest(input_path));
+			.pipe(gulp.dest(output_path));
 	}
 
 	/**
@@ -160,7 +160,7 @@ var WpdtrtPluginBump = function(opts) {
 				/(define\( '[A-Z_]+_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(.+;)/,
 				'$1' + root_package.version + '$3'
 			))
-			.pipe(gulp.dest(input_path));
+			.pipe(gulp.dest(output_path));
 	}
 
 	/**
@@ -187,7 +187,7 @@ var WpdtrtPluginBump = function(opts) {
 				/(DoTheRightThing\\WPPlugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/g,
 				'$1' + wpdtrt_plugin_package_version_namespaced
 			))
-			.pipe(gulp.dest(input_path + 'src/'));
+			.pipe(gulp.dest(output_path + 'src/'));
 	}
 
 	/**
@@ -213,7 +213,7 @@ var WpdtrtPluginBump = function(opts) {
 				/(const WPPLUGIN_VERSION = ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(';)/,
 				'$1' + wpdtrt_plugin_package.version + '$3'
 			))
-			.pipe(gulp.dest(input_path + 'src/'));
+			.pipe(gulp.dest(output_path + 'src/'));
 	}
 
 	/**
@@ -233,7 +233,7 @@ var WpdtrtPluginBump = function(opts) {
 				/("DoTheRightThing\\\\WPPlugin\\\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})(\\\\")/,
 				'$1' + wpdtrt_plugin_package_version_namespaced + '$3'
 			))
-			.pipe(gulp.dest(input_path));
+			.pipe(gulp.dest(output_path));
 	}
 
 	/**
@@ -253,7 +253,7 @@ var WpdtrtPluginBump = function(opts) {
 				/(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
 				'$1' + wpdtrt_plugin_package.version
 			))
-			.pipe(gulp.dest(input_path));
+			.pipe(gulp.dest(output_path));
 
 			gulp.src(input_path + 'readme.txt')
 			.pipe(replace(
@@ -270,7 +270,7 @@ var WpdtrtPluginBump = function(opts) {
 				/(== Changelog ==\n\n= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\n)/,
 				"$1" + wpdtrt_plugin_package.version + " =\r\r= $2$3"
 			))
-			.pipe(gulp.dest(input_path));
+			.pipe(gulp.dest(output_path));
 	}
 
 	/**
@@ -295,7 +295,7 @@ var WpdtrtPluginBump = function(opts) {
 				/(define\( '[A-Z_]+_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(.+;)/,
 				'$1' + wpdtrt_plugin_package.version + '$3'
 			))
-			.pipe(gulp.dest(input_path));
+			.pipe(gulp.dest(output_path));
 	}
 
 	return function() {
