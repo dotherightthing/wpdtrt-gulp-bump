@@ -3,7 +3,7 @@
  * Plugin Name:  DTRT Plugin Child
  * Plugin URI:   https://github.com/dotherightthing/wpdtrt-blocks
  * Description:  Demo plugin which uses wpdtrt-plugin.
- * Version:      0.12.345
+ * Version:      1.0.0
  * Author:       Dan Smith
  * Author URI:   https://profiles.wordpress.org/dotherightthingnz
  * License:      GPLv2 or later
@@ -12,20 +12,20 @@
  * Domain Path:  /languages
  */
 
-if( ! defined( 'WPDTRT_BLOCKS_VERSION' ) ) {
-  define( 'WPDTRT_BLOCKS_VERSION', '0.12.345' );
+if( ! defined( 'WPDTRT_PLUGIN_CHILD_VERSION' ) ) {
+  define( 'WPDTRT_PLUGIN_CHILD_VERSION', '2.0.0' );
 }
 
 function wpdtrt_blocks_shortcode_1_init() {
-  $wpdtrt_blocks_shortcode_1 = new DoTheRightThing\WPPlugin\r_0_12_345\Shortcode();
+  $wpdtrt_blocks_shortcode_1 = new DoTheRightThing\WPPlugin\r_1_0_0\Shortcode();
 }
 
 function wpdtrt_blocks_shortcode_2_init() {
-  $wpdtrt_blocks_shortcode_2 = new DoTheRightThing\WPPlugin\r_0_12_345\Shortcode();
+  $wpdtrt_blocks_shortcode_2 = new DoTheRightThing\WPPlugin\r_1_0_0\Shortcode();
 }
 
 function wpdtrt_blocks_shortcode_3_init() {
-  $wpdtrt_blocks_shortcode_3 = new DoTheRightThing\WPPlugin\r_0_12_345\Shortcode();
+  $wpdtrt_blocks_shortcode_3 = new DoTheRightThing\WPPlugin\r_1_0_0\Shortcode();
 }
 
 ?>

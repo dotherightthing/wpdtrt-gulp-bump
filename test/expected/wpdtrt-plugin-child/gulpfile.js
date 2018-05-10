@@ -8,7 +8,7 @@
  *    gulp dist --gulpfile ./vendor/dotherightthing/wpdtrt-plugin/gulpfile.js --cwd ./
  *
  * @package     WPDTRT_Plugin Child
- * @version 	0.12.345
+ * @version 	2.0.0
  * @since       0.7.6
  */
  

@@ -2,7 +2,7 @@
     "name": "dotherightthing/wpdtrt-plugin",
     "autoload": {
         "psr-4": {
-            "DoTheRightThing\\WPPlugin\\r_0_12_345\\": "src"
+            "DoTheRightThing\\WPPlugin\\r_1_0_0\\": "src"
         }
     }
 }

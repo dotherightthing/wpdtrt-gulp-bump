@@ -7,7 +7,7 @@
  * @since     0.6.0
  */
 
-namespace DoTheRightThing\WPPlugin\r_0_12_345;
+namespace DoTheRightThing\WPPlugin\r_1_0_0;
 
 // ...
 

@@ -7,7 +7,7 @@
  * @version 	1.0.0
  */
 
-class WPDTRT_Test_Plugin extends DoTheRightThing\WPPlugin\r_0_12_345\Plugin {
+class WPDTRT_Test_Plugin extends DoTheRightThing\WPPlugin\r_1_0_0\Plugin {
 // ...
 }
 
