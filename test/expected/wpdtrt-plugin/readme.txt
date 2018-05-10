@@ -17,4 +17,4 @@ Base classes for a WordPress plugin and associated shortcodes and widgets.
 = 1.0.0 =
 
 = 0.12.345 =
-* gulp bump - Allow for up to 3 digits in each of the major/minor/patch semver numbers
+* Lorem ipsum dolor init

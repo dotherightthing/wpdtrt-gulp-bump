@@ -24,4 +24,4 @@ Demo plugin which uses wpdtrt-plugin.
 == Changelog ==
 
 = 0.12.345 =
-* Lorem ispum dolor init
+* Lorem ipsum dolor init
