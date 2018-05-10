@@ -2,3 +2,22 @@ sudo: false
 language: node_js
 node_js:
   - 8.11.1
+
+# Notifications of build results
+# https://docs.travis-ci.com/user/notifications/
+notifications:
+  email: false
+  slack: $SLACK_AUTH
+
+# Deploy code to Github as a 'release'
+# This is run after a tagged commit triggers a successful build
+# api_key is from https://github.com/settings/tokens
+deploy:
+  provider: releases
+  api_key:
+    secure: $GITHUB_AUTH
+  on:
+    repo: dotherightthing/gulp-wpdtrt-plugin-bump
+    tags: true
+    # https://stackoverflow.com/a/27775257/6850747
+    all_branches: true
