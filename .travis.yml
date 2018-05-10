@@ -7,7 +7,11 @@ node_js:
 # https://docs.travis-ci.com/user/notifications/
 notifications:
   email: false
-  slack: $SLACK_AUTH
+  slack:
+    on_success: change
+    on_failure: always
+    rooms:
+      secure: $SLACK_AUTH
 
 # Deploy code to Github as a 'release'
 # This is run after a tagged commit triggers a successful build
