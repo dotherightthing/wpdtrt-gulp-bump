@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "gulp-wpdtrt-plugin-bump",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Updates the version of dotherightthing/wpdtrt-plugin and any generated children, using the version information in package.json.",
   "keywords": [
     "gulp",
