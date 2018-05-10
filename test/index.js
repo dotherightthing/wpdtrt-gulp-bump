@@ -7,6 +7,7 @@
 // https://github.com/stevelacy/gulp-bump/blob/master/test/index.js
 // https://github.com/lazd/gulp-replace/blob/master/test/main.js
 // https://samwize.com/2014/02/08/a-guide-to-mochas-describe-it-and-setup-hooks/
+// https://gulpjs.org/writing-a-plugin/testing (TODO)
 
 // 1. `describe()` is merely for grouping, which you can nest as deep
 // 2. `it()` is a test case
@@ -106,7 +107,7 @@ describe('Test plugin', function() {
             outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + plugin_parent_files[i]);
             expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + plugin_parent_files[i]);
 
-            expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
+            expect( outputBuffer.toString('utf8').trim() ).not.differentFrom( expectedBuffer.toString('utf8').trim() )
           }
 
           done();
@@ -150,7 +151,7 @@ describe('Test plugin', function() {
             outputBuffer = fs.readFileSync(root_output_path + plugin_child_files[i]);
             expectedBuffer = fs.readFileSync(root_expected_path + plugin_child_files[i]);
 
-            expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
+            expect( outputBuffer.toString('utf8').trim() ).not.differentFrom( expectedBuffer.toString('utf8').trim() )
           }
 
           done();
