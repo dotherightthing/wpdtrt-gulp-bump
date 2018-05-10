@@ -50,10 +50,13 @@ describe('Test plugin', function() {
 
   describe('Test orphan parent', function() {
 
+    before( function() {
+      timestamp = new Date().getTime();
+    });
+
     // Setup
     before( function() {
 
-      timestamp = new Date().getTime();
       wpdtrt_plugin_input_path =    'test/fixtures/wpdtrt-plugin/';
       wpdtrt_plugin_output_path =   'tmp/' + timestamp + '/wpdtrt-plugin/';
       wpdtrt_plugin_expected_path = 'test/expected/wpdtrt-plugin/';
@@ -77,13 +80,28 @@ describe('Test plugin', function() {
       gulp.start('test');
     });
 
+    it('readme.txt should be updated correctly', function(done) {
+
+      gulp.task('test', ['wpdtrtPluginBumpParent'], function() {
+
+        setTimeout(function() {
+
+          outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + 'readme.txt');
+          expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + 'readme.txt');
+
+          expect( outputBuffer.toString() ).to.equal( expectedBuffer.toString() );
+
+          done();
+        }, 1000);
+      });
+      gulp.start('test');
+    });
   });
 
   describe('Test parent installed as a dependency of child', function() {
 
     // Setup
     before( function() {
-      timestamp = new Date().getTime();
       wpdtrt_plugin_input_path =    'test/fixtures/wpdtrt-plugin/';
       wpdtrt_plugin_output_path =   'tmp/' + timestamp + '/wpdtrt-plugin/';
       wpdtrt_plugin_expected_path = 'test/expected/wpdtrt-plugin/';
@@ -113,12 +131,15 @@ describe('Test plugin', function() {
 
       gulp.task('test', ['wpdtrtPluginBumpChild'], function() {
 
-        outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + 'readme.txt');
-        expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + 'readme.txt');
+        setTimeout(function() {
 
-        expect( outputBuffer.toString() ).to.equal( expectedBuffer.toString() );
-        //expect(fs.readFileSync(wpdtrt_plugin_output_path + 'readme.txt').toString('utf8')).to.contain('Stable tag: 1.4.11');
-        done();
+          outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + 'readme.txt');
+          expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + 'readme.txt');
+
+          expect( outputBuffer.toString() ).to.equal( expectedBuffer.toString() );
+
+          done();
+        }, 1000);
       });
       gulp.start('test');
     });
