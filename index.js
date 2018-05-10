@@ -1,4 +1,4 @@
-/*jslint white:true, regexp: true, node:true */
+/*jslint white:true, node:true */
 
 'use strict';
 
