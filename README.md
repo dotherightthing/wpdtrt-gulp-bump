@@ -29,7 +29,7 @@ function moduleIsAvailable(path) {
 gulp.task('bump_replace', function() {
 
     // if run from wpdtrt-plugin:
-    // gulp bump
+    // gulp bump_replace
     var wpdtrt_plugin_input_path = '',
         wpdtrt_plugin_output_path = '',
         wpdtrt_plugin_package = process.cwd() + '/' + wpdtrt_plugin_input_path + 'package.json',
@@ -38,7 +38,7 @@ gulp.task('bump_replace', function() {
         root_package = wpdtrt_plugin_package;
 
     // if run from a child plugin:
-    // gulp bump --gulpfile ./vendor/dotherightthing/wpdtrt-plugin/gulpfile.js --cwd ./
+    // gulp bump_replace --gulpfile ./vendor/dotherightthing/wpdtrt-plugin/gulpfile.js --cwd ./
     if ( moduleIsAvailable( '../../../package.json' ) ) {
         root_input_path = '../../../';
         root_output_path = '../../../';
@@ -53,16 +53,6 @@ gulp.task('bump_replace', function() {
         root_output_path: root_output_path,
         root_package: root_package
     });
-});
-
-gulp.task('bump', function(callback) {
-
-  runSequence(
-    'bump_update',
-    'bump_replace',
-    'bump_update_autoload',
-    callback
-  );
 });
 ```
 
