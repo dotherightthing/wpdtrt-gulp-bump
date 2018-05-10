@@ -40,27 +40,23 @@ describe('Test plugin', function() {
 	this.timeout(4000);
 
   var timestamp,
-      wpdtrt_plugin_input_path,
-      wpdtrt_plugin_output_path,
-      wpdtrt_plugin_expected_path,
-      root_input_path,
-      root_output_path,
-      root_expected_path,
+      wpdtrt_plugin_input_path =    'test/fixtures/wpdtrt-plugin/',
+      wpdtrt_plugin_output_path =   'tmp/' + timestamp + '/wpdtrt-plugin/',
+      wpdtrt_plugin_expected_path = 'test/expected/wpdtrt-plugin/',
+      root_input_path =             'test/fixtures/wpdtrt-plugin-child/',
+      root_output_path =            'tmp/' + timestamp + '/wpdtrt-plugin-child/',
+      root_expected_path =          'test/expected/wpdtrt-plugin-child/',
       outputBuffer,
       expectedBuffer;
 
-  describe('Test orphan parent', function() {
+  before( function() {
+    timestamp = new Date().getTime();
+  });
 
-    before( function() {
-      timestamp = new Date().getTime();
-    });
+  describe('Test orphan parent', function() {
 
     // Setup
     before( function() {
-
-      wpdtrt_plugin_input_path =    'test/fixtures/wpdtrt-plugin/';
-      wpdtrt_plugin_output_path =   'tmp/' + timestamp + '/wpdtrt-plugin/';
-      wpdtrt_plugin_expected_path = 'test/expected/wpdtrt-plugin/';
 
       gulp.task('wpdtrtPluginBumpParent', wpdtrtPluginBump({
         wpdtrt_plugin_input_path: wpdtrt_plugin_input_path,
@@ -90,7 +86,7 @@ describe('Test plugin', function() {
           outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + 'readme.txt');
           expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + 'readme.txt');
 
-          expect( outputBuffer.toString() ).not.differentFrom( expectedBuffer.toString() )
+          expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
 
           done();
         }, 1000);
@@ -103,12 +99,6 @@ describe('Test plugin', function() {
 
     // Setup
     before( function() {
-      wpdtrt_plugin_input_path =    'test/fixtures/wpdtrt-plugin/';
-      wpdtrt_plugin_output_path =   'tmp/' + timestamp + '/wpdtrt-plugin/';
-      wpdtrt_plugin_expected_path = 'test/expected/wpdtrt-plugin/';
-      root_input_path =             'test/fixtures/wpdtrt-plugin-child/';
-      root_output_path =            'tmp/' + timestamp + '/wpdtrt-plugin-child/';
-      root_expected_path =          'test/expected/wpdtrt-plugin-child/';
 
       gulp.task('wpdtrtPluginBumpChild', wpdtrtPluginBump({
         wpdtrt_plugin_input_path: wpdtrt_plugin_input_path,
@@ -137,7 +127,7 @@ describe('Test plugin', function() {
           outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + 'readme.txt');
           expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + 'readme.txt');
 
-          expect( outputBuffer.toString() ).not.differentFrom( expectedBuffer.toString() )
+          expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
 
           done();
         }, 1000);
