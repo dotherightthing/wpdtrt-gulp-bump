@@ -3,7 +3,7 @@
  * Plugin Name:  DTRT Plugin Child
  * Plugin URI:   https://github.com/dotherightthing/wpdtrt-plugin-child
  * Description:  Demo plugin which uses wpdtrt-plugin.
- * Version:      1.0.0
+ * Version:      2.0.0
  * Author:       Dan Smith
  * Author URI:   https://profiles.wordpress.org/dotherightthingnz
  * License:      GPLv2 or later

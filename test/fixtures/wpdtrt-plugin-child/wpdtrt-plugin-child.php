@@ -16,13 +16,16 @@ if( ! defined( 'WPDTRT_PLUGIN_CHILD_VERSION' ) ) {
   define( 'WPDTRT_PLUGIN_CHILD_VERSION', '0.12.345' );
 }
 
-/**
- * Register Shortcode
- */
 function wpdtrt_blocks_shortcode_1_init() {
   $wpdtrt_blocks_shortcode_1 = new DoTheRightThing\WPPlugin\r_0_12_345\Shortcode();
 }
 
-add_action( 'init', 'wpdtrt_blocks_shortcode_1_init', 100 );
+function wpdtrt_blocks_shortcode_2_init() {
+  $wpdtrt_blocks_shortcode_2 = new DoTheRightThing\WPPlugin\r_0_12_345\Shortcode();
+}
+
+function wpdtrt_blocks_shortcode_3_init() {
+  $wpdtrt_blocks_shortcode_3 = new DoTheRightThing\WPPlugin\r_0_12_345\Shortcode();
+}
 
 ?>
