@@ -80,10 +80,8 @@ describe('Test plugin', function () {
             gulp.task('wpdtrtPluginBumpParent', wpdtrtPluginBump({
                 wpdtrt_plugin_input_path: wpdtrt_plugin_input_path,
                 wpdtrt_plugin_output_path: wpdtrt_plugin_output_path,
-                wpdtrt_plugin_package: process.cwd() + '/' + wpdtrt_plugin_input_path + 'package.json', // process.cwd() + '/package.json'
                 root_input_path: wpdtrt_plugin_input_path,
-                root_output_path: wpdtrt_plugin_output_path,
-                root_package: process.cwd() + '/test/fixtures/wpdtrt-plugin/package.json' // process.cwd() + '/package.json'
+                root_output_path: wpdtrt_plugin_output_path
             }));
         });
 
@@ -125,10 +123,8 @@ describe('Test plugin', function () {
             gulp.task('wpdtrtPluginBumpChild', wpdtrtPluginBump({
                 wpdtrt_plugin_input_path: wpdtrt_plugin_input_path,
                 wpdtrt_plugin_output_path: wpdtrt_plugin_output_path,
-                wpdtrt_plugin_package: process.cwd() + '/' + wpdtrt_plugin_input_path + 'package.json', // process.cwd() + '/package.json'
                 root_input_path: root_input_path,
-                root_output_path: root_output_path,
-                root_package: process.cwd() + '/' + root_input_path + 'package.json' // '../../../package.json'
+                root_output_path: root_output_path
             }));
         });
 
