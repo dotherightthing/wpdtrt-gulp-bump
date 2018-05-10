@@ -38,9 +38,7 @@ describe('Test plugin', function() {
   describe('Test orphan parent', function() {
 
     var wpdtrt_plugin_input_path =  'test/fixtures/wpdtrt-plugin/',
-        wpdtrt_plugin_output_path = 'test/output/wpdtrt-plugin/',
-        root_input_path =           'test/fixtures/wpdtrt-plugin-child/',
-        root_output_path =          'test/output/wpdtrt-plugin-child/';
+        wpdtrt_plugin_output_path = 'test/output/wpdtrt-plugin/';
 
     gulp.task('wpdtrtPluginBumpParent', wpdtrtPluginBump({
       wpdtrt_plugin_input_path: wpdtrt_plugin_input_path,
