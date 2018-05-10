@@ -8,7 +8,7 @@ node_js:
 notifications:
   email: false
   slack:
-    on_success: change
+    on_success: always
     on_failure: always
     rooms:
       secure: $SLACK_AUTH
