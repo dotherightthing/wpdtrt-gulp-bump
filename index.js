@@ -61,13 +61,13 @@ var WpdtrtPluginBump = function(opts) {
 
 	/**
 	 * Child: version the extended class name
-	 * @param {object} root_package - A reference to the child's package.json file
 	 * @param {string} input_path - Path to wpdtrt-plugin-child/
 	 * @param {string} output_path - Path to wpdtrt-plugin-child/ output directory
+	 * @param {object} root_package - A reference to the child's package.json file
 	 * @param {string} wpdtrt_plugin_package_version_namespaced - The version in namespace format
 	 * @return {array} src files
 	 */
-	function version_child_extend(root_package, input_path, output_path, wpdtrt_plugin_package_version_namespaced) {
+	function version_child_extend( input_path, output_path, root_package, wpdtrt_plugin_package_version_namespaced) {
 		// extends DoTheRightThing\WPPlugin\r_1_2_3
 		var files = [
 			input_path + 'src/class-' + root_package.name + '-plugin.php',
@@ -85,12 +85,12 @@ var WpdtrtPluginBump = function(opts) {
 
 	/**
 	 * Child: version the gulpfile
-	 * @param {object} root_package - A reference to the child's package.json file
 	 * @param {string} input_path - Path to wpdtrt-plugin-child/
 	 * @param {string} output_path - Path to wpdtrt-plugin-child/ output directory
+	 * @param {object} root_package - A reference to the child's package.json file
 	 * @return {array} src files
 	 */
-	function version_child_gulpfile( root_package, input_path, output_path ) {
+	function version_child_gulpfile( input_path, output_path, root_package ) {
 		// * @version 1.2.3
 		var files = input_path + 'gulpfile.js';
 
@@ -105,12 +105,12 @@ var WpdtrtPluginBump = function(opts) {
 
 	/**
 	 * Child: version the (WordPress) readme
-	 * @param {object} root_package - A reference to the child's package.json file
 	 * @param {string} input_path - Path to wpdtrt-plugin-child/
 	 * @param {string} output_path - Path to wpdtrt-plugin-child/ output directory
+	 * @param {object} root_package - A reference to the child's package.json file
 	 * @return {array} src files
 	 */
-	function version_child_readme( root_package, input_path, output_path ) {
+	function version_child_readme( input_path, output_path, root_package ) {
 		var files = input_path + 'readme.txt';
 
 		return gulp.src(files)
@@ -134,13 +134,13 @@ var WpdtrtPluginBump = function(opts) {
 
 	/**
 	 * Child: version the child root file
-	 * @param {object} root_package - A reference to the child's package.json file
 	 * @param {string} input_path - Path to wpdtrt-plugin-child/
 	 * @param {string} output_path - Path to wpdtrt-plugin-child/ output directory
+	 * @param {object} root_package - A reference to the child's package.json file
 	 * @param {string} wpdtrt_plugin_package_version_namespaced - The version in namespace format
 	 * @return {array} src files
 	 */
-	function version_child_root( root_package, input_path, output_path, wpdtrt_plugin_package_version_namespaced ) {
+	function version_child_root( input_path, output_path, root_package, wpdtrt_plugin_package_version_namespaced ) {
 		var files = input_path + root_package.name + '.php';
 
 		return gulp.src(files)
@@ -302,37 +302,46 @@ var WpdtrtPluginBump = function(opts) {
 
 		var root_package = require(opts.root_package),
 			wpdtrt_plugin_package = require(opts.wpdtrt_plugin_package),
-			wpdtrt_plugin_package_version_namespaced = namespace_wpdtrt_plugin_package_version( wpdtrt_plugin_package.version );
+			wpdtrt_plugin_package_version_namespaced = namespace_wpdtrt_plugin_package_version( wpdtrt_plugin_package.version ),
+			input = '',
+			output = '';
 
 
 		// orphan parent
 		if ( opts.root_input_path === opts.wpdtrt_plugin_input_path ) {
 
+			input = opts.wpdtrt_plugin_input_path;
+			output = opts.wpdtrt_plugin_output_path;
+
 			// get the latest release number
 			console.log('Bump ' + wpdtrt_plugin_package.name + ' to ' + wpdtrt_plugin_package.version + ' using package.json' );
 
-			version_parent_src( opts.wpdtrt_plugin_input_path, opts.wpdtrt_plugin_output_path, wpdtrt_plugin_package_version_namespaced );
+			version_parent_src( input, output, wpdtrt_plugin_package_version_namespaced );
 
-			version_parent_src_plugin( opts.wpdtrt_plugin_input_path, opts.wpdtrt_plugin_output_path, wpdtrt_plugin_package, wpdtrt_plugin_package_version_namespaced );
+			version_parent_src_plugin( input, output, wpdtrt_plugin_package, wpdtrt_plugin_package_version_namespaced );
 
-			version_parent_composer( opts.wpdtrt_plugin_input_path, opts.wpdtrt_plugin_output_path, wpdtrt_plugin_package_version_namespaced );
+			version_parent_composer( input, output, wpdtrt_plugin_package_version_namespaced );
 
-			version_parent_autoloader( opts.wpdtrt_plugin_input_path, opts.wpdtrt_plugin_output_path, wpdtrt_plugin_package );
+			version_parent_autoloader( input, output, wpdtrt_plugin_package );
 
-			version_parent_root( opts.wpdtrt_plugin_input_path, opts.wpdtrt_plugin_output_path, wpdtrt_plugin_package );
+			version_parent_root( input, output, wpdtrt_plugin_package );
 		}
 		// parent installed as a dependency of child
 		else {
+
+			input = opts.root_input_path;
+			output = opts.root_output_path;
+
 			// bump wpdtrt-foo to 0.1.2 and wpdtrt-plugin 1.2.3 using package.json
 			console.log('Bump ' + root_package.name + ' to ' + root_package.version + ' and ' + wpdtrt_plugin_package.name + ' ' + wpdtrt_plugin_package.version + ' using package.json' );
 
-			version_child_extend( root_package, opts.root_input_path, opts.root_output_path, wpdtrt_plugin_package_version_namespaced );
+			version_child_extend( input, output, root_package, wpdtrt_plugin_package_version_namespaced );
 
-			version_child_gulpfile( root_package, opts.root_input_path, opts.root_output_path );
+			version_child_gulpfile( input, output, root_package );
 
-			version_child_readme( root_package, opts.root_input_path, opts.root_output_path );
+			version_child_readme( input, output, root_package );
 
-			version_child_root( root_package, opts.root_input_path, opts.root_output_path, wpdtrt_plugin_package_version_namespaced );
+			version_child_root( input, output, root_package, wpdtrt_plugin_package_version_namespaced );
 		}
 	};
 };
