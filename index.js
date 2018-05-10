@@ -138,7 +138,7 @@ var WpdtrtPluginBump = function(opts) {
 		return gulp.src(files)
 			// DoTheRightThing\WPPlugin\r_1_2_3\Shortcode()
 			.pipe(replace(
-				/(DoTheRightThing\\WPPlugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/,
+				/(DoTheRightThing\\WPPlugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/g,
 				'$1' + wpdtrt_plugin_package_version_namespaced
 			))
 			// * Version: 1.2.3
