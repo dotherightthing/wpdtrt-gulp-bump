@@ -3,11 +3,7 @@
 'use strict';
 
 var gulp = require('gulp');
-//var expect = require('gulp-expect-file');
 var replace = require('gulp-replace');
-
-// testing
-// var debug = require('gulp-debug');
 
 /**
  * Plugin
@@ -75,7 +71,6 @@ var WpdtrtPluginBump = function(opts) {
 		];
 
 		return gulp.src(files)
-			// .pipe(expect.real(files)) // .pipe(debug())
 			.pipe(replace(
 				/(extends DoTheRightThing\\WPPlugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/,
 				'$1' + wpdtrt_plugin_package_version_namespaced
@@ -95,7 +90,6 @@ var WpdtrtPluginBump = function(opts) {
 		var files = input_path + 'gulpfile.js';
 
 		return gulp.src(files)
-			// .pipe(expect.real(files)) // .pipe(debug())
 			.pipe(replace(
 				/(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
 				'$1' + root_package.version
@@ -114,7 +108,6 @@ var WpdtrtPluginBump = function(opts) {
 		var files = input_path + 'readme.txt';
 
 		return gulp.src(files)
-			// .pipe(expect.real(files)) // .pipe(debug())
 			.pipe(replace(
 				// Stable tag: 1.2.3
 				/(Stable tag:.)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
@@ -125,7 +118,6 @@ var WpdtrtPluginBump = function(opts) {
 				//
 				// = 1.2.3 =
 				//
-				// @see https://github.com/dotherightthing/wpdtrt-plugin/issues/101
 				/(== Changelog ==\s\s= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\s)/,
 				"$1" + root_package.version + " =\n\n= $2$3"
 			))
@@ -144,8 +136,7 @@ var WpdtrtPluginBump = function(opts) {
 		var files = input_path + root_package.name + '.php';
 
 		return gulp.src(files)
-			// .pipe(expect.real(files)) // .pipe(debug())
-			// DoTheRightThing\WPPlugin\r_1_2_3
+			// DoTheRightThing\WPPlugin\r_1_2_3\Shortcode()
 			.pipe(replace(
 				/(DoTheRightThing\\WPPlugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/,
 				'$1' + wpdtrt_plugin_package_version_namespaced
@@ -182,7 +173,6 @@ var WpdtrtPluginBump = function(opts) {
 
 		// DoTheRightThing\WPPlugin\r_1_2_3
 		return gulp.src(files)
-			// .pipe(expect.real(files)) // .pipe(debug())
 			.pipe(replace(
 				/(DoTheRightThing\\WPPlugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/g,
 				'$1' + wpdtrt_plugin_package_version_namespaced
@@ -202,7 +192,6 @@ var WpdtrtPluginBump = function(opts) {
 		var files = input_path + 'src/Plugin.php';
 
 		return gulp.src(files)
-			// .pipe(expect.real(files)) // .pipe(debug())
 			// DoTheRightThing\WPPlugin\r_1_2_3
 			.pipe(replace(
 				/(DoTheRightThing\\WPPlugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/g,
@@ -228,7 +217,6 @@ var WpdtrtPluginBump = function(opts) {
 
 		// "DoTheRightThing\\WPPlugin\\r_1_2_3\\": "src"
 		return gulp.src(files)
-			// .pipe(expect.real(files)) // .pipe(debug())
 			.pipe(replace(
 				/("DoTheRightThing\\\\WPPlugin\\\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})(\\\\")/,
 				'$1' + wpdtrt_plugin_package_version_namespaced + '$3'
@@ -248,7 +236,6 @@ var WpdtrtPluginBump = function(opts) {
 
 		// * @version 1.2.3
 		gulp.src(files)
-			// .pipe(expect.real(files)) // .pipe(debug())
 			.pipe(replace(
 				/(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
 				'$1' + wpdtrt_plugin_package.version
@@ -266,7 +253,6 @@ var WpdtrtPluginBump = function(opts) {
 				//
 				// = 1.2.3 =
 				//
-				// @see https://github.com/dotherightthing/wpdtrt-plugin/issues/101
 				/(== Changelog ==\s\s= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\s)/,
 				"$1" + wpdtrt_plugin_package.version + " =\n\n= $2$3"
 			))
@@ -284,7 +270,6 @@ var WpdtrtPluginBump = function(opts) {
 		var files = input_path + 'wpdtrt-plugin.php'
 
 		gulp.src(files)
-			// .pipe(expect.real(files)) // .pipe(debug())
 			// * Version: 1.2.3
 			.pipe(replace(
 				/(\* Version:\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
