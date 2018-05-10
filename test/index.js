@@ -17,7 +17,6 @@
 var gulp = require('gulp');
 var assert = require('assert');
 var chai = require('chai');
-var expectFile = require('gulp-expect-file');
 var fs = require('fs');
 var mocha = require('mocha');
 var path = require('path');
