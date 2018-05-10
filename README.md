@@ -7,7 +7,7 @@ Updates the version of [dotherightthing/wpdtrt-plugin](https://github.com/dother
 ## Installation
 
 ```
-yarn add https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump
+yarn add https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump --dev
 ```
 
 ## Usage
@@ -53,6 +53,16 @@ gulp.task('bump_replace', function() {
         root_output_path: root_output_path,
         root_package: root_package
     });
+});
+
+gulp.task('bump', function(callback) {
+
+  runSequence(
+    'bump_update',
+    'bump_replace',
+    'bump_update_autoload',
+    callback
+  );
 });
 ```
 
