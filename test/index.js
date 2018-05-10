@@ -108,7 +108,7 @@ describe('Test plugin', function() {
             outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + plugin_parent_files[i]);
             expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + plugin_parent_files[i]);
 
-            // fails - are programmed line breaks different from user authored ones?
+            // readme.txt fails - are programmed line breaks different from user authored ones?
             expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
           }
 
@@ -150,10 +150,10 @@ describe('Test plugin', function() {
 
           for( i=0; i<plugin_child_files.length; i += 1 ) {
 
-            outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + plugin_child_files[i]);
-            expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + plugin_child_files[i]);
+            outputBuffer = fs.readFileSync(root_output_path + plugin_child_files[i]);
+            expectedBuffer = fs.readFileSync(root_expected_path + plugin_child_files[i]);
 
-            // fails - are programmed line breaks different from user authored ones?
+            // readme.txt fails - are programmed line breaks different from user authored ones?
             expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
           }
 
