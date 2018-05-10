@@ -12,8 +12,8 @@
  * Domain Path:  /languages
  */
 
-if( ! defined( 'WPDTRT_BLOCKS_VERSION' ) ) {
-  define( 'WPDTRT_BLOCKS_VERSION', '0.12.345' );
+if( ! defined( 'WPDTRT_PLUGIN_CHILD_VERSION' ) ) {
+  define( 'WPDTRT_PLUGIN_CHILD_VERSION', '0.12.345' );
 }
 
 /**
