@@ -57,17 +57,28 @@ describe('Test plugin', function() {
 
   describe('Test parent installed as a dependency of child', function() {
 
+    var wpdtrt_plugin_path = 'fixtures/wpdtrt-plugin/',
+        root_path = 'fixtures/wpdtrt-plugin-child/';
+
     gulp.task('wpdtrtPluginBumpChild', wpdtrtPluginBump({
-      wpdtrt_plugin_path: 'fixtures/wpdtrt-plugin/',
+      wpdtrt_plugin_path: wpdtrt_plugin_path,
       wpdtrt_plugin_package: process.cwd() + '/fixtures/wpdtrt-plugin/package.json', // process.cwd() + '/package.json'
-      root_path: 'fixtures/wpdtrt-plugin-child/',
+      root_path: root_path,
       root_package: process.cwd() + '/fixtures/wpdtrt-plugin-child/package.json' // '../../../package.json'
     }));
 
     it('Plugin runs without error', function(done) {
       // pseudo-task
       gulp.task('test', ['wpdtrtPluginBumpChild'], function() {
-        //assert.equal(1, true);
+        done();
+      });
+      gulp.start('test');
+    });
+
+    it('readme.txt should be updated correctly', function(done) {
+
+      gulp.task('test', ['wpdtrtPluginBumpChild'], function() {
+        expect(fs.readFileSync(wpdtrt_plugin_path + 'readme.txt').toString('utf8')).to.contain('Stable tag: 1.4.11');
         done();
       });
       gulp.start('test');
