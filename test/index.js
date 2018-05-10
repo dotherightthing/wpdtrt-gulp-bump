@@ -17,6 +17,7 @@
 var gulp = require('gulp');
 var assert = require('assert');
 var chai = require('chai');
+
 var fs = require('fs');
 var mocha = require('mocha');
 var path = require('path');
@@ -39,7 +40,7 @@ describe('Test plugin', function() {
 	// https://duske.me/simple-functional-tests-for-gulp-tasks/
 	this.timeout(4000);
 
-  var timestamp,
+  var timestamp = new Date().getTime(),
       wpdtrt_plugin_input_path =    'test/fixtures/wpdtrt-plugin/',
       wpdtrt_plugin_output_path =   'tmp/' + timestamp + '/wpdtrt-plugin/',
       wpdtrt_plugin_expected_path = 'test/expected/wpdtrt-plugin/',
@@ -47,11 +48,30 @@ describe('Test plugin', function() {
       root_output_path =            'tmp/' + timestamp + '/wpdtrt-plugin-child/',
       root_expected_path =          'test/expected/wpdtrt-plugin-child/',
       outputBuffer,
-      expectedBuffer;
-
-  before( function() {
-    timestamp = new Date().getTime();
-  });
+      expectedBuffer,
+      i,
+      plugin_parent_files = [
+        'src/class-wpdtrt-test-plugin.php',
+        'src/class-wpdtrt-test-widgets.php',
+        'src/Plugin.php',
+        'src/Shortcode.php',
+        'src/Taxonomy.php',
+        'src/TemplateLoader.php',
+        'src/Widget.php',
+        'composer.json',
+        'index.php',
+        //'package.json',
+        ////'readme.txt',
+        'wpdtrt-plugin.php'
+      ],
+      plugin_child_files = [
+        'src/class-wpdtrt-plugin-child-plugin.php',
+        'src/class-wpdtrt-plugin-child-widgets.php',
+        'gulpfile.js',
+        //'package.json',
+        ////'readme.txt',
+        'wpdtrt-plugin-child.php'
+      ];
 
   describe('Test orphan parent', function() {
 
@@ -77,16 +97,20 @@ describe('Test plugin', function() {
       gulp.start('test');
     });
 
-    it('readme.txt should be updated correctly', function(done) {
+    it('Files should be versioned correctly', function(done) {
 
       gulp.task('test', ['wpdtrtPluginBumpParent'], function() {
 
         setTimeout(function() {
 
-          outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + 'readme.txt');
-          expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + 'readme.txt');
+          for( i=0; i<plugin_parent_files.length; i += 1 ) {
 
-          expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
+            outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + plugin_parent_files[i]);
+            expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + plugin_parent_files[i]);
+
+            // fails - are programmed line breaks different from user authored ones?
+            expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
+          }
 
           done();
         }, 1000);
@@ -118,16 +142,20 @@ describe('Test plugin', function() {
       gulp.start('test');
     });
 
-    it('readme.txt should be updated correctly', function(done) {
+    it('Files should be versioned correctly', function(done) {
 
       gulp.task('test', ['wpdtrtPluginBumpChild'], function() {
 
         setTimeout(function() {
 
-          outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + 'readme.txt');
-          expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + 'readme.txt');
+          for( i=0; i<plugin_child_files.length; i += 1 ) {
 
-          expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
+            outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + plugin_child_files[i]);
+            expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + plugin_child_files[i]);
+
+            // fails - are programmed line breaks different from user authored ones?
+            expect( outputBuffer.toString().trim() ).not.differentFrom( expectedBuffer.toString().trim() )
+          }
 
           done();
         }, 1000);
