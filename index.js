@@ -19,7 +19,7 @@ var replace = require('gulp-replace');
  *
  * @param opts array optional Options
  */
-var WpdtrtPluginBump = function(opts) {
+var wpdtrtPluginBump = function(opts) {
 	opts = opts || {};
 
 	if ( !opts.root_input_path ) {
@@ -332,4 +332,4 @@ var WpdtrtPluginBump = function(opts) {
 };
 
 // Export the plugin main function
-module.exports = WpdtrtPluginBump;
+module.exports = wpdtrtPluginBump;
