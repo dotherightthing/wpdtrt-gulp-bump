@@ -38,10 +38,10 @@ describe('Test plugin', function() {
   describe('Test orphan parent', function() {
 
     gulp.task('wpdtrtPluginBumpParent', wpdtrtPluginBump({
-      wpdtrt_plugin_path: 'fixtures/wpdtrt-plugin/',
-      wpdtrt_plugin_package: process.cwd() + '/fixtures/wpdtrt-plugin/package.json', // process.cwd() + '/package.json'
-      root_path: 'fixtures/wpdtrt-plugin/',
-      root_package: process.cwd() + '/fixtures/wpdtrt-plugin/package.json' // process.cwd() + '/package.json'
+      wpdtrt_plugin_path: 'test/fixtures/wpdtrt-plugin/',
+      wpdtrt_plugin_package: process.cwd() + '/test/fixtures/wpdtrt-plugin/package.json', // process.cwd() + '/package.json'
+      root_path: 'test/fixtures/wpdtrt-plugin/',
+      root_package: process.cwd() + '/test/fixtures/wpdtrt-plugin/package.json' // process.cwd() + '/package.json'
     }));
 
     it('Plugin runs without error', function(done) {
@@ -57,14 +57,14 @@ describe('Test plugin', function() {
 
   describe('Test parent installed as a dependency of child', function() {
 
-    var wpdtrt_plugin_path = 'fixtures/wpdtrt-plugin/',
-        root_path = 'fixtures/wpdtrt-plugin-child/';
+    var wpdtrt_plugin_path = 'test/fixtures/wpdtrt-plugin/',
+        root_path = 'test/fixtures/wpdtrt-plugin-child/';
 
     gulp.task('wpdtrtPluginBumpChild', wpdtrtPluginBump({
       wpdtrt_plugin_path: wpdtrt_plugin_path,
-      wpdtrt_plugin_package: process.cwd() + '/fixtures/wpdtrt-plugin/package.json', // process.cwd() + '/package.json'
+      wpdtrt_plugin_package: process.cwd() + '/test/fixtures/wpdtrt-plugin/package.json', // process.cwd() + '/package.json'
       root_path: root_path,
-      root_package: process.cwd() + '/fixtures/wpdtrt-plugin-child/package.json' // '../../../package.json'
+      root_package: process.cwd() + '/test/fixtures/wpdtrt-plugin-child/package.json' // '../../../package.json'
     }));
 
     it('Plugin runs without error', function(done) {
