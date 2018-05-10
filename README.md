@@ -4,11 +4,19 @@
 
 Updates the version of [dotherightthing/wpdtrt-plugin](https://github.com/dotherightthing/wpdtrt-plugin/) and any [generated children](https://github.com/dotherightthing/generator-wp-plugin-boilerplate), using the version information in `package.json`.
 
+## Installation
+
+```
+yarn add https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump
+```
+
 ## Usage
 
 As used in [wpdtrt-plugin's gulpfile.js](https://github.com/dotherightthing/wpdtrt-plugin/blob/master/gulpfile.js):
 
 ```
+var wpdtrtPluginBump = require('gulp-wpdtrt-plugin-bump');
+
 function moduleIsAvailable(path) {
     try {
        require.resolve(path);
