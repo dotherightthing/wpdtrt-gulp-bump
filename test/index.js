@@ -106,7 +106,7 @@ describe('Test plugin', function () {
                         outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + plugin_parent_files[i]);
                         expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + plugin_parent_files[i]);
 
-                        expect(outputBuffer.toString('utf8').trim()).not.differentFrom(expectedBuffer.toString('utf8').trim())
+                        expect(outputBuffer.toString('utf8').trim()).not.differentFrom(expectedBuffer.toString('utf8').trim());
                     }
 
                     done();
@@ -151,7 +151,7 @@ describe('Test plugin', function () {
                         outputBuffer = fs.readFileSync(root_output_path + plugin_child_files[i]);
                         expectedBuffer = fs.readFileSync(root_expected_path + plugin_child_files[i]);
 
-                        expect(outputBuffer.toString('utf8').trim()).not.differentFrom(expectedBuffer.toString('utf8').trim())
+                        expect(outputBuffer.toString('utf8').trim()).not.differentFrom(expectedBuffer.toString('utf8').trim());
                     }
 
                     done();
