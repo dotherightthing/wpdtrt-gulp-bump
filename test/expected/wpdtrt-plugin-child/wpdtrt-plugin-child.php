@@ -16,16 +16,16 @@ if( ! defined( 'WPDTRT_PLUGIN_CHILD_VERSION' ) ) {
   define( 'WPDTRT_PLUGIN_CHILD_VERSION', '2.0.0' );
 }
 
-function wpdtrt_blocks_shortcode_1_init() {
-  $wpdtrt_blocks_shortcode_1 = new DoTheRightThing\WPPlugin\r_1_0_0\Shortcode();
+function wpdtrt_plugin_child_shortcode_1_init() {
+  $wpdtrt_plugin_child_shortcode_1 = new WPDTRT_Plugin_Child_Shortcode();
 }
 
-function wpdtrt_blocks_shortcode_2_init() {
-  $wpdtrt_blocks_shortcode_2 = new DoTheRightThing\WPPlugin\r_1_0_0\Shortcode();
+function wpdtrt_plugin_child_shortcode_2_init() {
+  $wpdtrt_plugin_child_shortcode_2 = new WPDTRT_Plugin_Child_Shortcode();
 }
 
-function wpdtrt_blocks_shortcode_3_init() {
-  $wpdtrt_blocks_shortcode_3 = new DoTheRightThing\WPPlugin\r_1_0_0\Shortcode();
+function wpdtrt_plugin_child_shortcode_3_init() {
+  $wpdtrt_plugin_child_shortcode_3 = new WPDTRT_Plugin_Child_Shortcode();
 }
 
 ?>

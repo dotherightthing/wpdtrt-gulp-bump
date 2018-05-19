@@ -139,7 +139,7 @@ var wpdtrtPluginBump = function (opts) {
             ))
             // define( 'WPDTRT_FOO_VERSION', '1.2.3' );
             .pipe(replace(
-                /(define\( '[A-Z_]+_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(\s+;)/,
+                /(define\( '[A-Z_]+_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(' \);)/,
                 '$1' + root_package.version + '$3'
             ))
             .pipe(gulp.dest(output_path));
@@ -187,9 +187,9 @@ var wpdtrtPluginBump = function (opts) {
                 /(DoTheRightThing\\WPDTRT_Plugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/g,
                 '$1' + wpdtrt_plugin_package_version_namespaced
             ))
-            // const WPPLUGIN_VERSION = '1.2.3';
+            // const WPDTRT_PLUGIN_VERSION = '1.2.3';
             .pipe(replace(
-                /(const WPPLUGIN_VERSION = ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(';)/,
+                /(const WPDTRT_PLUGIN_VERSION = ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(';)/,
                 '$1' + wpdtrt_plugin_package.version + '$3'
             ))
             .pipe(gulp.dest(output_path + 'src/'));
@@ -267,7 +267,7 @@ var wpdtrtPluginBump = function (opts) {
             ))
             // define( 'WPDTRT_FOO_VERSION', '1.2.3' );
             .pipe(replace(
-                /(define\( '[A-Z_]+_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(\s+;)/,
+                /(define\( '[A-Z_]+_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(' \);)/,
                 '$1' + wpdtrt_plugin_package.version + '$3'
             ))
             .pipe(gulp.dest(output_path));
