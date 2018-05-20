@@ -109,7 +109,7 @@ describe('Test plugin', function () {
         // Setup
         before(function () {
 
-            // run the plugin, to copy the fixtures to transformed output
+            // run plugin, to copy fixtures to transformed output
             gulp.task('wpdtrtPluginBumpParent', wpdtrtPluginBump({
                 wpdtrt_plugin_input_path: wpdtrt_plugin_input_path,
                 wpdtrt_plugin_output_path: wpdtrt_plugin_output_path,
@@ -155,7 +155,7 @@ describe('Test plugin', function () {
         // Setup
         before(function () {
 
-            // run the plugin, to copy the fixtures to transformed output
+            // run plugin, to copy fixtures to transformed output
             gulp.task('wpdtrtPluginBumpChild', wpdtrtPluginBump({
                 wpdtrt_plugin_input_path: wpdtrt_plugin_input_path,
                 wpdtrt_plugin_output_path: wpdtrt_plugin_output_path,
