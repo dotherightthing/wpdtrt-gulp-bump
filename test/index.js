@@ -118,7 +118,7 @@ describe('Test plugin', function () {
             }));
         });
 
-        it('Parent as orphan - plugin runs without error', function (done) {
+        it('Parent as orphan - plugin should run without error', function (done) {
             // pseudo-task
             gulp.task('test', ['wpdtrtPluginBumpParent'], function () {
                 done();
@@ -164,7 +164,7 @@ describe('Test plugin', function () {
             }));
         });
 
-        it('Parent as dependency - plugin runs without error', function (done) {
+        it('Parent as dependency - plugin should run without error', function (done) {
             // pseudo-task
             gulp.task('test', ['wpdtrtPluginBumpChild'], function () {
                 done();
