@@ -41,6 +41,31 @@ describe('Test plugin', function () {
     // https://duske.me/simple-functional-tests-for-gulp-tasks/
     this.timeout(4000);
 
+    function compare_output_with_expected(filename, output_path, expected_path, done) {
+
+        // https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback
+
+        fs.readFile(output_path + filename, 'utf8', function (output_error, output_data) {
+
+            if (output_error) {
+                throw output_error;
+            }
+
+            fs.readFile(expected_path + filename, 'utf8', function (expected_error, expected_data) {
+
+                if (expected_error) {
+                    throw expected_error;
+                }
+
+                expect(output_data).not.differentFrom(expected_data);
+
+                if (done !== null) {
+                    done();
+                }
+            });
+        });
+    }
+
     var timestamp = new Date().getTime(),
         wpdtrt_plugin_input_path =    'test/fixtures/wpdtrt-plugin/',
         wpdtrt_plugin_output_path =   'tmp/' + timestamp + '/wpdtrt-plugin/',
@@ -48,9 +73,8 @@ describe('Test plugin', function () {
         root_input_path =             'test/fixtures/wpdtrt-plugin-child/',
         root_output_path =            'tmp/' + timestamp + '/wpdtrt-plugin-child/',
         root_expected_path =          'test/expected/wpdtrt-plugin-child/',
-        outputBuffer,
-        expectedBuffer,
         i,
+        callback = null,
         plugin_parent_files = [
             'src/Plugin.php',
             'src/Rewrite.php',
@@ -85,6 +109,7 @@ describe('Test plugin', function () {
         // Setup
         before(function () {
 
+            // run the plugin, to copy the fixtures to transformed output
             gulp.task('wpdtrtPluginBumpParent', wpdtrtPluginBump({
                 wpdtrt_plugin_input_path: wpdtrt_plugin_input_path,
                 wpdtrt_plugin_output_path: wpdtrt_plugin_output_path,
@@ -93,7 +118,7 @@ describe('Test plugin', function () {
             }));
         });
 
-        it('Plugin runs without error', function (done) {
+        it('Parent as orphan - plugin runs without error', function (done) {
             // pseudo-task
             gulp.task('test', ['wpdtrtPluginBumpParent'], function () {
                 done();
@@ -101,22 +126,24 @@ describe('Test plugin', function () {
             gulp.start('test');
         });
 
-        it('Files should be versioned correctly', function (done) {
+        it('Parent as orphan - files should be versioned correctly', function (done) {
 
             gulp.task('test', ['wpdtrtPluginBumpParent'], function () {
 
+                // wait for wpdtrtPluginBump to finish writing output to the file system
                 setTimeout(function () {
-
                     for (i = 0; i < plugin_parent_files.length; i += 1) {
 
-                        outputBuffer = fs.readFileSync(wpdtrt_plugin_output_path + plugin_parent_files[i]);
-                        expectedBuffer = fs.readFileSync(wpdtrt_plugin_expected_path + plugin_parent_files[i]);
+                        // only call done() after last file is checked
+                        if ((i + 1) === plugin_parent_files.length) {
+                            callback = done;
+                        } else {
+                            callback = null;
+                        }
 
-                        expect(outputBuffer.toString('utf8').trim()).not.differentFrom(expectedBuffer.toString('utf8').trim());
+                        compare_output_with_expected(plugin_parent_files[i], wpdtrt_plugin_output_path, wpdtrt_plugin_expected_path, callback);
                     }
-
-                    done();
-                }, 1000);
+                }, 2000);
             });
 
             gulp.start('test');
@@ -128,6 +155,7 @@ describe('Test plugin', function () {
         // Setup
         before(function () {
 
+            // run the plugin, to copy the fixtures to transformed output
             gulp.task('wpdtrtPluginBumpChild', wpdtrtPluginBump({
                 wpdtrt_plugin_input_path: wpdtrt_plugin_input_path,
                 wpdtrt_plugin_output_path: wpdtrt_plugin_output_path,
@@ -136,7 +164,7 @@ describe('Test plugin', function () {
             }));
         });
 
-        it('Plugin runs without error', function (done) {
+        it('Parent as dependency - plugin runs without error', function (done) {
             // pseudo-task
             gulp.task('test', ['wpdtrtPluginBumpChild'], function () {
                 done();
@@ -144,22 +172,24 @@ describe('Test plugin', function () {
             gulp.start('test');
         });
 
-        it('Files should be versioned correctly', function (done) {
+        it('Parent as dependency - files should be versioned correctly', function (done) {
 
             gulp.task('test', ['wpdtrtPluginBumpChild'], function () {
 
+                // wait for wpdtrtPluginBump to finish writing output to the file system
                 setTimeout(function () {
-
                     for (i = 0; i < plugin_child_files.length; i += 1) {
 
-                        outputBuffer = fs.readFileSync(root_output_path + plugin_child_files[i]);
-                        expectedBuffer = fs.readFileSync(root_expected_path + plugin_child_files[i]);
+                        // only call done() after last file is checked
+                        if ((i + 1) === plugin_child_files.length) {
+                            callback = done;
+                        } else {
+                            callback = null;
+                        }
 
-                        expect(outputBuffer.toString('utf8').trim()).not.differentFrom(expectedBuffer.toString('utf8').trim());
+                        compare_output_with_expected(plugin_child_files[i], root_output_path, root_expected_path, callback);
                     }
-
-                    done();
-                }, 1000);
+                }, 2000);
             });
 
             gulp.start('test');
