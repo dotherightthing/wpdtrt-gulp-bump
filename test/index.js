@@ -143,7 +143,7 @@ describe('Test plugin', function () {
 
                         compare_output_with_expected(plugin_parent_files[i], wpdtrt_plugin_output_path, wpdtrt_plugin_expected_path, callback);
                     }
-                }, 2000);
+                }, 1000);
             });
 
             gulp.start('test');
@@ -189,7 +189,7 @@ describe('Test plugin', function () {
 
                         compare_output_with_expected(plugin_child_files[i], root_output_path, root_expected_path, callback);
                     }
-                }, 2000);
+                }, 1000);
             });
 
             gulp.start('test');
