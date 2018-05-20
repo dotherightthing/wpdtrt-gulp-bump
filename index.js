@@ -50,6 +50,10 @@ var wpdtrtPluginBump = function (opts) {
     }
 
     /**
+     * ===== Child replacements =====
+     */
+
+    /**
      * Child: version the extended class name
      * @param {string} input_path - Path to wpdtrt-plugin-child/
      * @param {string} output_path - Path to wpdtrt-plugin-child/ output directory
@@ -57,7 +61,7 @@ var wpdtrtPluginBump = function (opts) {
      * @param {string} wpdtrt_plugin_package_version_namespaced - The version in namespace format
      * @return {array} src files
      */
-    function version_child_extend(input_path, output_path, root_package, wpdtrt_plugin_package_version_namespaced) {
+    function version_child_src(input_path, output_path, root_package, wpdtrt_plugin_package_version_namespaced) {
         // extends DoTheRightThing\WPDTRT_Plugin\r_1_2_3
         var files = [
             input_path + 'src/class-' + root_package.name + '-plugin.php',
@@ -146,6 +150,67 @@ var wpdtrtPluginBump = function (opts) {
     }
 
     /**
+     * ===== Parent replacements =====
+     */
+
+    /**
+     * Parent: version the autoloader (index) file
+     * @param {string} input_path - Path to wpdtrt-plugin/
+     * @param {string} output_path - Path to wpdtrt-plugin/ output directory
+     * @param {object} wpdtrt_plugin_package - A reference to the package.json file
+     * @return {array} src files
+     */
+    function version_parent_autoloader(input_path, output_path, wpdtrt_plugin_package) {
+        var files = input_path + 'index.php';
+
+        // * @version 1.2.3
+        return gulp.src(files)
+            .pipe(replace(
+                /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
+                '$1' + wpdtrt_plugin_package.version
+            ))
+            .pipe(gulp.dest(output_path));
+    }
+
+    /**
+     * Parent: version the composer file
+     * @param {string} input_path - Path to wpdtrt-plugin/
+     * @param {string} output_path - Path to wpdtrt-plugin/ output directory
+     * @param {string} wpdtrt_plugin_package_version_namespaced - The version in namespace format
+     * @return {array} src files
+     */
+    function version_parent_composer(input_path, output_path, wpdtrt_plugin_package_version_namespaced) {
+        var files = input_path + 'composer.json';
+
+        // "DoTheRightThing\\WPDTRT_Plugin\\r_1_2_3\\": "src"
+        return gulp.src(files)
+            .pipe(replace(
+                /("DoTheRightThing\\\\WPDTRT_Plugin\\\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})(\\\\")/,
+                '$1' + wpdtrt_plugin_package_version_namespaced + '$3'
+            ))
+            .pipe(gulp.dest(output_path));
+    }
+
+    /**
+     * Parent: version the gulpfile
+     * @param {string} input_path - Path to wpdtrt-plugin/
+     * @param {string} output_path - Path to wpdtrt-plugin/ output directory
+     * @param {object} wpdtrt_plugin_package - A reference to the package.json file
+     * @return {array} src files
+     */
+    function version_parent_gulpfile(input_path, output_path, wpdtrt_plugin_package) {
+        // * @version 1.2.3
+        var files = input_path + 'gulpfile.js';
+
+        return gulp.src(files)
+            .pipe(replace(
+                /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
+                '$1' + wpdtrt_plugin_package.version
+            ))
+            .pipe(gulp.dest(output_path));
+    }
+
+    /**
      * Parent: version the namespaced src files
      * @param {string} input_path - Path to wpdtrt-plugin/
      * @param {string} output_path - Path to wpdtrt-plugin/ output directory
@@ -196,43 +261,16 @@ var wpdtrtPluginBump = function (opts) {
     }
 
     /**
-     * Parent: version the composer file
-     * @param {string} input_path - Path to wpdtrt-plugin/
-     * @param {string} output_path - Path to wpdtrt-plugin/ output directory
-     * @param {string} wpdtrt_plugin_package_version_namespaced - The version in namespace format
-     * @return {array} src files
-     */
-    function version_parent_composer(input_path, output_path, wpdtrt_plugin_package_version_namespaced) {
-        var files = input_path + 'composer.json';
-
-        // "DoTheRightThing\\WPDTRT_Plugin\\r_1_2_3\\": "src"
-        return gulp.src(files)
-            .pipe(replace(
-                /("DoTheRightThing\\\\WPDTRT_Plugin\\\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})(\\\\")/,
-                '$1' + wpdtrt_plugin_package_version_namespaced + '$3'
-            ))
-            .pipe(gulp.dest(output_path));
-    }
-
-    /**
-     * Parent: version the autoloader (index) file
+     * Parent: version the (WordPress) readme
      * @param {string} input_path - Path to wpdtrt-plugin/
      * @param {string} output_path - Path to wpdtrt-plugin/ output directory
      * @param {object} wpdtrt_plugin_package - A reference to the package.json file
      * @return {array} src files
      */
-    function version_parent_autoloader(input_path, output_path, wpdtrt_plugin_package) {
-        var files = input_path + 'index.php';
+    function version_parent_test_readme(input_path, output_path, wpdtrt_plugin_package) {
+        var files = input_path + 'tests/generated-plugin/readme.txt';
 
-        // * @version 1.2.3
-        gulp.src(files)
-            .pipe(replace(
-                /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
-                '$1' + wpdtrt_plugin_package.version
-            ))
-            .pipe(gulp.dest(output_path));
-
-        gulp.src(input_path + 'readme.txt')
+        return gulp.src(files)
             .pipe(replace(
                 // Stable tag: 1.2.3
                 /(Stable tag: )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/,
@@ -246,7 +284,7 @@ var wpdtrtPluginBump = function (opts) {
                 /(== Changelog ==\s\s= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\s)/,
                 "$1" + wpdtrt_plugin_package.version + " =\n\n= $2$3"
             ))
-            .pipe(gulp.dest(output_path));
+            .pipe(gulp.dest(output_path + 'tests/generated-plugin/'));
     }
 
     /**
@@ -256,8 +294,8 @@ var wpdtrtPluginBump = function (opts) {
      * @param {object} wpdtrt_plugin_package - A reference to the package.json file
      * @return {array} src files
      */
-    function version_parent_root(input_path, output_path, wpdtrt_plugin_package) {
-        var files = input_path + 'wpdtrt-plugin.php';
+    function version_parent_test_root(input_path, output_path, wpdtrt_plugin_package) {
+        var files = input_path + 'tests/generated-plugin/wpdtrt-test.php';
 
         gulp.src(files)
             // * Version: 1.2.3
@@ -270,8 +308,38 @@ var wpdtrtPluginBump = function (opts) {
                 /(define\( '[A-Z_]+_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(' \);)/,
                 '$1' + wpdtrt_plugin_package.version + '$3'
             ))
-            .pipe(gulp.dest(output_path));
+            .pipe(gulp.dest(output_path + 'tests/generated-plugin/'));
     }
+
+
+    /**
+     * Parent: version the namespaced src files
+     * @param {string} input_path - Path to wpdtrt-plugin/
+     * @param {string} output_path - Path to wpdtrt-plugin/ output directory
+     * @param {string} wpdtrt_plugin_package_version_namespaced - The version in namespace format
+     * @return {array} src files
+     */
+    function version_parent_test_src(input_path, output_path, wpdtrt_plugin_package_version_namespaced) {
+        var files = [
+            input_path + 'tests/generated-plugin/src/class-wpdtrt-test-plugin.php',
+            input_path + 'tests/generated-plugin/src/class-wpdtrt-test-rewrite.php',
+            input_path + 'tests/generated-plugin/src/class-wpdtrt-test-shortcode.php',
+            input_path + 'tests/generated-plugin/src/class-wpdtrt-test-taxonomy.php',
+            input_path + 'tests/generated-plugin/src/class-wpdtrt-test-widget.php'
+        ];
+
+        // DoTheRightThing\WPDTRT_Plugin\r_1_2_3
+        return gulp.src(files)
+            .pipe(replace(
+                /(DoTheRightThing\\WPDTRT_Plugin\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/g,
+                '$1' + wpdtrt_plugin_package_version_namespaced
+            ))
+            .pipe(gulp.dest(output_path + 'tests/generated-plugin/src/'));
+    }
+
+    /**
+     * ===== Perform replacements =====
+     */
 
     /**
      * process.cwd() console.log test results
@@ -303,15 +371,21 @@ var wpdtrtPluginBump = function (opts) {
         // get the latest release number
         console.log('Bump ' + wpdtrt_plugin_package.name + ' to ' + wpdtrt_plugin_package.version + ' using package.json');
 
+        version_parent_autoloader(input, output, wpdtrt_plugin_package);
+
+        version_parent_composer(input, output, wpdtrt_plugin_package_version_namespaced);
+
+        version_parent_gulpfile(input, output, wpdtrt_plugin_package);
+
         version_parent_src(input, output, wpdtrt_plugin_package_version_namespaced);
 
         version_parent_src_plugin(input, output, wpdtrt_plugin_package, wpdtrt_plugin_package_version_namespaced);
 
-        version_parent_composer(input, output, wpdtrt_plugin_package_version_namespaced);
+        version_parent_test_readme(input, output, wpdtrt_plugin_package);
 
-        version_parent_autoloader(input, output, wpdtrt_plugin_package);
+        version_parent_test_root(input, output, wpdtrt_plugin_package);
 
-        version_parent_root(input, output, wpdtrt_plugin_package);
+        version_parent_test_src(input, output, wpdtrt_plugin_package_version_namespaced);
     } else {
         // parent installed as a dependency of child
         input = opts.root_input_path;
@@ -324,7 +398,7 @@ var wpdtrtPluginBump = function (opts) {
         // bump wpdtrt-foo to 0.1.2 and wpdtrt-plugin 1.2.3 using package.json
         console.log('Bump ' + root_package.name + ' to ' + root_package.version + ' and ' + wpdtrt_plugin_package.name + ' ' + wpdtrt_plugin_package.version + ' using package.json');
 
-        version_child_extend(input, output, root_package, wpdtrt_plugin_package_version_namespaced);
+        version_child_src(input, output, root_package, wpdtrt_plugin_package_version_namespaced);
 
         version_child_gulpfile(input, output, root_package);
 
