@@ -1,5 +1,5 @@
 {
-    "name": "dotherightthing/wpdtrt-plugin",
+    "name": "dotherightthing/wpdtrt-plugin-boilerplate",
     "autoload": {
         "psr-4": {
             "DoTheRightThing\\WPDTRT_Plugin\\r_0_12_345\\": "src"

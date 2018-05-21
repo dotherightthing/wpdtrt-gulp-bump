@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name:  DTRT Test
- * Plugin URI:   https://github.com/dotherightthing/wpdtrt-plugin
- * Description:  Test plugin using the wpdtrt-plugin base classes.
+ * Plugin URI:   https://github.com/dotherightthing/wpdtrt-plugin-boilerplate
+ * Description:  Test plugin using the wpdtrt-plugin-boilerplate base classes.
  * Version:      0.12.345
  * Author:       Dan Smith
  * Author URI:   https://profiles.wordpress.org/dotherightthingnz

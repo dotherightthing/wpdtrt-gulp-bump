@@ -67,12 +67,12 @@ describe('Test plugin', function () {
     }
 
     var timestamp = new Date().getTime(),
-        wpdtrt_plugin_input_path =    'test/fixtures/wpdtrt-plugin/',
-        wpdtrt_plugin_output_path =   'tmp/' + timestamp + '/wpdtrt-plugin/',
-        wpdtrt_plugin_expected_path = 'test/expected/wpdtrt-plugin/',
-        root_input_path =             'test/fixtures/wpdtrt-plugin-child/',
-        root_output_path =            'tmp/' + timestamp + '/wpdtrt-plugin-child/',
-        root_expected_path =          'test/expected/wpdtrt-plugin-child/',
+        wpdtrt_plugin_boilerplate_input_path =    'test/fixtures/wpdtrt-plugin-boilerplate/',
+        wpdtrt_plugin_boilerplate_output_path =   'tmp/' + timestamp + '/wpdtrt-plugin-boilerplate/',
+        wpdtrt_plugin_boilerplate_expected_path = 'test/expected/wpdtrt-plugin-boilerplate/',
+        root_input_path =             'test/fixtures/wpdtrt-plugin/',
+        root_output_path =            'tmp/' + timestamp + '/wpdtrt-plugin/',
+        root_expected_path =          'test/expected/wpdtrt-plugin/',
         i,
         callback = null,
         plugin_parent_files = [
@@ -94,14 +94,14 @@ describe('Test plugin', function () {
             'index.php'
         ],
         plugin_child_files = [
-            'src/class-wpdtrt-plugin-child-plugin.php',
-            'src/class-wpdtrt-plugin-child-rewrite.php',
-            'src/class-wpdtrt-plugin-child-shortcode.php',
-            'src/class-wpdtrt-plugin-child-taxonomy.php',
-            'src/class-wpdtrt-plugin-child-widget.php',
+            'src/class-wpdtrt-plugin-plugin.php',
+            'src/class-wpdtrt-plugin-rewrite.php',
+            'src/class-wpdtrt-plugin-shortcode.php',
+            'src/class-wpdtrt-plugin-taxonomy.php',
+            'src/class-wpdtrt-plugin-widget.php',
             'gulpfile.js',
             'readme.txt',
-            'wpdtrt-plugin-child.php'
+            'wpdtrt-plugin.php'
         ];
 
     describe('Test orphan parent', function () {
@@ -111,10 +111,10 @@ describe('Test plugin', function () {
 
             // run plugin, to copy fixtures to transformed output
             gulp.task('wpdtrtPluginBumpParent', wpdtrtPluginBump({
-                wpdtrt_plugin_input_path: wpdtrt_plugin_input_path,
-                wpdtrt_plugin_output_path: wpdtrt_plugin_output_path,
-                root_input_path: wpdtrt_plugin_input_path,
-                root_output_path: wpdtrt_plugin_output_path
+                wpdtrt_plugin_boilerplate_input_path: wpdtrt_plugin_boilerplate_input_path,
+                wpdtrt_plugin_boilerplate_output_path: wpdtrt_plugin_boilerplate_output_path,
+                root_input_path: wpdtrt_plugin_boilerplate_input_path,
+                root_output_path: wpdtrt_plugin_boilerplate_output_path
             }));
         });
 
@@ -141,7 +141,7 @@ describe('Test plugin', function () {
                             callback = null;
                         }
 
-                        compare_output_with_expected(plugin_parent_files[i], wpdtrt_plugin_output_path, wpdtrt_plugin_expected_path, callback);
+                        compare_output_with_expected(plugin_parent_files[i], wpdtrt_plugin_boilerplate_output_path, wpdtrt_plugin_boilerplate_expected_path, callback);
                     }
                 }, 1000);
             });
@@ -157,8 +157,8 @@ describe('Test plugin', function () {
 
             // run plugin, to copy fixtures to transformed output
             gulp.task('wpdtrtPluginBumpChild', wpdtrtPluginBump({
-                wpdtrt_plugin_input_path: wpdtrt_plugin_input_path,
-                wpdtrt_plugin_output_path: wpdtrt_plugin_output_path,
+                wpdtrt_plugin_boilerplate_input_path: wpdtrt_plugin_boilerplate_input_path,
+                wpdtrt_plugin_boilerplate_output_path: wpdtrt_plugin_boilerplate_output_path,
                 root_input_path: root_input_path,
                 root_output_path: root_output_path
             }));
