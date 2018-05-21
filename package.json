@@ -2,7 +2,7 @@
   "private": true,
   "name": "gulp-wpdtrt-plugin-bump",
   "version": "0.1.0",
-  "description": "Updates a fixed selection of files in either dotherightthing/wpdtrt-plugin-boilerplate, or a generated child, using the version information in package.json.",
+  "description": "Updates a fixed selection of files in either dotherightthing/wpdtrt-plugin-boilerplate, or a generated plugin, using the version information in package.json.",
   "keywords": [
     "gulp",
     "gulp-plugin",
