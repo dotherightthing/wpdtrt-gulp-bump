@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:  DTRT Plugin Child
+ * Plugin Name:  DTRT Plugin
  * Plugin URI:   https://github.com/dotherightthing/wpdtrt-plugin
  * Description:  Demo plugin which uses wpdtrt-plugin-boilerplate.
  * Version:      2.0.0

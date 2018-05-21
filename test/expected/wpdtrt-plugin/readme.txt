@@ -1,5 +1,5 @@
 
-=== DTRT Plugin Child ===
+=== DTRT Plugin ===
 Contributors: dotherightthingnz
 Donate link: http://dotherightthing.co.nz
 Tags: blocks, maps, swatches
