@@ -7,7 +7,7 @@
  * @version   1.0.1
  */
 
-namespace DoTheRightThing\WPDTRT_Plugin\r_1_0_0;
+namespace DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_0_0;
 
 if ( ! class_exists( 'Plugin' ) ) {
 
@@ -19,7 +19,7 @@ if ( ! class_exists( 'Plugin' ) ) {
 		/**
 		 * Initialise the object's properties when it is instantiated.
 		 * This is a protected method as every plugin uses a sub class:
-		 * class WPDTRT_Test_Plugin extends DoTheRightThing\WPDTRT_Plugin\r_1_0_0\Plugin {...}
+		 * class WPDTRT_Test_Plugin extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_0_0\Plugin {...}
 		 *
 		 * A plugin-specific instance of this class is created on init:
 		 * add_action( 'init', '<%= nameSafe %>_init', 0 );
