@@ -62,3 +62,10 @@ gulp.task("bump_replace", function () {
 1. `yarn run lint` - Run code linting
 1. `yarn run test` - Run unit tests
 1. `yarn run docs` - Generate documentation to <docs/>
+
+### Release
+
+Prior to committing, please update the version number in the following files:
+
+1. `./package.json`
+1. `./config/naturaldocs/Project.txt`
