@@ -9,7 +9,7 @@
   ],
   "overrides": [
       {
-          "files": "gulpfile.js",
+          "files": ["gulpfile.js", "test/index.js"],
           "rules": {
               "no-unused-expressions": "off",
               "max-len": "off"

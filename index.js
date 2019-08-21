@@ -1,3 +1,10 @@
+/**
+ * File: index.js
+ * Topic: DTRT WordPress Plugin Boilerplate 
+ * 
+ * wpdtrtPluginBump utility.
+ */
+
 /* globals module, process, require */
 
 const gulp = require("gulp");

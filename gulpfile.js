@@ -35,6 +35,7 @@
 /* globals require, process */
 
 const gulp = require("gulp");
+const color = require("gulp-color");
 const download = require("gulp-download");
 const eslint = require("gulp-eslint");
 const log = require("fancy-log");
@@ -68,11 +69,43 @@ function is_travis() {
 function get_js_files_to_lint() {
     // note: es6 orignals only
     const jsFilesToLint = [
+        "gulpfile.js",
         "index.js",
         "test/*.js"
     ];
 
     return jsFilesToLint;
+}
+
+/**
+ * Function: decorate_log
+ *
+ * Log a Gulp task result with emoji and colour.
+ * 
+ * Parameters:
+ *   (object) filePath, messageCount, warningCount, errorCount
+ */
+function decorate_log( {
+    textstring = "",
+    messageCount = 0,
+    warningCount = 0,
+    errorCount = 0
+} = {} ) {
+    const colors = { pass: "GREEN", message: "WHITE", warning: "YELLOW", error: "RED" };
+    const emojis = { pass: "✔", message: "✖", warning: "✖", error: "✖" };
+    let state;
+
+    if ( errorCount > 0 ) {
+        state = "error";
+    } else if ( warningCount > 0 ) {
+        state = "warning";
+    } else if ( messageCount > 0 ) {
+        state = "message";
+    } else {
+        state = "pass";
+    }
+
+    console.log( color( `${emojis[state]} ${textstring}`, `${colors[state]}` ) );
 }
 
 /**
@@ -222,6 +255,17 @@ gulp.task("lint_js", () => {
     // return stream or promise for run-sequence
     return gulp.src(files)
         .pipe(eslint())
+        .pipe(eslint.result(result => {
+            const { filePath: textstring, messages, warningCount, errorCount } = result;
+            const { length: messageCount } = messages;
+            
+            decorate_log({
+                textstring,
+                messageCount,
+                warningCount,
+                errorCount
+            });
+        }))
         .pipe(eslint.format());
         // .pipe(eslint.failAfterError());
 });
