@@ -248,7 +248,7 @@ const wpdtrtPluginBump = function ( {
         const { version: bp_version } = wpdtrt_plugin_boilerplate_package;
         const re = new RegExp(
             // * @version 1.2.3
-            "/(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/"
+            /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
         );
 
         return gulp.src(files)
@@ -314,7 +314,7 @@ const wpdtrtPluginBump = function ( {
         const { version: bp_version } = wpdtrt_plugin_boilerplate_package;
         const re = new RegExp(
             // * @version 1.2.3
-            "/(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/"
+            /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
         );
 
         return gulp.src(files)
@@ -352,8 +352,7 @@ const wpdtrtPluginBump = function ( {
         ];
         const files = [];
         const re = new RegExp(
-            "/(DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\"
-            + "r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})", "g"
+            /(DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/ // eslint-disable-line max-len
         );
 
         categories.map( category => {
@@ -393,8 +392,7 @@ const wpdtrtPluginBump = function ( {
         const { version: bp_version } = wpdtrt_plugin_boilerplate_package;
         const re1 = new RegExp(
             // DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
-            "/(DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\"
-            + "r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})", "g"
+            /(DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/ // eslint-disable-line max-len
         );
         const re2 = new RegExp(
             // const WPDTRT_PLUGIN_VERSION = "1.2.3";
@@ -436,15 +434,14 @@ const wpdtrtPluginBump = function ( {
         const { version: bp_version } = wpdtrt_plugin_boilerplate_package;
         const re1 = new RegExp(
             // Stable tag: 1.2.3
-            "/(Stable tag: )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/"
+            /(Stable tag: )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
         );
         const re2 = new RegExp(
             // == Changelog ==
             //
             // = 1.2.3 =
             //
-            "/(== Changelog ==\s\s= )"
-            + "([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\s)/"
+            /(== Changelog ==\s\s= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\s)/ // eslint-disable-line max-len
         );
 
         return gulp.src(files)
@@ -481,12 +478,11 @@ const wpdtrtPluginBump = function ( {
         const { version: bp_version } = wpdtrt_plugin_boilerplate_package;
         const re1 = new RegExp(
             // * Version: 1.2.3
-            "/(\* Version:\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/"
+            /(\* Version:\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
         );
         const re2 = new RegExp(
             // define( "WPDTRT_FOO_VERSION", "1.2.3" );
-            "/(define\( \"[A-Z_]+_VERSION\", \")"
-            + "([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(\" \);)/"
+            /(define\( \"[A-Z_]+_VERSION\", \")([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(\" \);)/ // eslint-disable-line max-len
         );
 
         gulp.src(files)
@@ -529,8 +525,7 @@ const wpdtrtPluginBump = function ( {
         const files = [];
         const re = new RegExp(
             // DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
-            "/(DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\"
-            + "r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})", "g"
+            /(DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/ // eslint-disable-line max-len
         );
 
         categories.map( category => {
