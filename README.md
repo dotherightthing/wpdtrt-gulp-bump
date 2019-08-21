@@ -1,8 +1,8 @@
-# gulp-wpdtrt-plugin-bump
+# DTRT WordPress Plugin Boilerplate Utility: Bump
 
-[![GitHub release](https://img.shields.io/github/release/dotherightthing/gulp-wpdtrt-plugin-bump.svg?branch=master)](https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump/releases) [![Build Status](https://travis-ci.org/dotherightthing/gulp-wpdtrt-plugin-bump.svg?branch=master)](https://travis-ci.org/dotherightthing/gulp-wpdtrt-plugin-bump) [![GitHub issues](https://img.shields.io/github/issues/dotherightthing/gulp-wpdtrt-plugin-bump.svg)](https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump/issues)
+[![GitHub release](https://img.shields.io/github/release/dotherightthing/gulp-wpdtrt-plugin-bump.svg?branch=master)](https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump/releases) [![Build Status](https://travis-ci.org/dotherightthing/gulp-wpdtrt-plugin-bump.svg?branch=master)](https://travis-ci.org/dotherightthing/gulp-wpdtrt-plugin-bump) [![GitHub issues](https://img.shields.io/github/issues/dotherightthing/gulp-wpdtrt-plugin-bump.svg)](https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump/issues) [![GitHub wiki](https://img.shields.io/badge/documentation-wiki-lightgrey.svg)](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/wiki)
 
-Updates a fixed selection of files in either [dotherightthing/wpdtrt-plugin-boilerplate](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/), or a [generated child](https://github.com/dotherightthing/generator-wp-plugin-boilerplate), using the version information in `package.json`.
+A Gulp utility to update a fixed selection of files in either the [DTRT WordPress Plugin Boilerplate](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/), or a child generated with the [DTRT WordPress Plugin Boilerplate Generator](https://github.com/dotherightthing/generator-wp-plugin-boilerplate), using the version information in `package.json`.
 
 ## Installation
 
@@ -49,12 +49,16 @@ gulp.task("bump_replace", function () {
 });
 ```
 
-## Tests
+## Maintenance
 
-```
-// install test dependencies
-yarn install
+### Pre-requisites
 
-// run tests
-yarn test
-```
+1. Download and install [Mono](https://www.mono-project.com/download/stable/), which is required by *Natural Docs*.
+
+### Scripts
+
+1. `yarn install` - Install Yarn dependencies, then run the following scripts:
+1. `yarn run dependencies` - Install documentation dependencies
+1. `yarn run lint` - Run code linting
+1. `yarn run test` - Run unit tests
+1. `yarn run docs` - Generate documentation to <docs/>

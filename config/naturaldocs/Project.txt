@@ -9,7 +9,7 @@ Format: 2.0.2
 # ------------------------------------------------------------------------
 
 Title: Documentation
-Subtitle: DTRT WordPress Plugin Boilerplate (0.12.345)
+Subtitle: DTRT WordPress Plugin Boilerplate Utility: Bump (0.1.0)
 
 Copyright: Copyright © 2019 Dan Smith
 
@@ -61,15 +61,11 @@ Source Folder: ../..
 # Source Filtering
 # ------------------------------------------------------------------------
 
-Ignore Source Folder: ../../bin
-
 Ignore Source Folder: ../../docs
 
 Ignore Source Folder: ../../node_modules
 
-Ignore Source Folder: ../../tests
-
-Ignore Source Folder: ../../vendor
+Ignore Source Folder: ../../test
 
 
 # If there are any subfolders in the source code that you would like Natural
