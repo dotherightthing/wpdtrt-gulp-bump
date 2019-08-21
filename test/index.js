@@ -76,6 +76,7 @@ describe('Test plugin', function () {
         i,
         callback = null,
         plugin_parent_files = [
+            'config/naturaldocs/Project.txt',
             'src/Plugin.php',
             'src/Rewrite.php',
             'src/Shortcode.php',
@@ -94,6 +95,7 @@ describe('Test plugin', function () {
             'index.php'
         ],
         plugin_child_files = [
+            'config/naturaldocs/Project.txt',
             'src/class-wpdtrt-plugin-plugin.php',
             'src/class-wpdtrt-plugin-rewrite.php',
             'src/class-wpdtrt-plugin-shortcode.php',

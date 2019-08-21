@@ -13,11 +13,11 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/dotherightthing/wpdtrt-gulp-bump.git"
+    "url": "git://github.com/dotherightthing/gulp-wpdtrt-plugin-bump.git"
   },
   "author": "Dan Smith <dev@dotherightthing.co.nz>",
   "bugs": {
-    "url": "https://github.com/dotherightthing/wpdtrt-gulp-bump/issues"
+    "url": "https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump/issues"
   },
   "dependencies": {
     "gulp": "^3.9.1",
@@ -25,8 +25,15 @@
   },
   "devDependencies": {
     "assert": "^1.4.1",
+    "babel-eslint": "^10.0.2",
     "chai": "^4.1.2",
     "chai-diff": "^1.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-chai-friendly": "^0.4.1",
+    "eslint-plugin-cypress": "^2.0.1",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-json": "^1.2.0",
     "fs": "^0.0.1-security",
     "jslint": "^0.12.0",
     "mocha": "^5.1.1",
@@ -39,6 +46,6 @@
     "node": ">=8.11.1"
   },
   "license": "ISC",
-  "homepage": "https://github.com/dotherightthing/wpdtrt-gulp-bump",
-  "srcDir": "/Volumes/DanBackup/Websites/wpdtrt-gulp-bump"
+  "homepage": "https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump",
+  "srcDir": "/Volumes/DanBackup/Websites/gulp-wpdtrt-plugin-bump"
 }
