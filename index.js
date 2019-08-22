@@ -31,17 +31,17 @@ const replace = require( 'gulp-replace' );
  *     * For unit testing this is a location within 'fixtures'
  *   * outputPathRoot - Location to output versioned files to
  *     * For real plugins this is the plugin root directory (inputPathRoot)
+ *     * Only used to redirect output during testing
  *     * For unit testing this is the tmp wpdtrt-generated-plugin directory
  *     * For unit testing this is the tmp wpdtrt-plugin-boilerplate directory
  *   * inputPathBoilerplate
  *   * outputPathBoilerplate
+ *     * Only used to redirect output during testing
  */
 const wpdtrtPluginBump = function ( {
   inputPathRoot = '',
-  // outputPathRoot is only used to redirect output during testing
   outputPathRoot = inputPathRoot,
   inputPathBoilerplate = '',
-  // outputPathBoilerplate is only used to redirect output during testing
   outputPathBoilerplate = inputPathBoilerplate
 } = {} ) {
   console.log( `inputPathRoot = ${inputPathRoot}` );
@@ -50,46 +50,47 @@ const wpdtrtPluginBump = function ( {
   console.log( `outputPathBoilerplate = ${outputPathBoilerplate}` );
 
   /**
-     * Method: versionNamespaceSafe
-     *
-     * Get the version value from wpdtrt-plugin-boilerplate/package.json,
-     *  in namespace format.
-     *
-     * Parameters:
-     *   (string) packageVersionBoilerplate, e.g. 1.2.34
-     *
-     * Returns:
-     *   (string) The version in namespace format, e.g. 1_2_34
-     */
+   * Method: versionNamespaceSafe
+   *
+   * Get the version value from wpdtrt-plugin-boilerplate/package.json,
+   *  in namespace format.
+   *
+   * Parameters:
+   *   (string) packageVersionBoilerplate, e.g. 1.2.34
+   *
+   * Returns:
+   *   (string) The version in namespace format, e.g. 1_2_34
+   */
   function versionNamespaceSafe( packageVersionBoilerplate ) {
     return packageVersionBoilerplate.split( '.' ).join( '_' );
   }
 
   /**
-     * Group: Child replacements
-     */
+   * Group: Child replacements
+   */
 
   /**
-     * Method: versionGeneratedPluginSrc
-     *
-     * Child: version the extended class name.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-generated-plugin/
-     *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
-     *   (object) packageJsonRoot - A reference to the child's package.json file
-     *   (string) packageVersionBoilerplateNamespaced - The version in
-     *   namespace format
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./src/class-*.php:
-     * --- Text
-     * extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
-     * ---
-     */
+   * Method: versionGeneratedPluginSrc
+   *
+   * Child: version the extended class name.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-generated-plugin/
+   *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
+   *   (object) packageJsonRoot - A reference to the generated plugin's
+   *   package.json file
+   *   (string) packageVersionBoilerplateNamespaced - The version in
+   *   namespace format
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./src/class-*.php:
+   * --- Text
+   * extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
+   * ---
+   */
   function versionGeneratedPluginSrc(
     inputPath,
     outputPath,
@@ -124,24 +125,25 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionGeneratedPluginGulpfile
-     *
-     * Child: version the gulpfile.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-generated-plugin/
-     *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
-     *   (object) packageJsonRoot - A reference to the child's package.json file
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./gulpfile.js
-     * --- Text
-     * * @version 1.2.3
-     * ---
-     */
+   * Method: versionGeneratedPluginGulpfile
+   *
+   * Child: version the gulpfile.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-generated-plugin/
+   *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
+   *   (object) packageJsonRoot - A reference to the generated plugin's
+   *   package.json file
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./gulpfile.js
+   * --- Text
+   * * @version 1.2.3
+   * ---
+   */
   function versionGeneratedPluginGulpfile(
     inputPath,
     outputPath,
@@ -162,24 +164,25 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionNaturalDocsGeneratedPlugin
-     *
-     * Child: version the Natural Docs' Project.txt.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-generated-plugin/
-     *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
-     *   (object) packageJsonRoot - A reference to the child's package.json file
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./config/naturaldocs/Project.txt
-     * --- Text
-     * Subtitle: DTRT Foo (1.2.3)
-     * ---
-     */
+   * Method: versionNaturalDocsGeneratedPlugin
+   *
+   * Child: version the Natural Docs' Project.txt.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-generated-plugin/
+   *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
+   *   (object) packageJsonRoot - A reference to the generated plugin's
+   *   package.json file
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./config/naturaldocs/Project.txt
+   * --- Text
+   * Subtitle: DTRT Foo (1.2.3)
+   * ---
+   */
   function versionNaturalDocsGeneratedPlugin(
     inputPath,
     outputPath,
@@ -200,30 +203,31 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionReadmeGeneratedPlugin
-     *
-     * Child: version the (WordPress) readme.txt.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-generated-plugin/
-     *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
-     *   (object) packageJsonRoot - A reference to the child's package.json file
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./readme.txt
-     * --- Text
-     * Stable tag: 1.2.3
-     * ---
-     * --- Text
-     * == Changelog ==
-     *
-     * = 1.2.3 =
-     *
-     * ---
-     */
+   * Method: versionReadmeGeneratedPlugin
+   *
+   * Child: version the (WordPress) readme.txt.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-generated-plugin/
+   *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
+   *   (object) packageJsonRoot - A reference to the generated plugin's
+   *   package.json file
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./readme.txt
+   * --- Text
+   * Stable tag: 1.2.3
+   * ---
+   * --- Text
+   * == Changelog ==
+   *
+   * = 1.2.3 =
+   *
+   * ---
+   */
   function versionReadmeGeneratedPlugin(
     inputPath,
     outputPath,
@@ -251,27 +255,28 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionRootGeneratedPlugin
-     *
-     * Child: version the child root file.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-generated-plugin/
-     *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
-     *   (object) packageJsonRoot - A reference to the child's package.json file
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./wpdtrt-generated-plugin.php ?
-     * --- Text
-     * * Version: 1.2.3
-     * ---
-     * --- Text
-     * define( 'WPDTRT_PLUGIN_VERSION', '1.2.3' );
-     * ---
-     */
+   * Method: versionRootGeneratedPlugin
+   *
+   * Child: version the child root file.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-generated-plugin/
+   *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
+   *   (object) packageJsonRoot - A reference to the generated plugin's
+   *   package.json file
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./wpdtrt-generated-plugin.php ?
+   * --- Text
+   * * Version: 1.2.3
+   * ---
+   * --- Text
+   * define( 'WPDTRT_PLUGIN_VERSION', '1.2.3' );
+   * ---
+   */
   function versionRootGeneratedPlugin(
     inputPath,
     outputPath,
@@ -299,28 +304,28 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Group: Parent replacements
-     */
+   * Group: Parent replacements
+   */
 
   /**
-     * Method: versionAutoloaderParent
-     *
-     * Parent: version the autoloader (index) file.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
-     *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-     *   (object) packageJsonBoilerplate - A reference to the package.json file
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./index.php
-     * --- Text
-     * * @version 1.2.3
-     * ---
-     */
+   * Method: versionAutoloaderParent
+   *
+   * Parent: version the autoloader (index) file.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
+   *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
+   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./index.php
+   * --- Text
+   * * @version 1.2.3
+   * ---
+   */
   function versionAutoloaderParent(
     inputPath,
     outputPath,
@@ -341,24 +346,24 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionComposerParent
-     *
-     * Parent: version the composer file.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
-     *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-     *   (string) packageVersionBoilerplateNamespaced - The version in namespace format
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./composer.json
-     * --- Text
-     * "DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_1_2_3\\": "src"
-     * ---
-     */
+   * Method: versionComposerParent
+   *
+   * Parent: version the composer file.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
+   *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
+   *   (string) packageVersionBoilerplateNamespaced - The version in namespace format
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./composer.json
+   * --- Text
+   * "DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_1_2_3\\": "src"
+   * ---
+   */
   function versionComposerParent(
     inputPath,
     outputPath,
@@ -378,24 +383,24 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionGulpfileParent
-     *
-     * Parent: version the gulpfile.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
-     *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-     *   (object) packageJsonBoilerplate - A reference to the package.json file
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./gulpfile.js
-     * --- Text
-     * * @version 1.2.3
-     * ---
-     */
+   * Method: versionGulpfileParent
+   *
+   * Parent: version the gulpfile.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
+   *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
+   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./gulpfile.js
+   * --- Text
+   * * @version 1.2.3
+   * ---
+   */
   function versionGulpfileParent(
     inputPath,
     outputPath,
@@ -416,24 +421,24 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionNaturalDocsParent
-     *
-     * Parent: version the Natural Docs' Project.txt.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
-     *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-     *   (object) packageJsonBoilerplate - A reference to the package.json file
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./config/naturaldocs/Project.txt
-     * --- Text
-     * Subtitle: DTRT WordPress Plugin Boilerplate (1.2.3)
-     * ---
-     */
+   * Method: versionNaturalDocsParent
+   *
+   * Parent: version the Natural Docs' Project.txt.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
+   *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
+   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./config/naturaldocs/Project.txt
+   * --- Text
+   * Subtitle: DTRT WordPress Plugin Boilerplate (1.2.3)
+   * ---
+   */
   function versionNaturalDocsParent(
     inputPath,
     outputPath,
@@ -454,24 +459,24 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionSrcParent
-     *
-     * Parent: version the namespaced src files.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
-     *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-     *   (string) packageVersionBoilerplateNamespaced - The version in namespace format
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./src/*.php
-     * --- Text
-     * DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
-     * ---
-     */
+   * Method: versionSrcParent
+   *
+   * Parent: version the namespaced src files.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
+   *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
+   *   (string) packageVersionBoilerplateNamespaced - The version in namespace format
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./src/*.php
+   * --- Text
+   * DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
+   * ---
+   */
   function versionSrcParent(
     inputPath,
     outputPath,
@@ -502,28 +507,28 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionSrcPluginParent
-     *
-     * Parent: version the namespaced src/Plugin.php file.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
-     *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-     *   (object) packageJsonBoilerplate - A reference to the package.json file
-     *   (string) packageVersionBoilerplateNamespaced - The version in namespace format
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./src/Plugin.php
-     * --- Text
-     * DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
-     * ---
-     * --- Text
-     * const WPDTRT_PLUGIN_VERSION = "1.2.3";
-     * ---
-     */
+   * Method: versionSrcPluginParent
+   *
+   * Parent: version the namespaced src/Plugin.php file.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
+   *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
+   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *   (string) packageVersionBoilerplateNamespaced - The version in namespace format
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./src/Plugin.php
+   * --- Text
+   * DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
+   * ---
+   * --- Text
+   * const WPDTRT_PLUGIN_VERSION = "1.2.3";
+   * ---
+   */
   function versionSrcPluginParent(
     inputPath,
     outputPath,
@@ -553,24 +558,24 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionNaturalDocsParentTest
-     *
-     * Parent: version Natural Docs' Project.txt.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
-     *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-     *   (object) packageJsonBoilerplate - A reference to the package.json file
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./config/naturaldocs/Project.txt
-     * --- Text
-     * Subtitle: DTRT Foo (1.2.3)
-     * ---
-     */
+   * Method: versionNaturalDocsParentTest
+   *
+   * Parent: version Natural Docs' Project.txt.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
+   *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
+   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./config/naturaldocs/Project.txt
+   * --- Text
+   * Subtitle: DTRT Foo (1.2.3)
+   * ---
+   */
   function versionNaturalDocsParentTest(
     inputPath,
     outputPath,
@@ -594,30 +599,30 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionReadmeParentTest
-     *
-     * Parent: version the (WordPress) readme.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
-     *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-     *   (object) packageJsonBoilerplate - A reference to the package.json file
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./tests/generated-plugin/readme.txt
-     * --- Text
-     * Stable tag: 1.2.3
-     * ---
-     * --- Text
-     * // == Changelog ==
-     * //
-     * // = 1.2.3 =
-     * //
-     * ---
-     */
+   * Method: versionReadmeParentTest
+   *
+   * Parent: version the (WordPress) readme.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
+   *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
+   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./tests/generated-plugin/readme.txt
+   * --- Text
+   * Stable tag: 1.2.3
+   * ---
+   * --- Text
+   * // == Changelog ==
+   * //
+   * // = 1.2.3 =
+   * //
+   * ---
+   */
   function versionReadmeParentTest(
     inputPath,
     outputPath,
@@ -645,27 +650,27 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionRootParentTest
-     *
-     * Parent: version the root (WordPress) file.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
-     *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-     *   (object) packageJsonBoilerplate - A reference to the package.json file
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./tests/generated-plugin/index.php
-     * --- Text
-     * * Version: 1.2.3
-     * ---
-     * --- Text
-     * define( 'WPDTRT_TEST_VERSION', '1.2.3' );
-     * ---
-     */
+   * Method: versionRootParentTest
+   *
+   * Parent: version the root (WordPress) file.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
+   *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
+   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./tests/generated-plugin/index.php
+   * --- Text
+   * * Version: 1.2.3
+   * ---
+   * --- Text
+   * define( 'WPDTRT_TEST_VERSION', '1.2.3' );
+   * ---
+   */
   function versionRootParentTest(
     inputPath,
     outputPath,
@@ -693,24 +698,24 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * Method: versionSrcParentTest
-     *
-     * Parent: version the namespaced src files.
-     *
-     * Parameters:
-     *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
-     *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-     *   (string) packageVersionBoilerplateNamespaced - The version in namespace format
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./tests/generated-plugin/src/*.php
-     * --- Text
-     * DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
-     * ---
-     */
+   * Method: versionSrcParentTest
+   *
+   * Parent: version the namespaced src files.
+   *
+   * Parameters:
+   *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
+   *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
+   *   (string) packageVersionBoilerplateNamespaced - The version in namespace format
+   *
+   * Returns:
+   *   (array) src files
+   *
+   * Output:
+   * ./tests/generated-plugin/src/*.php
+   * --- Text
+   * DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
+   * ---
+   */
   function versionSrcParentTest(
     inputPath,
     outputPath,
@@ -745,34 +750,30 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-     * ===== Perform replacements =====
-     */
+   * ===== Perform replacements =====
+   */
 
   /**
-     * process.cwd() console.log test results
-     *
-     * /Volumes/DanBackup/Websites/wpdtrt-plugin-boilerplate/gulpfile.js;
-     * /Volumes/DanBackup/Websites/wpdtrt-plugin-boilerplate/node_modules/gulp-wpdtrt-plugin-bump/index.js
-     * = /Volumes/DanBackup/Websites/wpdtrt-plugin-boilerplate
-     *
-     * /Volumes/DanBackup/Websites/wpdtrt-blocks/vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js
-     * /Volumes/DanBackup/Websites/wpdtrt-blocks/node_modules/gulp-wpdtrt-plugin-bump/index.js
-     * = /Volumes/DanBackup/Websites/wpdtrt-blocks
-     */
-  let input;
-  let output;
+   * process.cwd() console.log test results
+   *
+   * /Volumes/DanBackup/Websites/wpdtrt-plugin-boilerplate/gulpfile.js;
+   * /Volumes/DanBackup/Websites/wpdtrt-plugin-boilerplate/node_modules/gulp-wpdtrt-plugin-bump/index.js
+   * = /Volumes/DanBackup/Websites/wpdtrt-plugin-boilerplate
+   *
+   * /Volumes/DanBackup/Websites/wpdtrt-blocks/vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js
+   * /Volumes/DanBackup/Websites/wpdtrt-blocks/node_modules/gulp-wpdtrt-plugin-bump/index.js
+   * = /Volumes/DanBackup/Websites/wpdtrt-blocks
+   */
   let packageJsonRoot;
   let packageJsonBoilerplate;
   let packageVersionBoilerplateNamespaced;
 
   // orphan parent
   if ( inputPathRoot === inputPathBoilerplate ) {
-    input = inputPathBoilerplate;
-    output = outputPathBoilerplate;
     /* eslint-disable global-require */
-    packageJsonRoot = require( `${process.cwd()}/${input}package.json` );
+    packageJsonRoot = require( `${process.cwd()}/${inputPathBoilerplate}package.json` );
     packageJsonBoilerplate = require(
-      `${process.cwd()}/${input}package.json`
+      `${process.cwd()}/${inputPathBoilerplate}package.json`
     );
     /* eslint-enable global-require */
 
@@ -789,73 +790,71 @@ const wpdtrtPluginBump = function ( {
             + 'using package.json' );
 
     versionAutoloaderParent(
-      input,
-      output,
+      inputPathBoilerplate,
+      outputPathBoilerplate,
       packageJsonBoilerplate
     );
 
     versionComposerParent(
-      input,
-      output,
+      inputPathBoilerplate,
+      outputPathBoilerplate,
       packageVersionBoilerplateNamespaced
     );
 
     versionGulpfileParent(
-      input,
-      output,
+      inputPathBoilerplate,
+      outputPathBoilerplate,
       packageJsonBoilerplate
     );
 
     versionSrcParent(
-      input,
-      output,
+      inputPathBoilerplate,
+      outputPathBoilerplate,
       packageVersionBoilerplateNamespaced
     );
 
     versionSrcPluginParent(
-      input,
-      output,
+      inputPathBoilerplate,
+      outputPathBoilerplate,
       packageJsonBoilerplate,
       packageVersionBoilerplateNamespaced
     );
 
     versionNaturalDocsParent(
-      input,
-      output,
+      inputPathBoilerplate,
+      outputPathBoilerplate,
       packageJsonBoilerplate
     );
 
     versionReadmeParentTest(
-      input,
-      output,
+      inputPathBoilerplate,
+      outputPathBoilerplate,
       packageJsonBoilerplate
     );
 
     versionRootParentTest(
-      input,
-      output,
+      inputPathBoilerplate,
+      outputPathBoilerplate,
       packageJsonBoilerplate
     );
 
     versionSrcParentTest(
-      input,
-      output,
+      inputPathBoilerplate,
+      outputPathBoilerplate,
       packageVersionBoilerplateNamespaced
     );
 
     versionNaturalDocsParentTest(
-      input,
-      output,
+      inputPathBoilerplate,
+      outputPathBoilerplate,
       packageJsonBoilerplate
     );
 
     // TODO: versionNaturalDocsParentTest
   } else {
     // parent installed as a dependency of child
-    input = inputPathRoot;
-    output = outputPathRoot;
     /* eslint-disable global-require */
-    packageJsonRoot = require( `${process.cwd()}/${input}package.json` );
+    packageJsonRoot = require( `${process.cwd()}/${inputPathRoot}package.json` );
     packageJsonBoilerplate = require(
       `${process.cwd()}/`
             + `${inputPathBoilerplate}package.json`
@@ -878,33 +877,33 @@ const wpdtrtPluginBump = function ( {
     );
 
     versionGeneratedPluginSrc(
-      input,
-      output,
+      inputPathRoot,
+      outputPathRoot,
       packageJsonRoot,
       packageVersionBoilerplateNamespaced
     );
 
     versionGeneratedPluginGulpfile(
-      input,
-      output,
+      inputPathRoot,
+      outputPathRoot,
       packageJsonRoot
     );
 
     versionReadmeGeneratedPlugin(
-      input,
-      output,
+      inputPathRoot,
+      outputPathRoot,
       packageJsonRoot
     );
 
     versionRootGeneratedPlugin(
-      input,
-      output,
+      inputPathRoot,
+      outputPathRoot,
       packageJsonRoot
     );
 
     versionNaturalDocsGeneratedPlugin(
-      input,
-      output,
+      inputPathRoot,
+      outputPathRoot,
       packageJsonRoot
     );
   }

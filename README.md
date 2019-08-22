@@ -77,7 +77,7 @@ The unit tests confirm that:
 #### To add a new file:
 
 1. Add the file to the appropriate `fixtures` folders, with a version of `0.12.345`
-1. Add the file to the `pluginFilesParent` and `pluginFilesChild` arrays in `test/index.js`
+1. Add the file to the `pluginFilesBoilerplate` and `pluginFilesGeneratedPlugin` arrays in `test/index.js`
 1. Add a new regex replacement function to `./index.js`
 
 ### Scripts
@@ -103,6 +103,11 @@ Prior to committing, please update the version number in the following files:
 * [A guide to mocha's describe(), it() and setup hooks](https://samwize.com/2014/02/08/a-guide-to-mochas-describe-it-and-setup-hooks/)
 * [Chai Assertion Library: BDD - Expect & Should](https://www.chaijs.com/api/bdd/)
 * [RegExr: Learn, Build, & Test RegEx](https://regexr.com)
+* <https://artandlogic.com/2014/05/a-simple-gulp-plugin/>
+* <https://duske.me/simple-functional-tests-for-gulp-tasks/>
+* <https://github.com/stevelacy/gulp-bump/blob/master/test/index.js>
+* <https://github.com/lazd/gulp-replace/blob/master/test/main.js>
+* <https://gulpjs.org/writing-a-plugin/testing>
 
 ---
 
