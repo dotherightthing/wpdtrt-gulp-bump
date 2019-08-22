@@ -413,7 +413,7 @@ gulp.task("release", (callback) => {
         runSequence(
             "release_yarn_dist",
             "release_copy",
-            "release_zip"
+            "release_zip",
             callback
         );
     } else {
