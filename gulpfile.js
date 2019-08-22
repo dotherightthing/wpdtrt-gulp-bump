@@ -29,7 +29,10 @@
  * yarn run docs
  * ---
  *
- * @version     1.5.13
+ * 6. Optimise files
+ * ---
+ * yarn run optimise
+ * ---
  */
 
 /* globals require, process */
@@ -41,8 +44,11 @@ const eslint = require("gulp-eslint");
 const log = require("fancy-log");
 const runSequence = require("run-sequence");
 const shell = require("gulp-shell");
+const svgo = require("gulp-svgo");
 const unzip = require("gulp-unzip");
 const validate = require("gulp-nice-package");
+
+const svg_files = "github-ui/icons/*.svg";
 
 /**
  * Function: is_travis
@@ -350,6 +356,28 @@ gulp.task("docs", () => {
 });
 
 /**
+ * Function: optimise
+ * 
+ * Reduce file size of input.
+ *
+ * Returns:
+ *   Stream or promise for run-sequence.
+ */
+gulp.task( "optimise", () => {
+
+    gulp_helper_taskheader(
+        "5",
+        "Optimise",
+        "SVG"
+    );
+
+    // compress to same folder
+    return gulp.src( svg_files )
+        .pipe( svgo() )
+        .pipe( gulp.dest( "github-ui/icons/optimised" ) );
+});
+
+/**
  * Function: default
  * 
  * Default task
@@ -381,6 +409,8 @@ gulp.task("default", (callback) => {
         "test",
         // 4
         "docs",
+        // 5
+        "optimise"
     );
 
     callback();
