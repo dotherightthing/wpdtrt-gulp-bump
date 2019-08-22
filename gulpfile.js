@@ -423,8 +423,8 @@ gulp.task( 'releaseCopy', () => {
   // Release files are those that are required
   // to use the package as a WP Plugin
   const releaseFiles = [
-    'docs',
-    'readme-styles',
+    'docs/**/*',
+    'readme-styles/**/*',
     'index.js',
     'README.md'
   ];
