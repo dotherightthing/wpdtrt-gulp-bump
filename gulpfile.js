@@ -4,39 +4,9 @@
  *
  * Gulp build tasks.
  *
- * 1. Install Yarn dependencies, then run the following scripts
- * ---
- * yarn install
- * ---
- *
- * 2. Install documentation dependencies
- * ---
- * yarn run dependencies
- * ---
- *
- * 3. Run code linting
- * ---
- * yarn run lint
- * ---
- *
- * 4. Run unit tests
- * ---
- * yarn run test
- * ---
- *
- * 5. Generate documentation to <docs/>
- * ---
- * yarn run docs
- * ---
- *
- * 6. Optimise files
- * ---
- * yarn run optimise
- * ---
- *
- * 7. Package release
- * ---
- * yarn run release
+ * See package.json for scripts, which can be run with:
+ * --- Text
+ * yarn run scriptname
  * ---
  */
 
@@ -169,6 +139,11 @@ const dummyFile = 'README.md';
  *
  * Parameters:
  *   callback - The runSequenceCallback that handles the response
+ *
+ * Example:
+ * --- Text
+ * yarn run dependencies
+ * ---
  */
 gulp.task( 'dependencies', ( callback ) => {
   gulpHelperTaskheader(
@@ -220,6 +195,11 @@ gulp.task( 'dependenciesDocs', () => {
  *
  * Parameters:
  *   callback - The runSequenceCallback that handles the response
+ *
+ * Example:
+ * --- Text
+ * yarn run lint
+ * ---
  */
 gulp.task( 'lint', ( callback ) => {
   gulpHelperTaskheader(
@@ -303,6 +283,11 @@ gulp.task( 'lintPackageJson', () => {
  *
  * Returns:
  *   Stream or promise for run-sequence.
+ *
+ * Example:
+ * --- Text
+ * yarn run test
+ * ---
  */
 gulp.task( 'test', () => {
   gulpHelperTaskheader(
@@ -328,6 +313,11 @@ gulp.task( 'test', () => {
  *
  * Returns:
  *   Stream or promise for run-sequence.
+ *
+ * Example:
+ * --- Text
+ * yarn run docs
+ * ---
  */
 gulp.task( 'docs', () => {
   gulpHelperTaskheader(
@@ -356,6 +346,11 @@ gulp.task( 'docs', () => {
  *
  * Returns:
  *   Stream or promise for run-sequence.
+ *
+ * Example:
+ * --- Text
+ * yarn run optimise
+ * ---
  */
 gulp.task( 'optimise', () => {
   gulpHelperTaskheader(
@@ -377,6 +372,11 @@ gulp.task( 'optimise', () => {
  *
  * Parameters:
  *   callback - The runSequenceCallback that handles the response
+ *
+ * Example:
+ * --- Text
+ * yarn run release
+ * ---
  */
 gulp.task( 'release', ( callback ) => {
   const travis = isTravis();
@@ -489,7 +489,8 @@ gulp.task( 'releaseZip', () => {
  * Parameters:
  *   callback - The callback that handles the response
  *
- * ---
+ * Example:
+ * --- Text
  * gulp
  * ---
  */

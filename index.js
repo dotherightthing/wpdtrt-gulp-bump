@@ -79,7 +79,7 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Group: Child replacements
+   * Group: Generated Plugin versioning
    */
 
   /**
@@ -317,7 +317,7 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Group: Parent replacements
+   * Group: Boilerplate versioning
    */
 
   /**
