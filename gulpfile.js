@@ -28,7 +28,7 @@ const distDir = process.cwd().split( '/' ).pop();
 const jsFilesToLint = [
   'gulpfile.js',
   'index.js',
-  'test/*.js',
+  'test/tests.js',
   // eslint-plugin-json
   'package.json',
   // eslint-plugin-markdown
@@ -257,7 +257,7 @@ gulp.task( 'lintJS', () => {
 } );
 
 /**
- * Function: test
+ * Function: tests
  *
  * Run mocha unit tests.
  *
@@ -266,10 +266,10 @@ gulp.task( 'lintJS', () => {
  *
  * Example:
  * --- Text
- * yarn run test
+ * yarn run tests
  * ---
  */
-gulp.task( 'test', () => {
+gulp.task( 'tests', () => {
   gulpHelperTaskheader(
     '3',
     'Documentation',
@@ -490,7 +490,7 @@ gulp.task( 'default', ( callback ) => {
     // 2
     'lint',
     // 3
-    'test',
+    'tests',
     // 4
     'docs',
     // 5

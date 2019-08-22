@@ -49,11 +49,11 @@
   "scripts": {
     "build": "gulp",
     "dependencies": "gulp dependencies",
-    "lint": "gulp lint",
-    "test": "gulp test",
     "docs": "gulp docs",
     "images": "gulp images",
-    "release": "gulp release"
+    "lint": "gulp lint",
+    "release": "gulp release",
+    "tests": "gulp tests"
   },
   "engines": {
     "node": ">=8.11.1"

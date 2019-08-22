@@ -1,9 +1,13 @@
 /**
- * File: test/index.js
+ * File: test/tests.js
  * Topic: DTRT WordPress Plugin Boilerplate
  *
  * Unit tests for wpdtrtPluginBump utility.
  * Written in Mocha, with Chai assertions.
+ *
+ * ---
+ * yarn run tests
+ * ---
  */
 
 const gulp = require( 'gulp' );
@@ -35,6 +39,7 @@ describe( 'Test plugin', function () { // eslint-disable-line func-names
   // (i/o usage)
   // https://duske.me/simple-functional-tests-for-gulp-tasks/
   this.timeout( 4000 );
+  this.slow( 2000 ); // display read time warning if test takes >2 minutes
 
   const timestamp = new Date().getTime();
   const inputPathRoot = 'test/fixtures/wpdtrt-generated-plugin/';
@@ -102,12 +107,14 @@ describe( 'Test plugin', function () { // eslint-disable-line func-names
           throw expectedError;
         }
 
+        /*
         const testing = '\n      '
           + `A) ${outputPath}${filename}\n`
           + '      '
           + `B) ${expectedPath}${filename}`;
 
         console.log( testing );
+        */
 
         expect( outputData ).not.differentFrom( expectedData );
 
