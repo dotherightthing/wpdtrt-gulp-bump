@@ -75,7 +75,7 @@ describe( 'Test plugin', function () { // eslint-disable-line func-names
   let callback = null;
 
   /**
-   * Section: compareOutputWithExpected
+   * Function: compareOutputWithExpected
    *
    * Copy a 'fixture'
    * to a timestamped folder within tmp/,
@@ -83,10 +83,10 @@ describe( 'Test plugin', function () { // eslint-disable-line func-names
    * then compare it to the 'expected' file.
    *
    * Parameters:
-   *   (string) filename
-   *   (string) outputPath
-   *   (string) expectedPath
-   *   (boolean) done
+   *   (string) filename - File name
+   *   (string) outputPath - Output path
+   *   (string) expectedPath - Expected path
+   *   (boolean) done - Done
    */
   function compareOutputWithExpected(
     filename, outputPath, expectedPath, done
@@ -119,7 +119,7 @@ describe( 'Test plugin', function () { // eslint-disable-line func-names
   }
 
   /**
-   * Section: Test boilerplate as root
+   * Function: Test boilerplate as root
    */
   describe( 'Test boilerplate as root', () => {
     // Setup
@@ -168,7 +168,7 @@ describe( 'Test plugin', function () { // eslint-disable-line func-names
   } );
 
   /**
-   * Section: Test generated plugin as root (with boilerplate as dependency)
+   * Function: Test generated plugin as root (with boilerplate as dependency)
    *
    * The generated plugin calls the Gulpfile provided by the boilerplate.
    */
