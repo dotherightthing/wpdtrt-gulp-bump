@@ -3,6 +3,7 @@
  * Topic: DTRT WordPress Plugin Boilerplate 
  * 
  * Unit tests for wpdtrtPluginBump utility.
+ * Written in Mocha, with Chai assertions.
  */
 
 /* globals require */
@@ -36,50 +37,27 @@ const it = mocha.it;
 // our plugin
 const wpdtrtPluginBump = require("../index.js");
 
+/**
+ * Function: Test plugin
+ *
+ * Copy a preset list of 'fixtures'
+ * to a timestamped folder within tmp/,
+ * version them there,
+ * then compare them to the 'expected' files.
+ */
 describe("Test plugin", function () {
     // increase default timeout in case assert operations take too long (i/o usage)
     // https://duske.me/simple-functional-tests-for-gulp-tasks/
     this.timeout(4000);
 
-    function compare_output_with_expected(
-        filename,
-        output_path,
-        expected_path,
-        done
-    ) {
-
-        // https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback
-
-        fs.readFile( output_path + filename, "utf8", (output_error, output_data) => {
-
-            if (output_error) {
-                throw output_error;
-            }
-
-            fs.readFile(expected_path + filename, "utf8", (expected_error, expected_data) => {
-
-                if (expected_error) {
-                    throw expected_error;
-                }
-
-                expect(output_data).not.differentFrom(expected_data);
-
-                if (done !== null) {
-                    done();
-                }
-            });
-        });
-    }
-
     const timestamp = new Date().getTime();
     const wpdtrt_plugin_boilerplate_input_path = "test/fixtures/wpdtrt-plugin-boilerplate/";
     const wpdtrt_plugin_boilerplate_output_path = `tmp/${timestamp}/wpdtrt-plugin-boilerplate/`;
     const wpdtrt_plugin_boilerplate_expected_path = "test/expected/wpdtrt-plugin-boilerplate/";
-    const root_input_path = "test/fixtures/wpdtrt-plugin/";
-    const root_output_path = `tmp/${timestamp}/wpdtrt-plugin/`;
-    const root_expected_path = "test/expected/wpdtrt-plugin/";
+    const root_input_path = "test/fixtures/wpdtrt-generated-plugin/";
+    const root_output_path = `tmp/${timestamp}/wpdtrt-generated-plugin/`;
+    const root_expected_path = "test/expected/wpdtrt-generated-plugin/";
     const plugin_parent_files = [
-        "config/naturaldocs/Project.txt",
         "src/Plugin.php",
         "src/Rewrite.php",
         "src/Shortcode.php",
@@ -95,21 +73,67 @@ describe("Test plugin", function () {
         "tests/generated-plugin/wpdtrt-test.php",
         "composer.json",
         "gulpfile.js",
-        "index.php"
+        "index.php",
+        "config/naturaldocs/Project.txt"
     ];
     const plugin_child_files = [
-        "config/naturaldocs/Project.txt",
-        "src/class-wpdtrt-plugin-plugin.php",
-        "src/class-wpdtrt-plugin-rewrite.php",
-        "src/class-wpdtrt-plugin-shortcode.php",
-        "src/class-wpdtrt-plugin-taxonomy.php",
-        "src/class-wpdtrt-plugin-widget.php",
-        "gulpfile.js",
+        "src/class-wpdtrt-generated-plugin-plugin.php",
+        "src/class-wpdtrt-generated-plugin-rewrite.php",
+        "src/class-wpdtrt-generated-plugin-shortcode.php",
+        "src/class-wpdtrt-generated-plugin-taxonomy.php",
+        "src/class-wpdtrt-generated-plugin-widget.php",
         "readme.txt",
-        "wpdtrt-plugin.php"
+        "wpdtrt-generated-plugin.php",
+        "config/naturaldocs/Project.txt"
     ];
     let callback = null;
 
+    /**
+     * Function: compare_output_with_expected
+     *
+     * Copy a 'fixture'
+     * to a timestamped folder within tmp/,
+     * version it,
+     * then compare it to the 'expected' file.
+     *
+     * Parameters:
+     *   (string) filename
+     *   (string) output_path
+     *   (string) expected_path
+     *   (boolean) done
+     *
+     * See: <fs.readFile: https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback>
+     */
+    function compare_output_with_expected(
+        filename,
+        output_path,
+        expected_path,
+        done
+    ) {
+        fs.readFile( `${output_path}${filename}`, "utf8", (output_error, output_data) => {
+
+            if (output_error) {
+                throw output_error;
+            }
+
+            fs.readFile( `${expected_path}${filename}`, "utf8", (expected_error, expected_data) => {
+
+                if (expected_error) {
+                    throw expected_error;
+                }
+
+                expect(output_data).not.differentFrom(expected_data);
+
+                if (done !== null) {
+                    done();
+                }
+            });
+        });
+    }
+
+    /**
+     * Function: Test orphan parent
+     */
     describe("Test orphan parent", () => {
 
         // Setup
@@ -138,13 +162,15 @@ describe("Test plugin", function () {
 
                 // wait for wpdtrtPluginBump to finish writing output to the file system
                 setTimeout( () => {
-                    plugin_parent_files.map( ( i ) => {
+                    plugin_parent_files.map( ( file, i ) => {
                         // only call done() after last file is checked
-                        if ((i + 1) === plugin_parent_files.length) {
+                        if ( (i + 1) === plugin_parent_files.length ) {
                             callback = done;
                         } else {
                             callback = null;
                         }
+
+                        console.log( `${i + 1}. ${file}` );
 
                         compare_output_with_expected(
                             plugin_parent_files[i],
@@ -160,6 +186,9 @@ describe("Test plugin", function () {
         });
     });
 
+    /**
+     * Function: Test parent installed as a dependency of child
+     */
     describe("Test parent installed as a dependency of child", () => {
 
         // Setup
@@ -167,10 +196,10 @@ describe("Test plugin", function () {
 
             // run plugin, to copy fixtures to transformed output
             gulp.task("wpdtrtPluginBumpChild", wpdtrtPluginBump({
-                wpdtrt_plugin_boilerplate_input_path,
-                wpdtrt_plugin_boilerplate_output_path,
                 root_input_path,
-                root_output_path
+                root_output_path,
+                wpdtrt_plugin_boilerplate_input_path,
+                wpdtrt_plugin_boilerplate_output_path
             }));
         });
 
@@ -195,6 +224,8 @@ describe("Test plugin", function () {
                         } else {
                             callback = null;
                         }
+
+                        console.log( `${i + 1}. ${file}` );
 
                         compare_output_with_expected(
                             plugin_child_files[i],

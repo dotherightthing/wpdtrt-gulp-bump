@@ -65,9 +65,9 @@ gulp.task("bump_replace", function () {
 The unit tests confirm that:
 
 1. The `fixtures` are successfully transformed to the `expected` copies
-1. For a generated `wpdtrt-plugin`, this occurs when `gulp-wpdtrt-plugin-bump` is run on it directly
+1. For a generated `wpdtrt-generated-plugin`, this occurs when `gulp-wpdtrt-plugin-bump` is run on it directly
 1. For `wpdtrt-plugin-boilerplate`, this occurs when `gulp-wpdtrt-plugin-bump` is run on it directly
-1. For `wpdtrt-plugin-boilerplate` loaded as a dependency of `wpdtrt-plugin`, this does not occur when `gulp-wpdtrt-plugin-bump` is run on `wpdtrt-plugin`
+1. For `wpdtrt-plugin-boilerplate` loaded as a dependency of `wpdtrt-generated-plugin`, this does not occur when `gulp-wpdtrt-plugin-bump` is run on `wpdtrt-generated-plugin`
 
 ### Scripts
 

@@ -62,8 +62,8 @@ const wpdtrtPluginBump = function ( {
      * Child - version the extended class name.
      *
      * Parameters:
-     *   (string) input_path - Path to wpdtrt-plugin/
-     *   (string) output_path - Path to wpdtrt-plugin/ output directory
+     *   (string) input_path - Path to wpdtrt-generated-plugin/
+     *   (string) output_path - Path to wpdtrt-generated-plugin/ output directory
      *   (object) root_package - A reference to the child's package.json file
      *   (string) wpdtrt_plugin_boilerplate_package_version_namespaced - The version in namespace format
      *
@@ -110,8 +110,8 @@ const wpdtrtPluginBump = function ( {
      * Child - version the gulpfile.
      *
      * Parameters:
-     *   (string) input_path - Path to wpdtrt-plugin/
-     *   (string) output_path - Path to wpdtrt-plugin/ output directory
+     *   (string) input_path - Path to wpdtrt-generated-plugin/
+     *   (string) output_path - Path to wpdtrt-generated-plugin/ output directory
      *   (object) root_package - A reference to the child's package.json file
      *
      * Returns:
@@ -142,8 +142,8 @@ const wpdtrtPluginBump = function ( {
      * Child: version the (WordPress) readme.
      *
      * Parameters:
-     *   (string) input_path - Path to wpdtrt-plugin/
-     *   (string) output_path - Path to wpdtrt-plugin/ output directory
+     *   (string) input_path - Path to wpdtrt-generated-plugin/
+     *   (string) output_path - Path to wpdtrt-generated-plugin/ output directory
      *   (object) root_package - A reference to the child's package.json file
      *
      * Returns:
@@ -186,8 +186,8 @@ const wpdtrtPluginBump = function ( {
      * Child - version the child root file.
      *
      * Parameters:
-     *   (string) input_path - Path to wpdtrt-plugin/
-     *   (string) output_path - Path to wpdtrt-plugin/ output directory
+     *   (string) input_path - Path to wpdtrt-generated-plugin/
+     *   (string) output_path - Path to wpdtrt-generated-plugin/ output directory
      *   (object) root_package - A reference to the child's package.json file
      *
      * Returns:
