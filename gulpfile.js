@@ -335,7 +335,7 @@ gulp.task( 'docs', () => {
 gulp.task( 'images', () => {
   gulpHelperTaskheader(
     '5',
-    'Optimise',
+    'Images',
     'SVG'
   );
 
