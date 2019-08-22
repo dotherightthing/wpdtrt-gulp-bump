@@ -44,7 +44,6 @@
 
 const gulp = require("gulp");
 const color = require("gulp-color");
-const del = require("del");
 const download = require("gulp-download");
 const eslint = require("gulp-eslint");
 const log = require("fancy-log");
