@@ -1,6 +1,6 @@
 /**
  * File: gulpfile.js
- * Topic: DTRT WordPress Plugin Boilerplate 
+ * Topic: DTRT WordPress Plugin Boilerplate Utility: Bump
  * 
  * Gulp build tasks.
  *
