@@ -217,7 +217,7 @@ describe("Test plugin", function () {
 
                 // wait for wpdtrtPluginBump to finish writing output to the file system
                 setTimeout( () => {
-                    plugin_child_files.map( ( i ) => {
+                    plugin_child_files.map( ( file, i ) => {
                         // only call done() after last file is checked
                         if ((i + 1) === plugin_child_files.length) {
                             callback = done;
