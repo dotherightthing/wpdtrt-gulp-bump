@@ -51,7 +51,17 @@ gulp.task( 'bump_replace', () => {
 
 ### Pre-requisites
 
-1. Download and install [Mono](https://www.mono-project.com/download/stable/), which is required by *Natural Docs*.
+1. Download and install [Mono](https://www.mono-project.com/download/stable/), which is required by [Natural Docs](https://www.naturaldocs.org/).
+
+### Scripts
+
+1. `yarn run build` - Install Yarn dependencies, then run the following scripts:
+1. `yarn run dependencies` - Install documentation dependencies
+1. `yarn run docs` - Generate documentation to <docs/>
+1. `yarn run images` - Optimise images
+1. `yarn run lint` - Run code linting
+1. `yarn run release` - Package release (Travis only)
+1. `yarn run tests` - Run unit tests
 
 ### Files
 
@@ -67,16 +77,6 @@ gulp.task( 'bump_replace', () => {
 1. Add the file to the appropriate `fixtures` folders, with a version of `0.12.345`
 1. Add the file to the `pluginFilesBoilerplate` and `pluginFilesGeneratedPlugin` arrays in `test/index.js`
 1. Add a new regex replacement function to `./index.js`
-
-### Scripts
-
-1. `yarn run build` - Install Yarn dependencies, then run the following scripts:
-1. `yarn run dependencies` - Install documentation dependencies
-1. `yarn run docs` - Generate documentation to <docs/>
-1. `yarn run images` - Optimise images
-1. `yarn run lint` - Run code linting
-1. `yarn run release` - Package release (Travis only)
-1. `yarn run tests` - Run unit tests
 
 ### Tests
 
