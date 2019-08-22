@@ -28,15 +28,28 @@ const replace = require( 'gulp-replace' );
  *   * inputPathRoot - Location of the plugin root directory
  *     * Used to load package.json
  *     * Relative to the active gulpfile, not to the CWD
- *     * For unit testing this is a location within 'fixtures'
+ *     * For real plugins:
+ *       * This is the directory containing the Gulpfile
+ *     * For unit testing:
+ *       * This is a location within 'fixtures'
+ *       * Used to load files requiring transformation
  *   * outputPathRoot - Location to output versioned files to
- *     * For real plugins this is the plugin root directory (inputPathRoot)
- *     * Only used to redirect output during testing
- *     * For unit testing this is the tmp wpdtrt-generated-plugin directory
- *     * For unit testing this is the tmp wpdtrt-plugin-boilerplate directory
+ *     * For real plugins:
+ *       * This is the plugin root directory (inputPathRoot)
+ *     * For unit testing:
+ *       * Used to output transformated files
+ *       * This is the tmp wpdtrt-generated-plugin directory
+ *       * This is the tmp wpdtrt-plugin-boilerplate directory
  *   * inputPathBoilerplate
+ *     * Used to load package.json
+ *     * For real plugins:
+ *       * This is the root directory if the boilerplate is not a dependency
+ *       * This is Composer's install location if the boilerplate is a dependency
+ *     * For unit testing:
+ *       * Used to load files requiring transformation
  *   * outputPathBoilerplate
- *     * Only used to redirect output during testing
+ *     * For unit testing:
+ *       * Used to output transformated files
  */
 const wpdtrtPluginBump = function ( {
   inputPathRoot = '',
@@ -44,10 +57,10 @@ const wpdtrtPluginBump = function ( {
   inputPathBoilerplate = '',
   outputPathBoilerplate = inputPathBoilerplate
 } = {} ) {
-  console.log( `inputPathRoot = ${inputPathRoot}` );
-  console.log( `outputPathRoot = ${outputPathRoot}` );
-  console.log( `inputPathBoilerplate = ${inputPathBoilerplate}` );
-  console.log( `outputPathBoilerplate = ${outputPathBoilerplate}` );
+  // console.log( `inputPathRoot = ${inputPathRoot}` );
+  // console.log( `outputPathRoot = ${outputPathRoot}` );
+  // console.log( `inputPathBoilerplate = ${inputPathBoilerplate}` );
+  // console.log( `outputPathBoilerplate = ${outputPathBoilerplate}` );
 
   /**
    * Method: versionNamespaceSafe
