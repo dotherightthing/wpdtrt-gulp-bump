@@ -31,20 +31,20 @@ gulp.task("bump_replace", function () {
 
     // if run from wpdtrt-plugin-boilerplate:
     // gulp bump
-    var root_input_path = "";
-    var wpdtrt_plugin_boilerplate_input_path = "";
+    var inputPathRoot = "";
+    var inputPathBoilerplate = "";
 
     // if run from a child plugin:
     // gulp bump
     // --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./
     if (pluginName !== "wpdtrt-plugin-boilerplate") {
-        root_input_path = "";
-        wpdtrt_plugin_boilerplate_input_path = "vendor/dotherightthing/wpdtrt-plugin-boilerplate/";
+        inputPathRoot = "";
+        inputPathBoilerplate = "vendor/dotherightthing/wpdtrt-plugin-boilerplate/";
     }
 
     return wpdtrtPluginBump({
-        root_input_path: root_input_path,
-        wpdtrt_plugin_boilerplate_input_path: wpdtrt_plugin_boilerplate_input_path
+        inputPathRoot: inputPathRoot,
+        inputPathBoilerplate: inputPathBoilerplate
     });
 });
 ```
@@ -77,7 +77,7 @@ The unit tests confirm that:
 #### To add a new file:
 
 1. Add the file to the appropriate `fixtures` folders, with a version of `0.12.345`
-1. Add the file to the `plugin_parent_files` and `plugin_child_files` arrays in `test/index.js`
+1. Add the file to the `pluginFilesParent` and `pluginFilesChild` arrays in `test/index.js`
 1. Add a new regex replacement function to `./index.js`
 
 ### Scripts

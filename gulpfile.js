@@ -54,25 +54,25 @@ const unzip = require("gulp-unzip");
 const validate = require("gulp-nice-package");
 const zip = require("gulp-zip");
 
-const distDir = get_pluginName;
+const distDir = getPluginName;
 
 // Input files.
-const js_files_to_lint = [
+const jsFilesToLint = [
     "gulpfile.js",
     "index.js",
     "test/*.js"
 ];
-const svg_files = "readme-styles/icons/*.svg";
+const svgFiles = "readme-styles/icons/*.svg";
 
 /**
- * Function: get_pluginName
+ * Function: getPluginName
  * 
  * Get the pluginName from package.json.
  *
  * Returns:
  *   (string) pluginName
  */
-function get_pluginName() {
+function getPluginName() {
     // pop() - remove the last element from the path array and return it
     const pluginName = process.cwd().split("/").pop();
 
@@ -80,7 +80,7 @@ function get_pluginName() {
 }
 
 /**
- * Function: is_travis
+ * Function: isTravis
  * 
  * Determines whether the current Gulp process is running on Travis CI.
  *
@@ -89,19 +89,19 @@ function get_pluginName() {
  * Returns:
  *   (boolean)
  */
-function is_travis() {
+function isTravis() {
     return (typeof process.env.TRAVIS !== "undefined");
 }
 
 /**
- * Function: decorate_log
+ * Function: decorateLog
  *
  * Log a Gulp task result with emoji and colour.
  * 
  * Parameters:
  *   (object) filePath, messageCount, warningCount, errorCount
  */
-function decorate_log( {
+function decorateLog( {
     textstring = "",
     messageCount = 0,
     warningCount = 0,
@@ -129,24 +129,24 @@ function decorate_log( {
  *
  * Parameters:
  *   step - Step number (string)
- *   task_category - Task category (string)
- *   task_action - Task action (string)
- *   task_detail - Task detail (string)
+ *   taskCategory - Task category (string)
+ *   taskAction - Task action (string)
+ *   taskDetail - Task detail (string)
  * 
  * Returns:
  *   (string) Task header
  */
-function gulp_helper_taskheader(
+function gulpHelperTaskheader(
     step = "0",
-    task_category = "",
-    task_action = "",
-    task_detail = ""
+    taskCategory = "",
+    taskAction = "",
+    taskDetail = ""
 ) {
 
     log(" ");
     log("========================================");
-    log(`${step} - ${task_category}:`);
-    log(`=> ${task_action}: ${task_detail}`);
+    log(`${step} - ${taskCategory}:`);
+    log(`=> ${taskAction}: ${taskDetail}`);
     log("----------------------------------------");
     log(" ");
 }
@@ -186,20 +186,20 @@ const dummyFile = "README.md";
  */
 gulp.task("dependencies", (callback) => {
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "1",
         "Dependencies",
         "Install"
     );
 
     runSequence(
-        "dependencies_docs",
+        "dependenciesDocs",
         callback
     );
 });
 
 /**
- * Function: dependencies_docs
+ * Function: dependenciesDocs
  * 
  * Install documentation dependencies.
  * 
@@ -211,9 +211,9 @@ gulp.task("dependencies", (callback) => {
  * Returns:
  *   Stream or promise for run-sequence.
  */
-gulp.task("dependencies_docs", () => {
+gulp.task("dependenciesDocs", () => {
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "1a",
         "Dependencies",
         "Install",
@@ -239,37 +239,37 @@ gulp.task("dependencies_docs", () => {
  */
 gulp.task("lint", (callback) => {
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "2",
         "QA",
         "Lint"
     );
 
     runSequence(
-        "lint_js",
-        "lint_package_json",
+        "lintJS",
+        "lintPackageJson",
         callback
     );
 });
 
 /**
- * Function: lint_js
+ * Function: lintJS
  * 
  * Lint JavaScript files.
  *
  * Returns:
  *   Stream or promise for run-sequence.
  */
-gulp.task("lint_js", () => {
+gulp.task("lintJS", () => {
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "2a",
         "QA",
         "Lint",
         "JS"
     );
 
-    const files = js_files_to_lint;
+    const files = jsFilesToLint;
 
     // return stream or promise for run-sequence
     return gulp.src( files )
@@ -278,7 +278,7 @@ gulp.task("lint_js", () => {
             const { filePath: textstring, messages, warningCount, errorCount } = result;
             const { length: messageCount } = messages;
             
-            decorate_log({
+            decorateLog({
                 textstring,
                 messageCount,
                 warningCount,
@@ -290,16 +290,16 @@ gulp.task("lint_js", () => {
 });
 
 /**
- * Function: lint_package_json
+ * Function: lintPackageJson
  * 
  * Lint package.json.
  *
  * Returns:
  *   Stream or promise for run-sequence.
  */
-gulp.task("lint_package_json", () => {
+gulp.task("lintPackageJson", () => {
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "2b",
         "QA",
         "Lint",
@@ -323,7 +323,7 @@ gulp.task("lint_package_json", () => {
  */
 gulp.task("test", () => {
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "3",
         "Documentation",
         "Run tests",
@@ -349,7 +349,7 @@ gulp.task("test", () => {
  */
 gulp.task("docs", () => {
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "4",
         "Documentation",
         "Generate",
@@ -357,14 +357,14 @@ gulp.task("docs", () => {
     );
 
     // Quotes escape space better than backslash on Travis
-    const naturaldocs_path = "Natural Docs/NaturalDocs.exe";
+    const naturalDocsPath = "Natural Docs/NaturalDocs.exe";
 
     // note: src files are not used,
     // this structure is only used
     // to include the preceding log()
     return gulp.src(dummyFile, {read: false})
         .pipe(shell([
-            `mono "${naturaldocs_path}" ./config/naturaldocs`
+            `mono "${naturalDocsPath}" ./config/naturaldocs`
         ]));
 });
 
@@ -378,14 +378,14 @@ gulp.task("docs", () => {
  */
 gulp.task( "optimise", () => {
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "5",
         "Optimise",
         "SVG"
     );
 
     // compress to same folder
-    return gulp.src( svg_files )
+    return gulp.src( svgFiles )
         .pipe( svgo() )
         .pipe( gulp.dest( "readme-styles/icons/optimised" ) );
 });
@@ -400,19 +400,19 @@ gulp.task( "optimise", () => {
  */
 gulp.task("release", (callback) => {
 
-    const travis = is_travis();
+    const travis = isTravis();
 
     if (travis) {
-        gulp_helper_taskheader(
+        gulpHelperTaskheader(
             "6",
             "Release",
             "Generate"
         );
 
         runSequence(
-            "release_yarn_dist",
-            "release_copy",
-            "release_zip",
+            "releaseYarnDist",
+            "releaseCopy",
+            "releaseZip",
             callback
         );
     } else {
@@ -421,16 +421,16 @@ gulp.task("release", (callback) => {
 });
 
 /**
- * Method: release_yarn_dist
+ * Method: releaseYarnDist
  * 
  * Uninstall Yarn development dependencies.
  *
  * Returns:
  *   Stream or promise for run-sequence.
  */
-gulp.task("release_yarn_dist", () => {
+gulp.task("releaseYarnDist", () => {
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "6a",
         "Release",
         "Uninstall dev dependencies",
@@ -445,7 +445,7 @@ gulp.task("release_yarn_dist", () => {
 });
 
 /**
- * Method: release_copy
+ * Method: releaseCopy
  * 
  * Copy release files to a temporary folder
  * 
@@ -454,9 +454,9 @@ gulp.task("release_yarn_dist", () => {
  * Returns:
  *   Stream or promise for run-sequence.
  */
-gulp.task("release_copy", () => {
+gulp.task("releaseCopy", () => {
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "6b",
         "Release",
         "Copy files",
@@ -480,16 +480,16 @@ gulp.task("release_copy", () => {
 });
 
 /**
- * Method: release_zip
+ * Method: releaseZip
  * 
  * Generate release.zip for deployment by Travis/Github.
  *
  * Returns:
  *   Stream or promise for run-sequence.
  */
-gulp.task("release_zip", () => {
+gulp.task("releaseZip", () => {
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "6c",
         "Release",
         "Generate",
@@ -519,9 +519,9 @@ gulp.task("release_zip", () => {
  */
 gulp.task("default", (callback) => {
 
-    const travis = is_travis();
+    const travis = isTravis();
 
-    gulp_helper_taskheader(
+    gulpHelperTaskheader(
         "0",
         "Installation",
         "Gulp",
