@@ -65,7 +65,9 @@ Ignore Source Folder: ../../docs
 
 Ignore Source Folder: ../../node_modules
 
-Ignore Source Folder: ../../test
+Ignore Source Folder: ../../test/expected
+
+Ignore Source Folder: ../../test/fixtures
 
 
 # If there are any subfolders in the source code that you would like Natural
