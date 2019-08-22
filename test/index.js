@@ -122,6 +122,13 @@ describe("Test plugin", function () {
                     throw expected_error;
                 }
 
+                const testing = "\n      "
+                + `A) ${output_path}${filename}\n`
+                + "      "
+                + `B) ${expected_path}${filename}`;
+
+                console.log( testing );
+
                 expect(output_data).not.differentFrom(expected_data);
 
                 if (done !== null) {
@@ -169,8 +176,6 @@ describe("Test plugin", function () {
                         } else {
                             callback = null;
                         }
-
-                        console.log( `      Testing: ${file}` );
 
                         compare_output_with_expected(
                             plugin_parent_files[i],
@@ -224,8 +229,6 @@ describe("Test plugin", function () {
                         } else {
                             callback = null;
                         }
-
-                        console.log( `      Testing: ${file}` );
 
                         compare_output_with_expected(
                             plugin_child_files[i],
