@@ -52,8 +52,8 @@
     "lint": "gulp lint",
     "test": "gulp test",
     "docs": "gulp docs",
-    "release": "gulp optimise",
-    "optimise": "gulp release"
+    "optimise": "gulp optimise",
+    "release": "gulp release"
   },
   "engines": {
     "node": ">=8.11.1"

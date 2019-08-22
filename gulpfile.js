@@ -412,10 +412,8 @@ gulp.task("release", (callback) => {
 
         runSequence(
             "release_yarn_dist",
-            "release_delete_pre",
             "release_copy",
-            "release_zip",
-            "release_delete_post",
+            "release_zip"
             callback
         );
     } else {
@@ -434,7 +432,7 @@ gulp.task("release", (callback) => {
 gulp.task("release_yarn_dist", () => {
 
     gulp_helper_taskheader(
-        "6b",
+        "6a",
         "Release",
         "Uninstall dev dependencies",
         "Yarn"
@@ -445,29 +443,6 @@ gulp.task("release_yarn_dist", () => {
         .pipe(shell([
             "yarn install --non-interactive --production"
         ]));
-});
-
-/**
- * Method: release_delete_pre
- * 
- * Delete existing release.zip.
- *
- * Returns:
- *   (string) The release zip
- */
-gulp.task("release_delete_pre", () => {
-
-    gulp_helper_taskheader(
-        "6c",
-        "Release",
-        "Delete",
-        "Previous release"
-    );
-
-    // return stream or promise for run-sequence
-    return del([
-        "release.zip"
-    ]);
 });
 
 /**
@@ -483,7 +458,7 @@ gulp.task("release_delete_pre", () => {
 gulp.task("release_copy", () => {
 
     gulp_helper_taskheader(
-        "6d",
+        "6b",
         "Release",
         "Copy files",
         "To temporary folder"
@@ -516,7 +491,7 @@ gulp.task("release_copy", () => {
 gulp.task("release_zip", () => {
 
     gulp_helper_taskheader(
-        "6e",
+        "6c",
         "Release",
         "Generate",
         "ZIP file"
@@ -529,26 +504,6 @@ gulp.task("release_zip", () => {
     ], {base: "."})
         .pipe(zip("release.zip"))
         .pipe(gulp.dest("./"));
-});
-
-/**
- * Method: release_delete_post
- * 
- * Delete the temporary folder.
- */
-gulp.task("release_delete_post", () => {
-
-    gulp_helper_taskheader(
-        "6f",
-        "Release",
-        "Delete",
-        "Temporary folder"
-    );
-
-    // return stream or promise for run-sequence
-    return del([
-        distDir
-    ]);
 });
 
 /**
