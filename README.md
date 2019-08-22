@@ -6,7 +6,7 @@ A Gulp utility to update a fixed selection of files in either the [DTRT WordPres
 
 ## Installation
 
-```
+```sh
 yarn add https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump --dev
 ```
 
@@ -14,39 +14,37 @@ yarn add https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump --dev
 
 As used in [wpdtrt-plugin-boilerplate's gulpfile.js](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/blob/master/gulpfile.js):
 
-```
-var wpdtrtPluginBump = require('gulp-wpdtrt-plugin-bump');
+```node
+/* globals gulp, taskheader */
 
-var pluginName = process.cwd().split("/").pop();
+var pluginName = process.cwd().split( '/' ).pop();
+var wpdtrtPluginBump = require( 'gulp-wpdtrt-plugin-bump' );
 
-gulp.task("bump_replace", function () {
+gulp.task( 'bump_replace', () => {
+  // if run from wpdtrt-plugin-boilerplate:
+  // gulp bump
+  var inputPathRoot = '';
+  var inputPathBoilerplate = '';
 
-    "use strict";
+  taskheader(
+    'Version',
+    'Bump',
+    'Replace version strings'
+  );
 
-    taskheader(
-        "Version",
-        "Bump",
-        "Replace version strings"
-    );
+  // if run from a child plugin:
+  // gulp bump
+  // --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./
+  if ( pluginName !== 'wpdtrt-plugin-boilerplate' ) {
+    inputPathRoot = '';
+    inputPathBoilerplate = 'vendor/dotherightthing/wpdtrt-plugin-boilerplate/';
+  }
 
-    // if run from wpdtrt-plugin-boilerplate:
-    // gulp bump
-    var inputPathRoot = "";
-    var inputPathBoilerplate = "";
-
-    // if run from a child plugin:
-    // gulp bump
-    // --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./
-    if (pluginName !== "wpdtrt-plugin-boilerplate") {
-        inputPathRoot = "";
-        inputPathBoilerplate = "vendor/dotherightthing/wpdtrt-plugin-boilerplate/";
-    }
-
-    return wpdtrtPluginBump({
-        inputPathRoot: inputPathRoot,
-        inputPathBoilerplate: inputPathBoilerplate
-    });
-});
+  return wpdtrtPluginBump( {
+    inputPathRoot: inputPathRoot,
+    inputPathBoilerplate: inputPathBoilerplate
+  } );
+} );
 ```
 
 ## Maintenance
@@ -85,7 +83,7 @@ The unit tests confirm that:
 1. `yarn run build` - Install Yarn dependencies, then run the following scripts:
 1. `yarn run dependencies` - Install documentation dependencies
 1. `yarn run lint` - Run code linting
-1. `yarn run test` - Run unit tests
+1. `yarn run tests` - Run unit tests
 1. `yarn run docs` - Generate documentation to <docs/>
 1. `yarn run images` - Optimise files
 1. `yarn run release` - Package release (only runs on Travis)
