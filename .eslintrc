@@ -3,7 +3,8 @@
   "parser": "babel-eslint",
   "plugins": [
     "cypress",
-    "chai-friendly"
+    "chai-friendly",
+    "json"
   ],
   "overrides": [
     {

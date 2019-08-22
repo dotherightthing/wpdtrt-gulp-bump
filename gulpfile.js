@@ -15,12 +15,11 @@ const color = require( 'gulp-color' );
 const download = require( 'gulp-download' );
 const eslint = require( 'gulp-eslint' );
 const log = require( 'fancy-log' );
-const print = require("gulp-print").default;
+const print = require( 'gulp-print' ).default;
 const runSequence = require( 'run-sequence' );
 const shell = require( 'gulp-shell' );
 const svgo = require( 'gulp-svgo' );
 const unzip = require( 'gulp-unzip' );
-const validate = require( 'gulp-nice-package' );
 const zip = require( 'gulp-zip' );
 
 const distDir = process.cwd().split( '/' ).pop();
@@ -29,6 +28,7 @@ const distDir = process.cwd().split( '/' ).pop();
 const jsFilesToLint = [
   'gulpfile.js',
   'index.js',
+  'package.json',
   'test/*.js'
 ];
 const svgFiles = 'readme-styles/icons/*.svg';
@@ -211,7 +211,6 @@ gulp.task( 'lint', ( callback ) => {
 
   runSequence(
     'lintJS',
-    'lintPackageJson',
     callback
   );
 } );
@@ -252,29 +251,6 @@ gulp.task( 'lintJS', () => {
     } ) )
     .pipe( eslint.format() );
   // .pipe(eslint.failAfterError());
-} );
-
-/**
- * Function: lintPackageJson
- *
- * Lint package.json.
- *
- * Returns:
- *   Stream or promise for run-sequence.
- */
-gulp.task( 'lintPackageJson', () => {
-  gulpHelperTaskheader(
-    '2b',
-    'QA',
-    'Lint',
-    'package.json'
-  );
-
-  // return stream or promise for run-sequence
-  return gulp.src( 'package.json' )
-    .pipe( validate( {
-      recommendations: false
-    } ) );
 } );
 
 /**
