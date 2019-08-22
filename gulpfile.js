@@ -246,7 +246,7 @@ gulp.task("lint_js", () => {
         "JS"
     );
 
-    const files = js_files_to_lint();
+    const files = js_files_to_lint;
 
     // return stream or promise for run-sequence
     return gulp.src( files )
