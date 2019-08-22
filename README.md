@@ -55,7 +55,7 @@ gulp.task( 'bump_replace', () => {
 
 ### Scripts
 
-1. `yarn run build` - Install Yarn dependencies
+1. `yarn install` - Install Yarn dependencies
 1. `yarn run build` - Run the following scripts:
   1. `yarn run dependencies` - Install documentation dependencies
   1. `yarn run docs` - Generate documentation to <docs/>
