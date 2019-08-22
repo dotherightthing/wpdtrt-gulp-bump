@@ -254,7 +254,7 @@ const wpdtrtPluginBump = function ( {
      * * Version: 1.2.3
      * ---
      * --- Text
-     * define( 'WPDTRT_TEST_VERSION', '1.2.3' );
+     * define( 'WPDTRT_PLUGIN_VERSION', '1.2.3' );
      * ---
      */
     function version_generated_plugin_root(
@@ -268,7 +268,7 @@ const wpdtrtPluginBump = function ( {
             /(\* Version:\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
         );
         const re2 = new RegExp(
-            /(define\( 'WPDTRT_TEST_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(' \);)/ // eslint-disable-line max-len
+            /(define\( 'WPDTRT_PLUGIN_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(' \);)/ // eslint-disable-line max-len
         );
 
         return gulp.src( files )
