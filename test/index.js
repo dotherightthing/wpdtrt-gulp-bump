@@ -141,8 +141,8 @@ describe("Test plugin", function () {
 
             // run plugin, to copy fixtures to transformed output
             gulp.task("wpdtrtPluginBumpParent", wpdtrtPluginBump({
-                wpdtrt_plugin_boilerplate_input_path: wpdtrt_plugin_boilerplate_input_path,
-                wpdtrt_plugin_boilerplate_output_path: wpdtrt_plugin_boilerplate_output_path,
+                wpdtrt_plugin_boilerplate_input_path,
+                wpdtrt_plugin_boilerplate_output_path,
                 root_input_path: wpdtrt_plugin_boilerplate_input_path,
                 root_output_path: wpdtrt_plugin_boilerplate_output_path
             }));
