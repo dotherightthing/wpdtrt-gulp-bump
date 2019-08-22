@@ -17,7 +17,7 @@ const replace = require( 'gulp-replace' );
  * ./package.json will always be wpdtrt-plugin-boilerplate/package.json
  *
  * Therefore we differentiate between
- * packageJsonRoot & packageJsonBoilerplate
+ * packageRoot & packageBoilerplate
  *
  * process.cwd() returns the path of the parent directory
  * of the js file running as the node process
@@ -77,7 +77,7 @@ const wpdtrtPluginBump = function ( {
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-generated-plugin/
    *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
-   *   (object) packageJsonRoot - A reference to the generated plugin's
+   *   (object) packageRoot - A reference to the generated plugin's
    *   package.json file
    *   (string) packageVersionBoilerplateNamespaced - The version in
    *   namespace format
@@ -94,7 +94,7 @@ const wpdtrtPluginBump = function ( {
   function versionGeneratedPluginSrc(
     inputPath,
     outputPath,
-    packageJsonRoot,
+    packageRoot,
     packageVersionBoilerplateNamespaced
   ) {
     const categories = [
@@ -108,7 +108,7 @@ const wpdtrtPluginBump = function ( {
     const re = new RegExp(
       /(extends DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/
     );
-    const { name } = packageJsonRoot;
+    const { name } = packageRoot;
 
     categories.forEach( ( category ) => {
       files.push(
@@ -132,7 +132,7 @@ const wpdtrtPluginBump = function ( {
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-generated-plugin/
    *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
-   *   (object) packageJsonRoot - A reference to the generated plugin's
+   *   (object) packageRoot - A reference to the generated plugin's
    *   package.json file
    *
    * Returns:
@@ -147,13 +147,13 @@ const wpdtrtPluginBump = function ( {
   function versionGeneratedPluginGulpfile(
     inputPath,
     outputPath,
-    packageJsonRoot
+    packageRoot
   ) {
     const files = `${inputPath}gulpfile.js`;
     const re = new RegExp(
       /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
-    const { version } = packageJsonRoot;
+    const { version } = packageRoot;
 
     return gulp.src( files )
       .pipe( replace(
@@ -164,14 +164,14 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionNaturalDocsGeneratedPlugin
+   * Method: versionGeneratedPluginDocs
    *
    * Child: version the Natural Docs' Project.txt.
    *
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-generated-plugin/
    *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
-   *   (object) packageJsonRoot - A reference to the generated plugin's
+   *   (object) packageRoot - A reference to the generated plugin's
    *   package.json file
    *
    * Returns:
@@ -183,16 +183,16 @@ const wpdtrtPluginBump = function ( {
    * Subtitle: DTRT Foo (1.2.3)
    * ---
    */
-  function versionNaturalDocsGeneratedPlugin(
+  function versionGeneratedPluginDocs(
     inputPath,
     outputPath,
-    packageJsonRoot
+    packageRoot
   ) {
     const files = `${inputPath}config/naturaldocs/Project.txt`;
     const re = new RegExp(
       /(Subtitle: [A-Za-z0-9( ]+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
-    const { version } = packageJsonRoot;
+    const { version } = packageRoot;
 
     return gulp.src( files )
       .pipe( replace(
@@ -203,14 +203,14 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionReadmeGeneratedPlugin
+   * Method: versionGeneratedPluginReadme
    *
    * Child: version the (WordPress) readme.txt.
    *
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-generated-plugin/
    *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
-   *   (object) packageJsonRoot - A reference to the generated plugin's
+   *   (object) packageRoot - A reference to the generated plugin's
    *   package.json file
    *
    * Returns:
@@ -228,10 +228,10 @@ const wpdtrtPluginBump = function ( {
    *
    * ---
    */
-  function versionReadmeGeneratedPlugin(
+  function versionGeneratedPluginReadme(
     inputPath,
     outputPath,
-    packageJsonRoot
+    packageRoot
   ) {
     const files = `${inputPath}readme.txt`;
     const re1 = new RegExp(
@@ -240,7 +240,7 @@ const wpdtrtPluginBump = function ( {
     const re2 = new RegExp(
       /(== Changelog ==\s\s= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\s)/
     );
-    const { version } = packageJsonRoot;
+    const { version } = packageRoot;
 
     return gulp.src( files )
       .pipe( replace(
@@ -255,14 +255,14 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionRootGeneratedPlugin
+   * Method: versionGeneratedPluginWpRoot
    *
    * Child: version the child root file.
    *
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-generated-plugin/
    *   (string) outputPath - Path to wpdtrt-generated-plugin/ output directory
-   *   (object) packageJsonRoot - A reference to the generated plugin's
+   *   (object) packageRoot - A reference to the generated plugin's
    *   package.json file
    *
    * Returns:
@@ -277,12 +277,12 @@ const wpdtrtPluginBump = function ( {
    * define( 'WPDTRT_PLUGIN_VERSION', '1.2.3' );
    * ---
    */
-  function versionRootGeneratedPlugin(
+  function versionGeneratedPluginWpRoot(
     inputPath,
     outputPath,
-    packageJsonRoot
+    packageRoot
   ) {
-    const { name, version } = packageJsonRoot;
+    const { name, version } = packageRoot;
     const files = `${inputPath}${name}.php`;
     const re1 = new RegExp(
       /(\* Version:\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
@@ -308,14 +308,14 @@ const wpdtrtPluginBump = function ( {
    */
 
   /**
-   * Method: versionAutoloaderParent
+   * Method: versionBoilerplateAutoloader
    *
    * Parent: version the autoloader (index) file.
    *
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
    *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *   (object) packageBoilerplate - A reference to the package.json file
    *
    * Returns:
    *   (array) src files
@@ -326,13 +326,13 @@ const wpdtrtPluginBump = function ( {
    * * @version 1.2.3
    * ---
    */
-  function versionAutoloaderParent(
+  function versionBoilerplateAutoloader(
     inputPath,
     outputPath,
-    packageJsonBoilerplate
+    packageBoilerplate
   ) {
     const files = `${inputPath}index.php`;
-    const { version } = packageJsonBoilerplate;
+    const { version } = packageBoilerplate;
     const re = new RegExp(
       /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
@@ -346,7 +346,7 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionComposerParent
+   * Method: versionBoilerplateComposer
    *
    * Parent: version the composer file.
    *
@@ -364,7 +364,7 @@ const wpdtrtPluginBump = function ( {
    * "DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_1_2_3\\": "src"
    * ---
    */
-  function versionComposerParent(
+  function versionBoilerplateComposer(
     inputPath,
     outputPath,
     packageVersionBoilerplateNamespaced
@@ -383,14 +383,14 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionGulpfileParent
+   * Method: versionBoilerplateGulpfile
    *
    * Parent: version the gulpfile.
    *
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
    *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *   (object) packageBoilerplate - A reference to the package.json file
    *
    * Returns:
    *   (array) src files
@@ -401,13 +401,13 @@ const wpdtrtPluginBump = function ( {
    * * @version 1.2.3
    * ---
    */
-  function versionGulpfileParent(
+  function versionBoilerplateGulpfile(
     inputPath,
     outputPath,
-    packageJsonBoilerplate
+    packageBoilerplate
   ) {
     const files = `${inputPath}gulpfile.js`;
-    const { version } = packageJsonBoilerplate;
+    const { version } = packageBoilerplate;
     const re = new RegExp(
       /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
@@ -421,14 +421,14 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionNaturalDocsParent
+   * Method: versionBoilerplateNaturalDocs
    *
    * Parent: version the Natural Docs' Project.txt.
    *
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
    *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *   (object) packageBoilerplate - A reference to the package.json file
    *
    * Returns:
    *   (array) src files
@@ -439,16 +439,16 @@ const wpdtrtPluginBump = function ( {
    * Subtitle: DTRT WordPress Plugin Boilerplate (1.2.3)
    * ---
    */
-  function versionNaturalDocsParent(
+  function versionBoilerplateNaturalDocs(
     inputPath,
     outputPath,
-    packageJsonBoilerplate
+    packageBoilerplate
   ) {
     const files = `${inputPath}config/naturaldocs/Project.txt`;
     const re = new RegExp(
       /(Subtitle: DTRT WordPress Plugin Boilerplate \(+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
-    const { version } = packageJsonBoilerplate;
+    const { version } = packageBoilerplate;
 
     return gulp.src( files )
       .pipe( replace(
@@ -459,7 +459,7 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionSrcParent
+   * Method: versionBoilerplateSrc
    *
    * Parent: version the namespaced src files.
    *
@@ -477,7 +477,7 @@ const wpdtrtPluginBump = function ( {
    * DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
    * ---
    */
-  function versionSrcParent(
+  function versionBoilerplateSrc(
     inputPath,
     outputPath,
     packageVersionBoilerplateNamespaced
@@ -507,14 +507,14 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionSrcPluginParent
+   * Method: versionBoilerplateSrcPlugin
    *
    * Parent: version the namespaced src/Plugin.php file.
    *
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
    *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *   (object) packageBoilerplate - A reference to the package.json file
    *   (string) packageVersionBoilerplateNamespaced - The version in namespace format
    *
    * Returns:
@@ -529,14 +529,14 @@ const wpdtrtPluginBump = function ( {
    * const WPDTRT_PLUGIN_VERSION = "1.2.3";
    * ---
    */
-  function versionSrcPluginParent(
+  function versionBoilerplateSrcPlugin(
     inputPath,
     outputPath,
-    packageJsonBoilerplate,
+    packageBoilerplate,
     packageVersionBoilerplateNamespaced
   ) {
     const files = `${inputPath}src/Plugin.php`;
-    const { version } = packageJsonBoilerplate;
+    const { version } = packageBoilerplate;
     const versionNamespaceSafeStr = packageVersionBoilerplateNamespaced;
     const re1 = new RegExp(
       /(DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/gm
@@ -558,14 +558,14 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionNaturalDocsParentTest
+   * Method: versionBoilerplateTestNaturalDocs
    *
    * Parent: version Natural Docs' Project.txt.
    *
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
    *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *   (object) packageBoilerplate - A reference to the package.json file
    *
    * Returns:
    *   (array) src files
@@ -576,17 +576,17 @@ const wpdtrtPluginBump = function ( {
    * Subtitle: DTRT Foo (1.2.3)
    * ---
    */
-  function versionNaturalDocsParentTest(
+  function versionBoilerplateTestNaturalDocs(
     inputPath,
     outputPath,
-    packageJsonRoot
+    packageRoot
   ) {
     const files = `${inputPath}tests/generated-plugin/`
         + 'config/naturaldocs/Project.txt';
     const re = new RegExp(
       /(Subtitle: [A-Za-z0-9( ]+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
-    const { version } = packageJsonRoot;
+    const { version } = packageRoot;
 
     return gulp.src( files )
       .pipe( replace(
@@ -599,14 +599,14 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionReadmeParentTest
+   * Method: versionBoilerplateTestReadme
    *
    * Parent: version the (WordPress) readme.
    *
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
    *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *   (object) packageBoilerplate - A reference to the package.json file
    *
    * Returns:
    *   (array) src files
@@ -623,13 +623,13 @@ const wpdtrtPluginBump = function ( {
    * //
    * ---
    */
-  function versionReadmeParentTest(
+  function versionBoilerplateTestReadme(
     inputPath,
     outputPath,
-    packageJsonBoilerplate
+    packageBoilerplate
   ) {
     const files = `${inputPath}tests/generated-plugin/readme.txt`;
-    const { version } = packageJsonBoilerplate;
+    const { version } = packageBoilerplate;
     const re1 = new RegExp(
       /(Stable tag: )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
@@ -650,14 +650,14 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionRootParentTest
+   * Method: versionBoilerplateTestWpRoot
    *
    * Parent: version the root (WordPress) file.
    *
    * Parameters:
    *   (string) inputPath - Path to wpdtrt-plugin-boilerplate/
    *   (string) outputPath - Path to wpdtrt-plugin-boilerplate/ output directory
-   *   (object) packageJsonBoilerplate - A reference to the package.json file
+   *   (object) packageBoilerplate - A reference to the package.json file
    *
    * Returns:
    *   (array) src files
@@ -671,13 +671,13 @@ const wpdtrtPluginBump = function ( {
    * define( 'WPDTRT_TEST_VERSION', '1.2.3' );
    * ---
    */
-  function versionRootParentTest(
+  function versionBoilerplateTestWpRoot(
     inputPath,
     outputPath,
-    packageJsonBoilerplate
+    packageBoilerplate
   ) {
     const files = `${inputPath}tests/generated-plugin/wpdtrt-test.php`;
-    const { version } = packageJsonBoilerplate;
+    const { version } = packageBoilerplate;
     const re1 = new RegExp(
       /(\* Version:\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
@@ -698,7 +698,7 @@ const wpdtrtPluginBump = function ( {
   }
 
   /**
-   * Method: versionSrcParentTest
+   * Method: versionBoilerplateTestSrc
    *
    * Parent: version the namespaced src files.
    *
@@ -716,7 +716,7 @@ const wpdtrtPluginBump = function ( {
    * DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
    * ---
    */
-  function versionSrcParentTest(
+  function versionBoilerplateTestSrc(
     inputPath,
     outputPath,
     packageVersionBoilerplateNamespaced
@@ -764,22 +764,20 @@ const wpdtrtPluginBump = function ( {
    * /Volumes/DanBackup/Websites/wpdtrt-blocks/node_modules/gulp-wpdtrt-plugin-bump/index.js
    * = /Volumes/DanBackup/Websites/wpdtrt-blocks
    */
-  let packageJsonRoot;
-  let packageJsonBoilerplate;
+  let packageRoot;
+  let packageBoilerplate;
   let packageVersionBoilerplateNamespaced;
 
-  // orphan parent
+  // boilerplate as root
   if ( inputPathRoot === inputPathBoilerplate ) {
     /* eslint-disable global-require */
-    packageJsonRoot = require( `${process.cwd()}/${inputPathBoilerplate}package.json` );
-    packageJsonBoilerplate = require(
-      `${process.cwd()}/${inputPathBoilerplate}package.json`
-    );
+    packageRoot = require( `${process.cwd()}/${inputPathBoilerplate}package.json` );
+    packageBoilerplate = require( `${process.cwd()}/${inputPathBoilerplate}package.json` );
     /* eslint-enable global-require */
 
     const {
       name: nameBoilerplate, version: versionBoilerplate
-    } = packageJsonBoilerplate;
+    } = packageBoilerplate;
 
     packageVersionBoilerplateNamespaced = versionNamespaceSafe(
       versionBoilerplate
@@ -789,82 +787,82 @@ const wpdtrtPluginBump = function ( {
     console.log( `      Bump ${nameBoilerplate} to ${versionBoilerplate} `
             + 'using package.json' );
 
-    versionAutoloaderParent(
+    versionBoilerplateAutoloader(
       inputPathBoilerplate,
       outputPathBoilerplate,
-      packageJsonBoilerplate
+      packageBoilerplate
     );
 
-    versionComposerParent(
-      inputPathBoilerplate,
-      outputPathBoilerplate,
-      packageVersionBoilerplateNamespaced
-    );
-
-    versionGulpfileParent(
-      inputPathBoilerplate,
-      outputPathBoilerplate,
-      packageJsonBoilerplate
-    );
-
-    versionSrcParent(
+    versionBoilerplateComposer(
       inputPathBoilerplate,
       outputPathBoilerplate,
       packageVersionBoilerplateNamespaced
     );
 
-    versionSrcPluginParent(
+    versionBoilerplateGulpfile(
       inputPathBoilerplate,
       outputPathBoilerplate,
-      packageJsonBoilerplate,
-      packageVersionBoilerplateNamespaced
+      packageBoilerplate
     );
 
-    versionNaturalDocsParent(
-      inputPathBoilerplate,
-      outputPathBoilerplate,
-      packageJsonBoilerplate
-    );
-
-    versionReadmeParentTest(
-      inputPathBoilerplate,
-      outputPathBoilerplate,
-      packageJsonBoilerplate
-    );
-
-    versionRootParentTest(
-      inputPathBoilerplate,
-      outputPathBoilerplate,
-      packageJsonBoilerplate
-    );
-
-    versionSrcParentTest(
+    versionBoilerplateSrc(
       inputPathBoilerplate,
       outputPathBoilerplate,
       packageVersionBoilerplateNamespaced
     );
 
-    versionNaturalDocsParentTest(
+    versionBoilerplateSrcPlugin(
       inputPathBoilerplate,
       outputPathBoilerplate,
-      packageJsonBoilerplate
+      packageBoilerplate,
+      packageVersionBoilerplateNamespaced
     );
 
-    // TODO: versionNaturalDocsParentTest
+    versionBoilerplateNaturalDocs(
+      inputPathBoilerplate,
+      outputPathBoilerplate,
+      packageBoilerplate
+    );
+
+    versionBoilerplateTestReadme(
+      inputPathBoilerplate,
+      outputPathBoilerplate,
+      packageBoilerplate
+    );
+
+    versionBoilerplateTestWpRoot(
+      inputPathBoilerplate,
+      outputPathBoilerplate,
+      packageBoilerplate
+    );
+
+    versionBoilerplateTestSrc(
+      inputPathBoilerplate,
+      outputPathBoilerplate,
+      packageVersionBoilerplateNamespaced
+    );
+
+    versionBoilerplateTestNaturalDocs(
+      inputPathBoilerplate,
+      outputPathBoilerplate,
+      packageBoilerplate
+    );
+
+    // TODO: versionBoilerplateTestNaturalDocs
   } else {
     // parent installed as a dependency of child
     /* eslint-disable global-require */
-    packageJsonRoot = require( `${process.cwd()}/${inputPathRoot}package.json` );
-    packageJsonBoilerplate = require(
+    packageRoot = require( `${process.cwd()}/${inputPathRoot}package.json` );
+    packageBoilerplate = require(
       `${process.cwd()}/`
             + `${inputPathBoilerplate}package.json`
     );
     /* eslint-enable global-require */
 
-    const { name: nameRoot, version: versionRoot } = packageJsonRoot;
+    const { name: nameRoot, version: versionRoot } = packageRoot;
     const {
       name: nameBoilerplate, version: versionBoilerplate
-    } = packageJsonBoilerplate;
+    } = packageBoilerplate;
 
     packageVersionBoilerplateNamespaced = versionNamespaceSafe(
       versionBoilerplate
@@ -879,32 +877,32 @@ const wpdtrtPluginBump = function ( {
     versionGeneratedPluginSrc(
       inputPathRoot,
       outputPathRoot,
-      packageJsonRoot,
+      packageRoot,
       packageVersionBoilerplateNamespaced
     );
 
     versionGeneratedPluginGulpfile(
       inputPathRoot,
       outputPathRoot,
-      packageJsonRoot
+      packageRoot
     );
 
-    versionReadmeGeneratedPlugin(
+    versionGeneratedPluginReadme(
       inputPathRoot,
       outputPathRoot,
-      packageJsonRoot
+      packageRoot
     );
 
-    versionRootGeneratedPlugin(
+    versionGeneratedPluginWpRoot(
       inputPathRoot,
       outputPathRoot,
-      packageJsonRoot
+      packageRoot
     );
 
-    versionNaturalDocsGeneratedPlugin(
+    versionGeneratedPluginDocs(
       inputPathRoot,
       outputPathRoot,
-      packageJsonRoot
+      packageRoot
     );
   }
 };

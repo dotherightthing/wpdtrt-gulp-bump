@@ -30,7 +30,7 @@ const wpdtrtPluginBump = require( '../index.js' );
  * version them there,
  * then compare them to the 'expected' files.
  */
-describe( 'Test plugin', () => {
+describe( 'Test plugin', function () { // eslint-disable-line func-names
   // increase default timeout in case assert operations take too long
   // (i/o usage)
   // https://duske.me/simple-functional-tests-for-gulp-tasks/
@@ -169,6 +169,8 @@ describe( 'Test plugin', () => {
 
   /**
    * Section: Test generated plugin as root (with boilerplate as dependency)
+   *
+   * The generated plugin calls the Gulpfile provided by the boilerplate.
    */
   describe( 'Test generated plugin as root (with boilerplate as dependency)', () => {
     // Setup
