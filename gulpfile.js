@@ -15,6 +15,7 @@ const color = require( 'gulp-color' );
 const download = require( 'gulp-download' );
 const eslint = require( 'gulp-eslint' );
 const log = require( 'fancy-log' );
+const print = require("gulp-print").default;
 const runSequence = require( 'run-sequence' );
 const shell = require( 'gulp-shell' );
 const svgo = require( 'gulp-svgo' );
