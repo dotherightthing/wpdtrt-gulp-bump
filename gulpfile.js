@@ -338,7 +338,7 @@ gulp.task("docs", () => {
     );
 
     // Quotes escape space better than backslash on Travis
-    const naturaldocs_path = "Natural Docs/NaturalDocs.exe"; // eslint-disable-line quotes
+    const naturaldocs_path = "Natural Docs/NaturalDocs.exe";
 
     // note: src files are not used,
     // this structure is only used
