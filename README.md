@@ -55,13 +55,14 @@ gulp.task( 'bump_replace', () => {
 
 ### Scripts
 
-1. `yarn run build` - Install Yarn dependencies, then run the following scripts:
-1. `yarn run dependencies` - Install documentation dependencies
-1. `yarn run docs` - Generate documentation to <docs/>
-1. `yarn run images` - Optimise images
-1. `yarn run lint` - Run code linting
-1. `yarn run release` - Package release (Travis only)
-1. `yarn run tests` - Run unit tests
+1. `yarn run build` - Install Yarn dependencies
+1. `yarn run build` - Run the following scripts:
+  1. `yarn run dependencies` - Install documentation dependencies
+  1. `yarn run docs` - Generate documentation to <docs/>
+  1. `yarn run images` - Optimise images
+  1. `yarn run lint` - Lint code
+  1. `yarn run release` - Package release (Travis only)
+  1. `yarn run tests` - Test code
 
 ### Files
 
