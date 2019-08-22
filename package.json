@@ -47,7 +47,6 @@
   "scripts": {
     "build": "gulp",
     "dependencies": "gulp dependencies",
-    "postinstall": "gulp",
     "lint": "gulp lint",
     "test": "gulp test",
     "docs": "gulp docs",
