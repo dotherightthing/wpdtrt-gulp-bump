@@ -20,6 +20,10 @@ install:
   - yarn install --non-interactive
   - yarn global add gulp-cli
 
+# Run the build script
+script:
+  - yarn run build
+
 # Notifications of build results
 # https://docs.travis-ci.com/user/notifications/
 # https://github.com/travis-ci/travis-ci/issues/6387 - $SLACK_AUTH not supported
