@@ -50,7 +50,7 @@
     "lint": "gulp lint",
     "test": "gulp test",
     "docs": "gulp docs",
-    "optimise": "gulp optimise",
+    "images": "gulp images",
     "release": "gulp release"
   },
   "engines": {

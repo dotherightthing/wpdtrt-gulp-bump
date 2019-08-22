@@ -317,7 +317,7 @@ gulp.task( 'docs', () => {
 } );
 
 /**
- * Function: optimise
+ * Function: images
  *
  * Reduce file size of input.
  *
@@ -326,10 +326,10 @@ gulp.task( 'docs', () => {
  *
  * Example:
  * --- Text
- * yarn run optimise
+ * yarn run images
  * ---
  */
-gulp.task( 'optimise', () => {
+gulp.task( 'images', () => {
   gulpHelperTaskheader(
     '5',
     'Optimise',
@@ -491,7 +491,7 @@ gulp.task( 'default', ( callback ) => {
     // 4
     'docs',
     // 5
-    'optimise',
+    'images',
     // 6
     'release'
   );

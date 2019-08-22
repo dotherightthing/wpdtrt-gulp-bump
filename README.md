@@ -87,7 +87,7 @@ The unit tests confirm that:
 1. `yarn run lint` - Run code linting
 1. `yarn run test` - Run unit tests
 1. `yarn run docs` - Generate documentation to <docs/>
-1. `yarn run optimise` - Optimise files
+1. `yarn run images` - Optimise files
 1. `yarn run release` - Package release (only runs on Travis)
 
 ### Release
