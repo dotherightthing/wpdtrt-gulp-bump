@@ -182,7 +182,7 @@ const wpdtrtPluginBump = function ( {
                 re,
                 `$1${version}`
             ) )
-            .pipe( gulp.dest( output_path ) );
+            .pipe( gulp.dest( `${output_path}config/naturaldocs/` ) );
     }
 
     /**
@@ -313,7 +313,7 @@ const wpdtrtPluginBump = function ( {
         wpdtrt_plugin_boilerplate_package
     ) {
         const files = `${input_path}index.php`;
-        const { version: bp_version } = wpdtrt_plugin_boilerplate_package;
+        const { version } = wpdtrt_plugin_boilerplate_package;
         const re = new RegExp(
             /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
         );
@@ -321,7 +321,7 @@ const wpdtrtPluginBump = function ( {
         return gulp.src(files)
             .pipe( replace(
                 re,
-                `$1${bp_version}`
+                `$1${version}`
             ) )
             .pipe( gulp.dest( output_path ) );
     }
@@ -388,7 +388,7 @@ const wpdtrtPluginBump = function ( {
         wpdtrt_plugin_boilerplate_package
     ) {
         const files = `${input_path}gulpfile.js`;
-        const { version: bp_version } = wpdtrt_plugin_boilerplate_package;
+        const { version } = wpdtrt_plugin_boilerplate_package;
         const re = new RegExp(
             /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
         );
@@ -396,7 +396,7 @@ const wpdtrtPluginBump = function ( {
         return gulp.src(files)
             .pipe( replace(
                 re,
-                `$1${bp_version}`
+                `$1${version}`
             ) )
             .pipe( gulp.dest( output_path ) );
     }
@@ -429,14 +429,14 @@ const wpdtrtPluginBump = function ( {
         const re = new RegExp(
             /(Subtitle: DTRT WordPress Plugin Boilerplate \(+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/ // eslint-disable-line max-len
         );
-        const { version: bp_version } = wpdtrt_plugin_boilerplate_package;
+        const { version } = wpdtrt_plugin_boilerplate_package;
 
         return gulp.src(files)
             .pipe( replace(
                 re,
-                `$1${bp_version}`
+                `$1${version}`
             ) )
-            .pipe( gulp.dest( output_path ) );
+            .pipe( gulp.dest( `${output_path}config/naturaldocs/` ) );
     }
 
     /**
@@ -517,22 +517,23 @@ const wpdtrtPluginBump = function ( {
         wpdtrt_plugin_boilerplate_package_version_namespaced
     ) {
         const files = `${input_path}src/Plugin.php`;
-        const { version: bp_version } = wpdtrt_plugin_boilerplate_package;
+        const { version } = wpdtrt_plugin_boilerplate_package;
+        const version_ns = wpdtrt_plugin_boilerplate_package_version_namespaced;
         const re1 = new RegExp(
             /(DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/ // eslint-disable-line max-len
         );
         const re2 = new RegExp(
             /(const WPDTRT_PLUGIN_VERSION = \")([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(\";)/ // eslint-disable-line max-len
-        )
+        );
 
         return gulp.src( files )
             .pipe( replace(
                 re1,
-                `$1${wpdtrt_plugin_boilerplate_package_version_namespaced}`
+                `$1${version_ns}`
             ) )
             .pipe( replace(
                 re2,
-                `$1${bp_version}$3`
+                `$1${version}$3`
             ) )
             .pipe(gulp.dest( `${output_path}src/` ) );
     }
@@ -568,7 +569,7 @@ const wpdtrtPluginBump = function ( {
         wpdtrt_plugin_boilerplate_package
     ) {
         const files = `${input_path}tests/generated-plugin/readme.txt`;
-        const { version: bp_version } = wpdtrt_plugin_boilerplate_package;
+        const { version } = wpdtrt_plugin_boilerplate_package;
         const re1 = new RegExp(
             /(Stable tag: )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
         );
@@ -579,11 +580,11 @@ const wpdtrtPluginBump = function ( {
         return gulp.src(files)
             .pipe( replace(
                 re1,
-                `$1${bp_version}`
+                `$1${version}`
             ) )
             .pipe( replace(
                 re2,
-                `$1${bp_version} =\n\n= $2$3`
+                `$1${version} =\n\n= $2$3`
             ) )
             .pipe(gulp.dest( `${output_path}tests/generated-plugin/` ) );
     }
@@ -624,7 +625,7 @@ const wpdtrtPluginBump = function ( {
                 re,
                 `$1${version}`
             ) )
-            .pipe( gulp.dest( `${output_path}tests/generated-plugin/` ) );
+            .pipe( gulp.dest( `${output_path}tests/generated-plugin/config/naturaldocs/` ) ); // eslint-disable-line max-len
     }
 
     /**
@@ -655,7 +656,7 @@ const wpdtrtPluginBump = function ( {
         wpdtrt_plugin_boilerplate_package
     ) {
         const files = `${input_path}tests/generated-plugin/wpdtrt-test.php`;
-        const { version: bp_version } = wpdtrt_plugin_boilerplate_package;
+        const { version } = wpdtrt_plugin_boilerplate_package;
         const re1 = new RegExp(
             /(\* Version:\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
         );
@@ -666,11 +667,11 @@ const wpdtrtPluginBump = function ( {
         gulp.src(files)
             .pipe( replace(
                 re1,
-                `$1${bp_version}`
+                `$1${version}`
             ) )
             .pipe( replace(
                 re2,
-                `$1${bp_version}$3`
+                `$1${version}$3`
             ) )
             .pipe( gulp.dest( `${output_path}tests/generated-plugin/` ) );
     }
@@ -710,6 +711,7 @@ const wpdtrtPluginBump = function ( {
         const re = new RegExp(
             /(DoTheRightThing\\WPDTRT_Plugin_Boilerplate\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})/ // eslint-disable-line max-len
         );
+        const version_ns = wpdtrt_plugin_boilerplate_package_version_namespaced;
 
         categories.map( category => {
             files.push(
@@ -720,7 +722,7 @@ const wpdtrtPluginBump = function ( {
         return gulp.src(files)
             .pipe( replace(
                 re,
-                `$1${wpdtrt_plugin_boilerplate_package_version_namespaced}`
+                `$1${version_ns}`
             ) )
             .pipe( gulp.dest( `${output_path}tests/generated-plugin/src/` ) );
     }
@@ -761,7 +763,8 @@ const wpdtrtPluginBump = function ( {
         wpdtrt_plugin_boilerplate_package_version_namespaced = namespace_safe_version( bp_version ); // eslint-disable-line max-len
 
         // get the latest release number
-        console.log( `Bump ${bp_name} to ${bp_version} using package.json` );
+        console.log( `      Bump ${bp_name} to ${bp_version} `
+            + "using package.json" );
 
         version_parent_autoloader(
             input,
@@ -842,14 +845,15 @@ const wpdtrtPluginBump = function ( {
 
         console.log(
             // bump wpdtrt-foo to 0.1.2 and wpdtrt-plugin-boilerplate 1.2.3 using package.json
-            `Bump ${rp_name} to ${rp_version} and ${bp_name} ${bp_version} `
-            + "using package.json"
+            `      Bump ${rp_name} to ${rp_version} `
+            + `and ${bp_name} ${bp_version} using package.json`
         );
 
         version_child_src(
             input,
             output,
-            root_package, wpdtrt_plugin_boilerplate_package_version_namespaced
+            root_package,
+            wpdtrt_plugin_boilerplate_package_version_namespaced
         );
 
         version_child_gulpfile(

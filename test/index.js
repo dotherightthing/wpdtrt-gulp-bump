@@ -170,7 +170,7 @@ describe("Test plugin", function () {
                             callback = null;
                         }
 
-                        console.log( `${i + 1}. ${file}` );
+                        console.log( `      Testing: ${file}` );
 
                         compare_output_with_expected(
                             plugin_parent_files[i],
@@ -225,7 +225,7 @@ describe("Test plugin", function () {
                             callback = null;
                         }
 
-                        console.log( `${i + 1}. ${file}` );
+                        console.log( `      Testing: ${file}` );
 
                         compare_output_with_expected(
                             plugin_child_files[i],
