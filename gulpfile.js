@@ -48,6 +48,12 @@ const svgo = require("gulp-svgo");
 const unzip = require("gulp-unzip");
 const validate = require("gulp-nice-package");
 
+// Input files.
+const js_files_to_lint = [
+    "gulpfile.js",
+    "index.js",
+    "test/*.js"
+];
 const svg_files = "github-ui/icons/*.svg";
 
 /**
@@ -62,25 +68,6 @@ const svg_files = "github-ui/icons/*.svg";
  */
 function is_travis() {
     return (typeof process.env.TRAVIS !== "undefined");
-}
-
-/**
- * Get list of JavaScript files to lint.
- *
- * See: <http://usejsdoc.org/about-including-package.html>.
- * 
- * Returns:
- *   (array) jsFiles - Files
- */
-function get_js_files_to_lint() {
-    // note: es6 orignals only
-    const jsFilesToLint = [
-        "gulpfile.js",
-        "index.js",
-        "test/*.js"
-    ];
-
-    return jsFilesToLint;
 }
 
 /**
@@ -126,7 +113,12 @@ function decorate_log( {
  * Returns:
  *   (string) Task header
  */
-function gulp_helper_taskheader(step, task_category, task_action, task_detail) {
+function gulp_helper_taskheader(
+    step = "0",
+    task_category = "",
+    task_action = "",
+    task_detail = ""
+) {
 
     log(" ");
     log("========================================");
@@ -174,8 +166,7 @@ gulp.task("dependencies", (callback) => {
     gulp_helper_taskheader(
         "1",
         "Dependencies",
-        "Install",
-        ""
+        "Install"
     );
 
     runSequence(
@@ -228,8 +219,7 @@ gulp.task("lint", (callback) => {
     gulp_helper_taskheader(
         "2",
         "QA",
-        "Lint",
-        ""
+        "Lint"
     );
 
     runSequence(
@@ -256,12 +246,12 @@ gulp.task("lint_js", () => {
         "JS"
     );
 
-    const files = get_js_files_to_lint();
+    const files = js_files_to_lint();
 
     // return stream or promise for run-sequence
-    return gulp.src(files)
-        .pipe(eslint())
-        .pipe(eslint.result(result => {
+    return gulp.src( files )
+        .pipe( eslint() )
+        .pipe( eslint.result( result => {
             const { filePath: textstring, messages, warningCount, errorCount } = result;
             const { length: messageCount } = messages;
             
