@@ -43,7 +43,7 @@ const wpdtrtPluginBump = function ( {
      *  in namespace format.
      *
      * Parameters:
-     *   (string) wpdtrt_plugin_boilerplate_package_version
+     *   (string) wpdtrt_plugin_boilerplate_package_version, e.g. 1.2.34
      *
      * Returns:
      *   (string) The version in namespace format

@@ -55,6 +55,20 @@ gulp.task("bump_replace", function () {
 
 1. Download and install [Mono](https://www.mono-project.com/download/stable/), which is required by *Natural Docs*.
 
+### Files
+
+1. index.js - Node module, plugins consume this via Gulp tasks
+1. test/index.js - unit tests, written in mocha/chai
+1. test/fixtures - plugin files with placeholder version information
+1. test/expected - plugin files with real version information
+
+The unit tests confirm that:
+
+1. The `fixtures` are successfully transformed to the `expected` copies
+1. For a generated `wpdtrt-plugin`, this occurs when `gulp-wpdtrt-plugin-bump` is run on it directly
+1. For `wpdtrt-plugin-boilerplate`, this occurs when `gulp-wpdtrt-plugin-bump` is run on it directly
+1. For `wpdtrt-plugin-boilerplate` loaded as a dependency of `wpdtrt-plugin`, this does not occur when `gulp-wpdtrt-plugin-bump` is run on `wpdtrt-plugin`
+
 ### Scripts
 
 1. `yarn install` - Install Yarn dependencies, then run the following scripts:
@@ -70,3 +84,10 @@ Prior to committing, please update the version number in the following files:
 
 1. `./package.json`
 1. `./config/naturaldocs/Project.txt`
+
+---
+
+## Technologies
+
+[![node.js](github-ui/icons/optimised/nodejs.svg)](https://nodejs.org/)
+[![Mocha](github-ui/icons/optimised/mocha.svg)](https://mochajs.org/)
