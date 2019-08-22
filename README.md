@@ -82,13 +82,13 @@ The unit tests confirm that:
 
 ### Scripts
 
-1. `yarn install` - Install Yarn dependencies, then run the following scripts:
+1. `yarn run build` - Install Yarn dependencies, then run the following scripts:
 1. `yarn run dependencies` - Install documentation dependencies
 1. `yarn run lint` - Run code linting
 1. `yarn run test` - Run unit tests
 1. `yarn run docs` - Generate documentation to <docs/>
 1. `yarn run optimise` - Optimise files
-1. `yarn run release` - Package release
+1. `yarn run release` - Package release (only runs on Travis)
 
 ### Release
 
