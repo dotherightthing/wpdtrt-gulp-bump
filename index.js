@@ -33,9 +33,8 @@ const wpdtrtPluginBump = function ( {
     wpdtrt_plugin_boilerplate_input_path = "",
     // wpdtrt_plugin_boilerplate_output_path is only used to
     // redirect output during testing
-    wpdtrt_plugin_boilerplate_output_path = wpdtrt_plugin_boilerplate_input_path
+    wpdtrt_plugin_boilerplate_output_path = wpdtrt_plugin_boilerplate_input_path // eslint-disable-line max-len
 } = {} ) {
-
     /**
      * Method: namespace_safe_version
      * 
@@ -57,7 +56,7 @@ const wpdtrtPluginBump = function ( {
      */
 
     /**
-     * Method: version_child_src
+     * Method: version_generated_plugin_src
      * 
      * Child: version the extended class name.
      *
@@ -76,7 +75,7 @@ const wpdtrtPluginBump = function ( {
      * extends DoTheRightThing\WPDTRT_Plugin_Boilerplate\r_1_2_3
      * ---
      */
-    function version_child_src(
+    function version_generated_plugin_src(
         input_path,
         output_path,
         root_package,
@@ -110,7 +109,7 @@ const wpdtrtPluginBump = function ( {
     }
 
     /**
-     * Method: version_child_gulpfile
+     * Method: version_generated_plugin_gulpfile
      * 
      * Child: version the gulpfile.
      *
@@ -128,7 +127,7 @@ const wpdtrtPluginBump = function ( {
      * * @version 1.2.3
      * ---
      */
-    function version_child_gulpfile(
+    function version_generated_plugin_gulpfile(
         input_path,
         output_path,
         root_package
@@ -148,7 +147,7 @@ const wpdtrtPluginBump = function ( {
     }
 
     /**
-     * Method: version_child_naturaldocs_project
+     * Method: version_generated_plugin_naturaldocs_project
      * 
      * Child: version the Natural Docs' Project.txt.
      *
@@ -166,7 +165,7 @@ const wpdtrtPluginBump = function ( {
      * Subtitle: DTRT Foo (1.2.3)
      * ---
      */
-    function version_child_naturaldocs_project(
+    function version_generated_plugin_naturaldocs_project(
         input_path,
         output_path,
         root_package
@@ -186,7 +185,7 @@ const wpdtrtPluginBump = function ( {
     }
 
     /**
-     * Method: version_child_readme
+     * Method: version_generated_plugin_readme
      * 
      * Child: version the (WordPress) readme.txt.
      *
@@ -210,7 +209,7 @@ const wpdtrtPluginBump = function ( {
      * 
      * ---
      */
-    function version_child_readme(
+    function version_generated_plugin_readme(
         input_path,
         output_path,
         root_package
@@ -237,7 +236,7 @@ const wpdtrtPluginBump = function ( {
     }
 
     /**
-     * Method: version_child_root
+     * Method: version_generated_plugin_root
      * 
      * Child: version the child root file.
      *
@@ -258,7 +257,7 @@ const wpdtrtPluginBump = function ( {
      * define( 'WPDTRT_TEST_VERSION', '1.2.3' );
      * ---
      */
-    function version_child_root(
+    function version_generated_plugin_root(
         input_path,
         output_path,
         root_package
@@ -838,8 +837,8 @@ const wpdtrtPluginBump = function ( {
             + `${wpdtrt_plugin_boilerplate_input_path}package.json` 
         );
 
-        const { rp_name, rp_version } = root_package;
-        const { bp_name, bp_version } = wpdtrt_plugin_boilerplate_package;
+        const { name: rp_name, version: rp_version } = root_package;
+        const { name: bp_name, version: bp_version } = wpdtrt_plugin_boilerplate_package; // eslint-disable-line max-len
 
         wpdtrt_plugin_boilerplate_package_version_namespaced = namespace_safe_version( bp_version ); // eslint-disable-line max-len
 
@@ -849,32 +848,32 @@ const wpdtrtPluginBump = function ( {
             + `and ${bp_name} ${bp_version} using package.json`
         );
 
-        version_child_src(
+        version_generated_plugin_src(
             input,
             output,
             root_package,
             wpdtrt_plugin_boilerplate_package_version_namespaced
         );
 
-        version_child_gulpfile(
+        version_generated_plugin_gulpfile(
             input,
             output,
             root_package
         );
 
-        version_child_readme(
+        version_generated_plugin_readme(
             input,
             output,
             root_package
         );
 
-        version_child_root(
+        version_generated_plugin_root(
             input,
             output,
             root_package
         );
 
-        version_child_naturaldocs_project(
+        version_generated_plugin_naturaldocs_project(
             input,
             output,
             root_package
