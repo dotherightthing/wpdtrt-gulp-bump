@@ -9,7 +9,7 @@ Format: 2.0.2
 # ------------------------------------------------------------------------
 
 Title: Documentation
-Subtitle: DTRT WordPress Plugin Bump (0.2.0)
+Subtitle: DTRT Plugin (0.12.345)
 
 Copyright: Copyright © 2019 Dan Smith
 
@@ -38,7 +38,7 @@ Timestamp: Last updated day month, year
 # ------------------------------------------------------------------------
 
 Source Folder: ../..
-
+Source Folder: ../../vendor/dotherightthing/wpdtrt-plugin-boilerplate
 
 
 # This is where you specify what files and folders Natural Docs should be
@@ -61,13 +61,15 @@ Source Folder: ../..
 # Source Filtering
 # ------------------------------------------------------------------------
 
+Ignore Source Folder: ../../bin
+
 Ignore Source Folder: ../../docs
 
 Ignore Source Folder: ../../node_modules
 
-Ignore Source Folder: ../../test/expected
+Ignore Source Folder: ../../tests
 
-Ignore Source Folder: ../../test/fixtures
+Ignore Source Folder: ../../vendor
 
 
 # If there are any subfolders in the source code that you would like Natural

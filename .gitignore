@@ -1,6 +1,7 @@
 config/naturaldocs/Working Data
 docs/*
 !docs/README.md
+images/optimised
 Natural Docs
 node_modules
 tmp
