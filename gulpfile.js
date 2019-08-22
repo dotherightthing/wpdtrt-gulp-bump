@@ -28,8 +28,11 @@ const distDir = process.cwd().split( '/' ).pop();
 const jsFilesToLint = [
   'gulpfile.js',
   'index.js',
+  'test/*.js',
+  // eslint-plugin-json
   'package.json',
-  'test/*.js'
+  // eslint-plugin-markdown
+  'README.md'
 ];
 const svgFiles = 'readme-styles/icons/*.svg';
 
