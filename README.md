@@ -57,23 +57,25 @@ gulp.task("bump_replace", function () {
 
 ### Files
 
-1. index.js - Node module, plugins consume this via Gulp tasks, versioned files are output to the specified output folder (for testing this is `tmp/`)
-1. test/index.js - unit tests, written in mocha/chai
-1. test/fixtures - plugin files with placeholder version information
-1. test/expected - plugin files with real version information
+1. `./index.js` - Node module, plugins consume this via Gulp tasks, versioned files are output to the specified output folder (for testing this is `tmp/`)
+1. `./test/index.js` - unit tests, written in mocha/chai
+1. `./test/fixtures` - plugin files with placeholder version information
+1. `./text/fixtures/wpdtrt-generated-plugin/package.json` sets the target `version`
+1. `./text/fixtures/wpdtrt-plugin-boilerplate/package.json` sets the target `version`
+1. `./test/expected` - plugin files with real version information
 
 The unit tests confirm that:
 
-1. The `fixtures` are successfully transformed to the `expected` copies
-1. For a generated `wpdtrt-generated-plugin`, this occurs when `gulp-wpdtrt-plugin-bump` is run on it directly
+1. The script successfully transforms the `fixtures` to their `expected` copies
+1. For a `wpdtrt-generated-plugin`, this occurs when `gulp-wpdtrt-plugin-bump` is run on it directly
 1. For `wpdtrt-plugin-boilerplate`, this occurs when `gulp-wpdtrt-plugin-bump` is run on it directly
 1. For `wpdtrt-plugin-boilerplate` loaded as a dependency of `wpdtrt-generated-plugin`, this does not occur when `gulp-wpdtrt-plugin-bump` is run on `wpdtrt-generated-plugin`
 
 To add a new file:
 
 1. Add the file to the appropriate `fixtures` folders, with a version of `0.12.345`
-2. Add a new versioning function to `./index.js`
-3. Add the file to the `plugin_parent_files` and `plugin_child_files` arrays in `test/index.js`
+1. Add the file to the `plugin_parent_files` and `plugin_child_files` arrays in `test/index.js`
+1. Add a new regex replacement function to `./index.js`
 
 ### Scripts
 

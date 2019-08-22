@@ -591,7 +591,7 @@ const wpdtrtPluginBump = function ( {
     /**
      * Method: version_parent_test_naturaldocs_project
      * 
-     * Parent: version the (WordPress) readme.
+     * Parent: version Natural Docs' Project.txt.
      *
      * Parameters:
      *   (string) input_path - Path to wpdtrt-plugin-boilerplate/
