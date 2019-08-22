@@ -31,10 +31,10 @@ const wpdtrtPluginBump = function ( {
     // root_output_path is only used to redirect output during testing
     root_output_path = root_input_path,
     wpdtrt_plugin_boilerplate_input_path = "",
-    // wpdtrt_plugin_boilerplate_output_path is only used to
-    // redirect output during testing
+    // wpdtrt_plugin_boilerplate_output_path is only used to redirect output during testing
     wpdtrt_plugin_boilerplate_output_path = wpdtrt_plugin_boilerplate_input_path // eslint-disable-line max-len
 } = {} ) {
+
     /**
      * Method: namespace_safe_version
      * 
@@ -45,7 +45,7 @@ const wpdtrtPluginBump = function ( {
      *   (string) wpdtrt_plugin_boilerplate_package_version, e.g. 1.2.34
      *
      * Returns:
-     *   (string) The version in namespace format
+     *   (string) The version in namespace format, e.g. 1_2_34
      */
     function namespace_safe_version(wpdtrt_plugin_boilerplate_package_version) {
         return wpdtrt_plugin_boilerplate_package_version.split(".").join("_");
@@ -249,7 +249,7 @@ const wpdtrtPluginBump = function ( {
      *   (array) src files
      *
      * Output:
-     * ./wpdtrt-*.php
+     * ./wpdtrt-generated-plugin.php ?
      * --- Text
      * * Version: 1.2.3
      * ---
@@ -538,6 +538,45 @@ const wpdtrtPluginBump = function ( {
     }
 
     /**
+     * Method: version_parent_test_naturaldocs_project
+     * 
+     * Parent: version Natural Docs' Project.txt.
+     *
+     * Parameters:
+     *   (string) input_path - Path to wpdtrt-plugin-boilerplate/
+     *   (string) output_path - Path to wpdtrt-plugin-boilerplate/ output directory
+     *   (object) wpdtrt_plugin_boilerplate_package - A reference to the package.json file
+     *
+     * Returns:
+     *   (array) src files
+     *
+     * Output:
+     * ./config/naturaldocs/Project.txt
+     * --- Text
+     * Subtitle: DTRT Foo (1.2.3)
+     * ---
+     */
+    function version_parent_test_naturaldocs_project(
+        input_path,
+        output_path,
+        root_package
+    ) {
+        const files = `${input_path}tests/generated-plugin/`
+        + "config/naturaldocs/Project.txt";
+        const re = new RegExp(
+            /(Subtitle: [A-Za-z0-9( ]+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
+        );
+        const { version } = root_package;
+
+        return gulp.src(files)
+            .pipe( replace(
+                re,
+                `$1${version}`
+            ) )
+            .pipe( gulp.dest( `${output_path}tests/generated-plugin/config/naturaldocs/` ) ); // eslint-disable-line max-len
+    }
+
+    /**
      * Method: version_parent_test_readme
      * 
      * Parent: version the (WordPress) readme.
@@ -586,45 +625,6 @@ const wpdtrtPluginBump = function ( {
                 `$1${version} =\n\n= $2$3`
             ) )
             .pipe(gulp.dest( `${output_path}tests/generated-plugin/` ) );
-    }
-
-    /**
-     * Method: version_parent_test_naturaldocs_project
-     * 
-     * Parent: version Natural Docs' Project.txt.
-     *
-     * Parameters:
-     *   (string) input_path - Path to wpdtrt-plugin-boilerplate/
-     *   (string) output_path - Path to wpdtrt-plugin-boilerplate/ output directory
-     *   (object) wpdtrt_plugin_boilerplate_package - A reference to the package.json file
-     *
-     * Returns:
-     *   (array) src files
-     *
-     * Output:
-     * ./config/naturaldocs/Project.txt
-     * --- Text
-     * Subtitle: DTRT Foo (1.2.3)
-     * ---
-     */
-    function version_parent_test_naturaldocs_project(
-        input_path,
-        output_path,
-        root_package
-    ) {
-        const files = `${input_path}tests/generated-plugin/`
-        + "config/naturaldocs/Project.txt";
-        const re = new RegExp(
-            /(Subtitle: [A-Za-z0-9( ]+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
-        );
-        const { version } = root_package;
-
-        return gulp.src(files)
-            .pipe( replace(
-                re,
-                `$1${version}`
-            ) )
-            .pipe( gulp.dest( `${output_path}tests/generated-plugin/config/naturaldocs/` ) ); // eslint-disable-line max-len
     }
 
     /**

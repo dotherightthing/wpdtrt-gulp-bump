@@ -38,7 +38,7 @@ const it = mocha.it;
 const wpdtrtPluginBump = require("../index.js");
 
 /**
- * Function: Test plugin
+ * Group: Test
  *
  * Copy a preset list of 'fixtures'
  * to a timestamped folder within tmp/,

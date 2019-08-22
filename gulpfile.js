@@ -33,12 +33,18 @@
  * ---
  * yarn run optimise
  * ---
+ *
+ * 7. Package release
+ * ---
+ * yarn run release
+ * ---
  */
 
 /* globals require, process */
 
 const gulp = require("gulp");
 const color = require("gulp-color");
+const del = require("del");
 const download = require("gulp-download");
 const eslint = require("gulp-eslint");
 const log = require("fancy-log");
@@ -47,6 +53,9 @@ const shell = require("gulp-shell");
 const svgo = require("gulp-svgo");
 const unzip = require("gulp-unzip");
 const validate = require("gulp-nice-package");
+const zip = require("gulp-zip");
+
+const distDir = get_pluginName;
 
 // Input files.
 const js_files_to_lint = [
@@ -54,7 +63,22 @@ const js_files_to_lint = [
     "index.js",
     "test/*.js"
 ];
-const svg_files = "github-ui/icons/*.svg";
+const svg_files = "readme-styles/icons/*.svg";
+
+/**
+ * Function: get_pluginName
+ * 
+ * Get the pluginName from package.json.
+ *
+ * Returns:
+ *   (string) pluginName
+ */
+function get_pluginName() {
+    // pop() - remove the last element from the path array and return it
+    const pluginName = process.cwd().split("/").pop();
+
+    return pluginName;
+}
 
 /**
  * Function: is_travis
@@ -364,7 +388,167 @@ gulp.task( "optimise", () => {
     // compress to same folder
     return gulp.src( svg_files )
         .pipe( svgo() )
-        .pipe( gulp.dest( "github-ui/icons/optimised" ) );
+        .pipe( gulp.dest( "readme-styles/icons/optimised" ) );
+});
+
+/**
+ * Method: release
+ * 
+ * Tasks which package a release.
+ *
+ * Parameters:
+ *   callback - The runSequenceCallback that handles the response
+ */
+gulp.task("release", (callback) => {
+
+    const travis = is_travis();
+
+    if (travis) {
+        gulp_helper_taskheader(
+            "6",
+            "Release",
+            "Generate"
+        );
+
+        runSequence(
+            "release_yarn_dist",
+            "release_delete_pre",
+            "release_copy",
+            "release_zip",
+            "release_delete_post",
+            callback
+        );
+    } else {
+        callback();
+    }
+});
+
+/**
+ * Method: release_yarn_dist
+ * 
+ * Uninstall Yarn development dependencies.
+ *
+ * Returns:
+ *   Stream or promise for run-sequence.
+ */
+gulp.task("release_yarn_dist", () => {
+
+    gulp_helper_taskheader(
+        "6b",
+        "Release",
+        "Uninstall dev dependencies",
+        "Yarn"
+    );
+
+    // return stream or promise for run-sequence
+    return gulp.src(dummyFile, {read: false})
+        .pipe(shell([
+            "yarn install --non-interactive --production"
+        ]));
+});
+
+/**
+ * Method: release_delete_pre
+ * 
+ * Delete existing release.zip.
+ *
+ * Returns:
+ *   (string) The release zip
+ */
+gulp.task("release_delete_pre", () => {
+
+    gulp_helper_taskheader(
+        "6c",
+        "Release",
+        "Delete",
+        "Previous release"
+    );
+
+    // return stream or promise for run-sequence
+    return del([
+        "release.zip"
+    ]);
+});
+
+/**
+ * Method: release_copy
+ * 
+ * Copy release files to a temporary folder
+ * 
+ * See: <globtester: http://www.globtester.com/>
+ *
+ * Returns:
+ *   Stream or promise for run-sequence.
+ */
+gulp.task("release_copy", () => {
+
+    gulp_helper_taskheader(
+        "6d",
+        "Release",
+        "Copy files",
+        "To temporary folder"
+    );
+
+    // Release files are those that are required
+    // to use the package as a WP Plugin
+    const releaseFiles = [
+        "docs",
+        "readme-styles",
+        "index.js",
+        "README.md"
+    ];
+
+    // return stream or promise for run-sequence
+    // https://stackoverflow.com/a/32188928/6850747
+    return gulp.src(releaseFiles, {base: "."})
+        .pipe(print())
+        .pipe(gulp.dest(distDir));
+});
+
+/**
+ * Method: release_zip
+ * 
+ * Generate release.zip for deployment by Travis/Github.
+ *
+ * Returns:
+ *   Stream or promise for run-sequence.
+ */
+gulp.task("release_zip", () => {
+
+    gulp_helper_taskheader(
+        "6e",
+        "Release",
+        "Generate",
+        "ZIP file"
+    );
+
+    // return stream or promise for run-sequence
+    // https://stackoverflow.com/a/32188928/6850747
+    return gulp.src([
+        `./${distDir}/**/*`
+    ], {base: "."})
+        .pipe(zip("release.zip"))
+        .pipe(gulp.dest("./"));
+});
+
+/**
+ * Method: release_delete_post
+ * 
+ * Delete the temporary folder.
+ */
+gulp.task("release_delete_post", () => {
+
+    gulp_helper_taskheader(
+        "6f",
+        "Release",
+        "Delete",
+        "Temporary folder"
+    );
+
+    // return stream or promise for run-sequence
+    return del([
+        distDir
+    ]);
 });
 
 /**
@@ -400,7 +584,9 @@ gulp.task("default", (callback) => {
         // 4
         "docs",
         // 5
-        "optimise"
+        "optimise",
+        // 6
+        "release"
     );
 
     callback();
