@@ -3,6 +3,9 @@ language: node_js
 node_js:
   - 10.16.2
 
+# conditions under which to run this build
+if: NOT (branch = master) OR (branch = master AND tag IS present)
+
 before_install:
   # Install Mono (Natural Docs dependency)
   # https://www.mono-project.com/download/stable/#download-lin-ubuntu
