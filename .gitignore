@@ -6,3 +6,4 @@ node_modules
 tmp
 *sublime-*
 /*.log
+gulp-wpdtrt-plugin-bump.code-workspace
