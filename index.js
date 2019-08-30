@@ -42,7 +42,7 @@ function logFiles( files ) {
  * Function: wpdtrtPluginBump
  *
  * require() is relative to the active gulpfile not to the CWD
- * as it is wpdtrt-plugin-boilerplate/gulpfile.js which is always run.
+ * as it is wpdtrt-plugin-boilerplate/gulpfile.babel.js which is always run.
  *
  * ./package.json will always be wpdtrt-plugin-boilerplate/package.json
  *
@@ -188,7 +188,7 @@ const wpdtrtPluginBump = function ( {
    *   (array) src files
    *
    * Output:
-   * ./gulpfile.js
+   * ./gulpfile.babel.js
    * --- Text
    * * @version 1.2.3
    * ---
@@ -198,7 +198,7 @@ const wpdtrtPluginBump = function ( {
     outputPath,
     packageRoot
   ) {
-    const files = `${inputPath}gulpfile.js`;
+    const files = `${inputPath}gulpfile.babel.js`;
     const re = new RegExp(
       /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
@@ -457,7 +457,7 @@ const wpdtrtPluginBump = function ( {
    *   (array) src files
    *
    * Output:
-   * ./gulpfile.js
+   * ./gulpfile.babel.js
    * --- Text
    * * @version 1.2.3
    * ---
@@ -467,7 +467,7 @@ const wpdtrtPluginBump = function ( {
     outputPath,
     packageBoilerplate
   ) {
-    const files = `${inputPath}gulpfile.js`;
+    const files = `${inputPath}gulpfile.babel.js`;
     const { version } = packageBoilerplate;
     const re = new RegExp(
       /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
@@ -833,11 +833,11 @@ const wpdtrtPluginBump = function ( {
   /**
    * process.cwd() console.log test results
    *
-   * /Volumes/DanBackup/Websites/wpdtrt-plugin-boilerplate/gulpfile.js;
+   * /Volumes/DanBackup/Websites/wpdtrt-plugin-boilerplate/gulpfile.babel.js;
    * /Volumes/DanBackup/Websites/wpdtrt-plugin-boilerplate/node_modules/gulp-wpdtrt-plugin-bump/index.js
    * = /Volumes/DanBackup/Websites/wpdtrt-plugin-boilerplate
    *
-   * /Volumes/DanBackup/Websites/wpdtrt-blocks/vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js
+   * /Volumes/DanBackup/Websites/wpdtrt-blocks/vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.babel.js
    * /Volumes/DanBackup/Websites/wpdtrt-blocks/node_modules/gulp-wpdtrt-plugin-bump/index.js
    * = /Volumes/DanBackup/Websites/wpdtrt-blocks
    */
