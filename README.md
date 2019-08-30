@@ -58,7 +58,7 @@ gulp.task( 'bump_replace', () => {
 1. `yarn install` - Install Yarn dependencies
 1. `yarn run build` - Run the following scripts:
    1. `yarn run dependencies` - Install documentation dependencies
-   1. `yarn run docs` - Generate documentation to <docs/>
+   1. `yarn run docs` - Generate documentation to `docs/`
    1. `yarn run images` - Optimise images
    1. `yarn run lint` - Lint code
    1. `yarn run release` - Package release (Travis only)
@@ -73,7 +73,7 @@ gulp.task( 'bump_replace', () => {
 1. `./text/fixtures/wpdtrt-plugin-boilerplate/package.json` sets the target `version`
 1. `./test/expected` - plugin files with real version information
 
-#### To add a new file:
+#### To add a new file
 
 1. Add the file to the appropriate `fixtures` folders, with a version of `0.12.345`
 1. Add the file to the `pluginFilesBoilerplate` and `pluginFilesGeneratedPlugin` arrays in `test/index.js`
