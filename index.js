@@ -20,9 +20,8 @@ const replace = require( 'gulp-replace' );
  * - If files don't exist, the versioning functions will fail silently.
  */
 function logFiles( files ) {
-
   let length = 1;
-  let plural = ''
+  let plural = '';
   let filesStr = files;
 
   if ( Array.isArray( files ) ) {
@@ -31,7 +30,7 @@ function logFiles( files ) {
 
     // remove [ and ] from output
     filesStr = files.toString();
-    filesStr = filesStr.replace(/,/g, '\n');
+    filesStr = filesStr.replace( /,/g, '\n' );
   }
 
   console.log( `Versioning ${length} file${plural}:` );
