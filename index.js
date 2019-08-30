@@ -9,6 +9,37 @@ const gulp = require( 'gulp' );
 const replace = require( 'gulp-replace' );
 
 /**
+ * Function: logFiles
+ *
+ * Print a message to the console.
+ * 
+ * Parameters:
+ *   (array) files - Files to version
+ *
+ * Note:
+ * - If files don't exist, the versioning functions will fail silently.
+ */
+function logFiles( files ) {
+
+  let length = 1;
+  let plural = ''
+  let filesStr = files;
+
+  if ( Array.isArray( files ) ) {
+    length = files.length;
+    plural = 's';
+
+    // remove [ and ] from output
+    filesStr = files.toString();
+    filesStr = filesStr.replace(/,/g, '\n');
+  }
+
+  console.log( `Versioning ${length} file${plural}:` );
+  console.log( filesStr );
+  console.log( ' ' );
+}
+
+/**
  * Function: wpdtrtPluginBump
  *
  * require() is relative to the active gulpfile not to the CWD
@@ -133,7 +164,9 @@ const wpdtrtPluginBump = function ( {
       );
     } );
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re,
         `$1${packageVersionBoilerplateNamespaced}`
@@ -172,7 +205,9 @@ const wpdtrtPluginBump = function ( {
     );
     const { version } = packageRoot;
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re,
         `$1${version}`
@@ -211,7 +246,9 @@ const wpdtrtPluginBump = function ( {
     );
     const { version } = packageRoot;
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re,
         `$1${version}`
@@ -259,7 +296,9 @@ const wpdtrtPluginBump = function ( {
     );
     const { version } = packageRoot;
 
-    return gulp.src( files )
+    logFiles( files );
+    
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re1,
         `$1${version}`
@@ -308,7 +347,9 @@ const wpdtrtPluginBump = function ( {
       /(define\( 'WPDTRT_PLUGIN_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(' \);)/
     );
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re1,
         `$1${version}`
@@ -354,7 +395,9 @@ const wpdtrtPluginBump = function ( {
       /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re,
         `$1${version}`
@@ -391,7 +434,9 @@ const wpdtrtPluginBump = function ( {
       /("DoTheRightThing\\\\WPDTRT_Plugin_Boilerplate\\\\r_)([0-9]{1,3}_[0-9]{1,3}_[0-9]{1,3})(\\\\")/
     );
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re,
         `$1${packageVersionBoilerplateNamespaced}$3`
@@ -429,7 +474,9 @@ const wpdtrtPluginBump = function ( {
       /(\* @version\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re,
         `$1${version}`
@@ -467,7 +514,9 @@ const wpdtrtPluginBump = function ( {
     );
     const { version } = packageBoilerplate;
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re,
         `$1${version}`
@@ -515,7 +564,9 @@ const wpdtrtPluginBump = function ( {
       files.push( `${inputPath}src/${category}.php` );
     } );
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re,
         `$1${packageVersionBoilerplateNamespaced}`
@@ -562,7 +613,9 @@ const wpdtrtPluginBump = function ( {
       /(const WPDTRT_PLUGIN_VERSION = ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(';)/
     );
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re1,
         `$1${versionNamespaceSafeStr}`
@@ -605,7 +658,9 @@ const wpdtrtPluginBump = function ( {
     );
     const { version } = packageRoot;
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re,
         `$1${version}`
@@ -654,7 +709,9 @@ const wpdtrtPluginBump = function ( {
       /(== Changelog ==\s\s= )([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})+( =\s)/
     );
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re1,
         `$1${version}`
@@ -702,7 +759,9 @@ const wpdtrtPluginBump = function ( {
       /(define\( 'WPDTRT_TEST_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(' \);)/
     );
 
-    gulp.src( files )
+    logFiles( files );
+
+    gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re1,
         `$1${version}`
@@ -758,7 +817,9 @@ const wpdtrtPluginBump = function ( {
       );
     } );
 
-    return gulp.src( files )
+    logFiles( files );
+
+    return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re,
         `$1${versionNamespaceSafeStr}`
