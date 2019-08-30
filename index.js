@@ -12,7 +12,7 @@ const replace = require( 'gulp-replace' );
  * Function: logFiles
  *
  * Print a message to the console.
- * 
+ *
  * Parameters:
  *   (array) files - Files to version
  *
@@ -296,7 +296,7 @@ const wpdtrtPluginBump = function ( {
     const { version } = packageRoot;
 
     logFiles( files );
-    
+
     return gulp.src( files, { allowEmpty: true } )
       .pipe( replace(
         re1,
@@ -861,7 +861,7 @@ const wpdtrtPluginBump = function ( {
     );
 
     // get the latest release number
-    console.log( `      Bump ${nameBoilerplate} to ${versionBoilerplate} `
+    console.log( `Bump ${nameBoilerplate} to ${versionBoilerplate} `
             + 'using package.json' );
 
     versionBoilerplateAutoloader(
@@ -947,7 +947,7 @@ const wpdtrtPluginBump = function ( {
 
     console.log(
       // bump wpdtrt-foo to 0.1.2 and wpdtrt-plugin-boilerplate 1.2.3 using package.json
-      `      Bump ${nameRoot} to ${versionRoot} `
+      `Bump ${nameRoot} to ${versionRoot} `
             + `and ${nameBoilerplate} ${versionBoilerplate} using package.json`
     );
 
