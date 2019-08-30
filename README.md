@@ -12,7 +12,7 @@ yarn add https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump --dev
 
 ## Usage
 
-As used in [wpdtrt-plugin-boilerplate's gulpfile.js](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/blob/master/gulpfile.js):
+As used in [wpdtrt-plugin-boilerplate's gulpfile.babel.js](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/blob/master/gulpfile.babel.js):
 
 ```node
 /* globals gulp, taskheader */
@@ -34,7 +34,7 @@ gulp.task( 'bump_replace', () => {
 
   // if run from a child plugin:
   // gulp bump
-  // --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./
+  // --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.babel.js --cwd ./
   if ( pluginName !== 'wpdtrt-plugin-boilerplate' ) {
     inputPathRoot = '';
     inputPathBoilerplate = 'vendor/dotherightthing/wpdtrt-plugin-boilerplate/';
@@ -58,7 +58,7 @@ gulp.task( 'bump_replace', () => {
 1. `yarn install` - Install Yarn dependencies
 1. `yarn run build` - Run the following scripts:
    1. `yarn run dependencies` - Install documentation dependencies
-   1. `yarn run docs` - Generate documentation to <docs/>
+   1. `yarn run docs` - Generate documentation to `docs/`
    1. `yarn run images` - Optimise images
    1. `yarn run lint` - Lint code
    1. `yarn run release` - Package release (Travis only)
@@ -73,7 +73,7 @@ gulp.task( 'bump_replace', () => {
 1. `./text/fixtures/wpdtrt-plugin-boilerplate/package.json` sets the target `version`
 1. `./test/expected` - plugin files with real version information
 
-#### To add a new file:
+#### To add a new file
 
 1. Add the file to the appropriate `fixtures` folders, with a version of `0.12.345`
 1. Add the file to the `pluginFilesBoilerplate` and `pluginFilesGeneratedPlugin` arrays in `test/index.js`

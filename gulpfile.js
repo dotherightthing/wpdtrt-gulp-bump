@@ -86,18 +86,20 @@ function decorateLog( {
 }
 
 /**
+ * Function: taskHeader
+ *
  * Displays a block comment for each task that runs.
  *
  * Parameters:
- *   step - Step number (string)
- *   taskCategory - Task category (string)
- *   taskAction - Task action (string)
- *   taskDetail - Task detail (string)
+ *   (string) step - Step number
+ *   (string) taskCategory - Task category
+ *   (string) taskAction - Task action
+ *   (string) taskDetail - Task detail
  *
  * Returns:
  *   (string) Task header
  */
-function gulpHelperTaskheader(
+function taskHeader(
   step = '0',
   taskCategory = '',
   taskAction = '',
@@ -150,7 +152,7 @@ const dummyFile = 'README.md';
  * ---
  */
 gulp.task( 'dependencies', ( callback ) => {
-  gulpHelperTaskheader(
+  taskHeader(
     '1',
     'Dependencies',
     'Install'
@@ -176,7 +178,7 @@ gulp.task( 'dependencies', ( callback ) => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'dependenciesDocs', () => {
-  gulpHelperTaskheader(
+  taskHeader(
     '1a',
     'Dependencies',
     'Install',
@@ -206,7 +208,7 @@ gulp.task( 'dependenciesDocs', () => {
  * ---
  */
 gulp.task( 'lint', ( callback ) => {
-  gulpHelperTaskheader(
+  taskHeader(
     '2',
     'QA',
     'Lint'
@@ -227,7 +229,7 @@ gulp.task( 'lint', ( callback ) => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'lintJS', () => {
-  gulpHelperTaskheader(
+  taskHeader(
     '2a',
     'QA',
     'Lint',
@@ -270,7 +272,7 @@ gulp.task( 'lintJS', () => {
  * ---
  */
 gulp.task( 'tests', () => {
-  gulpHelperTaskheader(
+  taskHeader(
     '3',
     'Documentation',
     'Run tests',
@@ -300,7 +302,7 @@ gulp.task( 'tests', () => {
  * ---
  */
 gulp.task( 'docs', () => {
-  gulpHelperTaskheader(
+  taskHeader(
     '4',
     'Documentation',
     'Generate',
@@ -333,7 +335,7 @@ gulp.task( 'docs', () => {
  * ---
  */
 gulp.task( 'images', () => {
-  gulpHelperTaskheader(
+  taskHeader(
     '5',
     'Images',
     'SVG'
@@ -362,7 +364,7 @@ gulp.task( 'release', ( callback ) => {
   const travis = isTravis();
 
   if ( travis ) {
-    gulpHelperTaskheader(
+    taskHeader(
       '6',
       'Release',
       'Generate'
@@ -388,7 +390,7 @@ gulp.task( 'release', ( callback ) => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'releaseYarnDist', () => {
-  gulpHelperTaskheader(
+  taskHeader(
     '6a',
     'Release',
     'Uninstall dev dependencies',
@@ -413,7 +415,7 @@ gulp.task( 'releaseYarnDist', () => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'releaseCopy', () => {
-  gulpHelperTaskheader(
+  taskHeader(
     '6b',
     'Release',
     'Copy files',
@@ -445,7 +447,7 @@ gulp.task( 'releaseCopy', () => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'releaseZip', () => {
-  gulpHelperTaskheader(
+  taskHeader(
     '6c',
     'Release',
     'Generate',
@@ -477,7 +479,7 @@ gulp.task( 'releaseZip', () => {
 gulp.task( 'default', ( callback ) => {
   const travis = isTravis();
 
-  gulpHelperTaskheader(
+  taskHeader(
     '0',
     'Installation',
     'Gulp',

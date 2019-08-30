@@ -51,7 +51,7 @@ describe( 'Test plugin', function () { // eslint-disable-line func-names
   const pluginFilesBoilerplate = [
     'composer.json',
     'config/naturaldocs/Project.txt',
-    'gulpfile.js',
+    'gulpfile.babel.js',
     'index.php',
     'src/Plugin.php',
     'src/Rewrite.php',
