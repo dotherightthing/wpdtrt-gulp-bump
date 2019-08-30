@@ -12,7 +12,7 @@ yarn add https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump --dev
 
 ## Usage
 
-As used in [wpdtrt-plugin-boilerplate's gulpfile.js](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/blob/master/gulpfile.js):
+As used in [wpdtrt-plugin-boilerplate's gulpfile.babel.js](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/blob/master/gulpfile.babel.js):
 
 ```node
 /* globals gulp, taskheader */
@@ -34,7 +34,7 @@ gulp.task( 'bump_replace', () => {
 
   // if run from a child plugin:
   // gulp bump
-  // --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.js --cwd ./
+  // --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.babel.js --cwd ./
   if ( pluginName !== 'wpdtrt-plugin-boilerplate' ) {
     inputPathRoot = '';
     inputPathBoilerplate = 'vendor/dotherightthing/wpdtrt-plugin-boilerplate/';
