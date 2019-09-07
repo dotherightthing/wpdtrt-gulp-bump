@@ -12,40 +12,10 @@ yarn add https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump --dev
 
 ## Usage
 
-As used in [wpdtrt-plugin-boilerplate's gulpfile.babel.js](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/blob/master/gulpfile.babel.js):
+See `wpdtrt-plugin-boilerplate`:
 
-```node
-/* globals gulp, taskheader */
-
-var pluginName = process.cwd().split( '/' ).pop();
-var wpdtrtPluginBump = require( 'gulp-wpdtrt-plugin-bump' );
-
-gulp.task( 'bump_replace', () => {
-  // if run from wpdtrt-plugin-boilerplate:
-  // gulp bump
-  var inputPathRoot = '';
-  var inputPathBoilerplate = '';
-
-  taskheader(
-    'Version',
-    'Bump',
-    'Replace version strings'
-  );
-
-  // if run from a child plugin:
-  // gulp bump
-  // --gulpfile ./vendor/dotherightthing/wpdtrt-plugin-boilerplate/gulpfile.babel.js --cwd ./
-  if ( pluginName !== 'wpdtrt-plugin-boilerplate' ) {
-    inputPathRoot = '';
-    inputPathBoilerplate = 'vendor/dotherightthing/wpdtrt-plugin-boilerplate/';
-  }
-
-  return wpdtrtPluginBump( {
-    inputPathRoot: inputPathRoot,
-    inputPathBoilerplate: inputPathBoilerplate
-  } );
-} );
-```
+* [`replaceVersions()` - gulp-modules/version.js](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/blob/9e46fda31099d5aa5d8d169a8a4e33471c18959c/gulp-modules/version.js#L47-L69)
+* [`boilerplatePath()` - gulp-modules/boilerplate-path.js](https://github.com/dotherightthing/wpdtrt-plugin-boilerplate/blob/master/gulp-modules/boilerplate-path.js)
 
 ## Maintenance
 
