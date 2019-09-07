@@ -343,7 +343,7 @@ const wpdtrtPluginBump = function ( {
       /(\* Version:\s+)([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/
     );
     const re2 = new RegExp(
-      /(define\( 'WPDTRT_PLUGIN_VERSION', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(' \);)/
+      /(define\( '(?:[A-Z_]+)', ')([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(' \);)/
     );
 
     logFiles( files );
