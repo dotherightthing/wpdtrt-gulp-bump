@@ -99,7 +99,7 @@ function decorateLog( {
  * Returns:
  *   (string) Task header
  */
-function console.log( taskHeader(
+function taskHeader(
   step = '0',
   taskCategory = '',
   taskAction = '',
@@ -152,7 +152,7 @@ const dummyFile = 'README.md';
  * ---
  */
 gulp.task( 'dependencies', ( callback ) => {
-  console.log( taskHeader(
+  taskHeader(
     '1',
     'Dependencies',
     'Install'
@@ -178,7 +178,7 @@ gulp.task( 'dependencies', ( callback ) => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'dependenciesDocs', () => {
-  console.log( taskHeader(
+  taskHeader(
     '1a',
     'Dependencies',
     'Install',
@@ -208,7 +208,7 @@ gulp.task( 'dependenciesDocs', () => {
  * ---
  */
 gulp.task( 'lint', ( callback ) => {
-  console.log( taskHeader(
+  taskHeader(
     '2',
     'QA',
     'Lint'
@@ -229,7 +229,7 @@ gulp.task( 'lint', ( callback ) => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'lintJS', () => {
-  console.log( taskHeader(
+  taskHeader(
     '2a',
     'QA',
     'Lint',
@@ -272,7 +272,7 @@ gulp.task( 'lintJS', () => {
  * ---
  */
 gulp.task( 'tests', () => {
-  console.log( taskHeader(
+  taskHeader(
     '3',
     'Documentation',
     'Run tests',
@@ -302,7 +302,7 @@ gulp.task( 'tests', () => {
  * ---
  */
 gulp.task( 'docs', () => {
-  console.log( taskHeader(
+  taskHeader(
     '4',
     'Documentation',
     'Generate',
@@ -335,7 +335,7 @@ gulp.task( 'docs', () => {
  * ---
  */
 gulp.task( 'images', () => {
-  console.log( taskHeader(
+  taskHeader(
     '5',
     'Images',
     'SVG'
@@ -364,7 +364,7 @@ gulp.task( 'release', ( callback ) => {
   const travis = isTravis();
 
   if ( travis ) {
-    console.log( taskHeader(
+    taskHeader(
       '6',
       'Release',
       'Generate'
@@ -390,7 +390,7 @@ gulp.task( 'release', ( callback ) => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'releaseNpmDist', () => {
-  console.log( taskHeader(
+  taskHeader(
     '6a',
     'Release',
     'Uninstall dev dependencies',
@@ -415,7 +415,7 @@ gulp.task( 'releaseNpmDist', () => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'releaseCopy', () => {
-  console.log( taskHeader(
+  taskHeader(
     '6b',
     'Release',
     'Copy files',
@@ -447,7 +447,7 @@ gulp.task( 'releaseCopy', () => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'releaseZip', () => {
-  console.log( taskHeader(
+  taskHeader(
     '6c',
     'Release',
     'Generate',
@@ -479,7 +479,7 @@ gulp.task( 'releaseZip', () => {
 gulp.task( 'default', ( callback ) => {
   const travis = isTravis();
 
-  console.log( taskHeader(
+  taskHeader(
     '0',
     'Installation',
     'Gulp',
