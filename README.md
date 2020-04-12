@@ -7,7 +7,7 @@ A Gulp utility to update a fixed selection of files in either the [DTRT WordPres
 ## Installation
 
 ```sh
-yarn add https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump --dev
+npm install https://github.com/dotherightthing/gulp-wpdtrt-plugin-bump --save-dev
 ```
 
 ## Usage
