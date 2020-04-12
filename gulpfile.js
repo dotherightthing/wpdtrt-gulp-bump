@@ -337,7 +337,7 @@ gulp.task( 'docs', ( callback ) => {
       ] ) );
   }
 
-  callback();
+  return callback();
 } );
 
 /**
