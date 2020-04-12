@@ -1,4 +1,8 @@
-sudo: false
+# Travis CI Build Config
+# validated at https://config.travis-ci.com/explore
+
+os: linux
+dist: xenial
 language: node_js
 node_js:
   - 10.16.2
@@ -39,12 +43,9 @@ notifications:
 # https://github.com/dotherightthing/generator-wpdtrt-plugin-boilerplate/wiki/Set-up-Travis-CI
 deploy:
   provider: releases
-  api_key:
-    secure: $GH_TOKEN
+  token:
+    secure: "$GH_TOKEN"
   file: 'release.zip'
-  # prevent Travis CI from resetting the working directory
-  # which deletes all changes made during the build 
-  skip_cleanup: true
   on:
     repo: dotherightthing/gulp-wpdtrt-plugin-bump
     tags: true
