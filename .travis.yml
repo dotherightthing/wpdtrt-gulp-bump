@@ -44,7 +44,7 @@ notifications:
 deploy:
   provider: releases
   token:
-    secure: "$GITHUB_TOKEN"
+    secure: $GITHUB_TOKEN
   file: 'release*.zip'
   on:
     repo: dotherightthing/gulp-wpdtrt-plugin-bump
