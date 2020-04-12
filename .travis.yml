@@ -9,23 +9,20 @@ if: NOT (branch = master) OR (branch = master AND tag IS present)
 before_install:
   # Install Mono (Natural Docs dependency)
   # https://www.mono-project.com/download/stable/#download-lin-ubuntu
-  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-  - sudo apt install apt-transport-https ca-certificates
-  - echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
-  - sudo apt update
-  - sudo apt install mono-complete
+  - if [ $TRAVIS_TAG ]; then sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF; fi
+  - if [ $TRAVIS_TAG ]; then sudo apt install apt-transport-https ca-certificates; fi
+  - if [ $TRAVIS_TAG ]; then echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list; fi
+  - if [ $TRAVIS_TAG ]; then sudo apt update; fi
+  - if [ $TRAVIS_TAG ]; then sudo apt install mono-complete; fi
 
 # Install dependencies
 install:
-  # Adding Yarn to Travis CI - https://gist.github.com/acburdine/61f4f91bacf6554fccdaa394fd14ebbd
-  # yarn install also runs the build script
-  - npm install -g yarn
-  - yarn install --non-interactive
-  - yarn global add gulp-cli
+  - npm ci
+  - npm install --global gulp-cli
 
 # Run the build script
 script:
-  - yarn run build
+  - npm run build
 
 # Notifications of build results
 # https://docs.travis-ci.com/user/notifications/

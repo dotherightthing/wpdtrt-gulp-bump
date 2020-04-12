@@ -6,7 +6,7 @@
  * Written in Mocha, with Chai assertions.
  *
  * ---
- * yarn run tests
+ * npm run tests
  * ---
  */
 

@@ -6,7 +6,7 @@
  *
  * See package.json for scripts, which can be run with:
  * --- Text
- * yarn run scriptname
+ * npm run scriptname
  * ---
  */
 
@@ -99,7 +99,7 @@ function decorateLog( {
  * Returns:
  *   (string) Task header
  */
-function taskHeader(
+function console.log( taskHeader(
   step = '0',
   taskCategory = '',
   taskAction = '',
@@ -148,11 +148,11 @@ const dummyFile = 'README.md';
  *
  * Example:
  * --- Text
- * yarn run dependencies
+ * npm run dependencies
  * ---
  */
 gulp.task( 'dependencies', ( callback ) => {
-  taskHeader(
+  console.log( taskHeader(
     '1',
     'Dependencies',
     'Install'
@@ -169,7 +169,7 @@ gulp.task( 'dependencies', ( callback ) => {
  *
  * Install documentation dependencies.
  *
- * Natural Docs can't be installed via Yarn
+ * Natural Docs can't be installed via NPM
  * as the Github release needs to be compiled,
  * and the download archive on the website
  * is in .zip rather than .tar format.
@@ -178,7 +178,7 @@ gulp.task( 'dependencies', ( callback ) => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'dependenciesDocs', () => {
-  taskHeader(
+  console.log( taskHeader(
     '1a',
     'Dependencies',
     'Install',
@@ -204,11 +204,11 @@ gulp.task( 'dependenciesDocs', () => {
  *
  * Example:
  * --- Text
- * yarn run lint
+ * npm run lint
  * ---
  */
 gulp.task( 'lint', ( callback ) => {
-  taskHeader(
+  console.log( taskHeader(
     '2',
     'QA',
     'Lint'
@@ -229,7 +229,7 @@ gulp.task( 'lint', ( callback ) => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'lintJS', () => {
-  taskHeader(
+  console.log( taskHeader(
     '2a',
     'QA',
     'Lint',
@@ -268,11 +268,11 @@ gulp.task( 'lintJS', () => {
  *
  * Example:
  * --- Text
- * yarn run tests
+ * npm run tests
  * ---
  */
 gulp.task( 'tests', () => {
-  taskHeader(
+  console.log( taskHeader(
     '3',
     'Documentation',
     'Run tests',
@@ -298,11 +298,11 @@ gulp.task( 'tests', () => {
  *
  * Example:
  * --- Text
- * yarn run docs
+ * npm run docs
  * ---
  */
 gulp.task( 'docs', () => {
-  taskHeader(
+  console.log( taskHeader(
     '4',
     'Documentation',
     'Generate',
@@ -331,11 +331,11 @@ gulp.task( 'docs', () => {
  *
  * Example:
  * --- Text
- * yarn run images
+ * npm run images
  * ---
  */
 gulp.task( 'images', () => {
-  taskHeader(
+  console.log( taskHeader(
     '5',
     'Images',
     'SVG'
@@ -357,21 +357,21 @@ gulp.task( 'images', () => {
  *
  * Example:
  * --- Text
- * yarn run release
+ * npm run release
  * ---
  */
 gulp.task( 'release', ( callback ) => {
   const travis = isTravis();
 
   if ( travis ) {
-    taskHeader(
+    console.log( taskHeader(
       '6',
       'Release',
       'Generate'
     );
 
     runSequence(
-      'releaseYarnDist',
+      'releaseNpmDist',
       'releaseCopy',
       'releaseZip',
       callback
@@ -382,25 +382,25 @@ gulp.task( 'release', ( callback ) => {
 } );
 
 /**
- * Method: releaseYarnDist
+ * Method: releaseNpmDist
  *
- * Uninstall Yarn development dependencies.
+ * Uninstall Npm development dependencies.
  *
  * Returns:
  *   Stream or promise for run-sequence.
  */
-gulp.task( 'releaseYarnDist', () => {
-  taskHeader(
+gulp.task( 'releaseNpmDist', () => {
+  console.log( taskHeader(
     '6a',
     'Release',
     'Uninstall dev dependencies',
-    'Yarn'
+    'Npm'
   );
 
   // return stream or promise for run-sequence
   return gulp.src( dummyFile, { read: false } )
     .pipe( shell( [
-      'yarn install --non-interactive --production'
+      'npm ci --production'
     ] ) );
 } );
 
@@ -415,7 +415,7 @@ gulp.task( 'releaseYarnDist', () => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'releaseCopy', () => {
-  taskHeader(
+  console.log( taskHeader(
     '6b',
     'Release',
     'Copy files',
@@ -447,7 +447,7 @@ gulp.task( 'releaseCopy', () => {
  *   Stream or promise for run-sequence.
  */
 gulp.task( 'releaseZip', () => {
-  taskHeader(
+  console.log( taskHeader(
     '6c',
     'Release',
     'Generate',
@@ -479,7 +479,7 @@ gulp.task( 'releaseZip', () => {
 gulp.task( 'default', ( callback ) => {
   const travis = isTravis();
 
-  taskHeader(
+  console.log( taskHeader(
     '0',
     'Installation',
     'Gulp',

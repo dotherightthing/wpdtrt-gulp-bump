@@ -25,14 +25,14 @@ See `wpdtrt-plugin-boilerplate`:
 
 ### Scripts
 
-1. `yarn install` - Install Yarn dependencies
-1. `yarn run build` - Run the following scripts:
-   1. `yarn run dependencies` - Install documentation dependencies
-   1. `yarn run docs` - Generate documentation to `docs/`
-   1. `yarn run images` - Optimise images
-   1. `yarn run lint` - Lint code
-   1. `yarn run release` - Package release (Travis only)
-   1. `yarn run tests` - Test code
+1. `npm install` - Install NPM dependencies
+1. `npm run build` - Run the following scripts:
+   1. `npm run dependencies` - Install documentation dependencies
+   1. `npm run docs` - Generate documentation to `docs/`
+   1. `npm run images` - Optimise images
+   1. `npm run lint` - Lint code
+   1. `npm run release` - Package release (Travis only)
+   1. `npm run tests` - Test code
 
 ### Files
 
