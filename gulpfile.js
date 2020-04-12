@@ -37,6 +37,20 @@ const jsFilesToLint = [
 const svgFiles = 'readme-styles/icons/*.svg';
 
 /**
+ * Function: hasTravisTag
+ *
+ * Determines whether the commit is tagged
+ *
+ * See: <Default Environment Variables: https://docs.travis-ci.com/user/environment-variables/#Default-Environment-Variables>.
+ *
+ * Returns:
+ *   (boolean)
+ */
+function hasTravisTag() {
+  return ( typeof process.env.TRAVIS_TAG !== 'undefined' );
+}
+
+/**
  * Function: isTravis
  *
  * Determines whether the current Gulp process is running on Travis CI.
@@ -301,7 +315,7 @@ gulp.task( 'tests', () => {
  * npm run docs
  * ---
  */
-gulp.task( 'docs', () => {
+gulp.task( 'docs', ( callback ) => {
   taskHeader(
     '4',
     'Documentation',
@@ -312,13 +326,18 @@ gulp.task( 'docs', () => {
   // Quotes escape space better than backslash on Travis
   const naturalDocsPath = 'Natural Docs/NaturalDocs.exe';
 
-  // note: src files are not used,
-  // this structure is only used
-  // to include the preceding log()
-  return gulp.src( dummyFile, { read: false } )
-    .pipe( shell( [
-      `mono "${naturalDocsPath}" ./config/naturaldocs`
-    ] ) );
+  // CI does not install mono unless the release is tagged
+  if ( hasTravisTag() ) {
+    // note: src files are not used,
+    // this structure is only used
+    // to include the preceding log()
+    return gulp.src( dummyFile, { read: false } )
+      .pipe( shell( [
+        `mono "${naturalDocsPath}" ./config/naturaldocs`
+      ] ) );
+  }
+
+  callback();
 } );
 
 /**
