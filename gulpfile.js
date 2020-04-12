@@ -47,7 +47,7 @@ const svgFiles = 'readme-styles/icons/*.svg';
  *   (boolean)
  */
 function hasTravisTag() {
-  return ( typeof process.env.TRAVIS_TAG !== 'undefined' );
+  return ( process.env.TRAVIS_TAG !== '' );
 }
 
 /**
