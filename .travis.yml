@@ -18,7 +18,7 @@ before_install:
 # Install dependencies
 install:
   - npm install --global gulp-cli
-  - npm ci --verbose
+  - npm ci
 
 # Run the build script
 script:
