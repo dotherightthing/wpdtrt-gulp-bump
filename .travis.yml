@@ -43,8 +43,9 @@ notifications:
 # https://github.com/dotherightthing/generator-wpdtrt-plugin-boilerplate/wiki/Set-up-Travis-CI
 deploy:
   provider: releases
-  token: $GITHUB_TOKEN
+  api_key: $GITHUB_TOKEN
   file: 'release*.zip'
+  skip_cleanup: true
   on:
     repo: dotherightthing/gulp-wpdtrt-plugin-bump
     tags: true
